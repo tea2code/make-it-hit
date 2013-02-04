@@ -2,6 +2,7 @@ import common.vector2d
 import data.circle
 import data.data
 import data.movable
+import graphics.circledrawer
 
 if __name__ == '__main__':
     import doctest
@@ -9,3 +10,4 @@ if __name__ == '__main__':
     doctest.testmod( data.circle )
     doctest.testmod( data.data )
     doctest.testmod( data.movable )
+    doctest.testmod( graphics.circledrawer )
