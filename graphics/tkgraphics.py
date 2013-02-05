@@ -1,4 +1,4 @@
-﻿from . import circledrawer
+﻿from . import tkcircledrawer
 from common import tickable
 from data import circle
 
@@ -40,7 +40,7 @@ class TkGraphics( tickable.Tickable ):
         # Draw players.
         for p in data.players:
             if isinstance( p, circle.Circle ):
-                drawer = circledrawer.CircleDrawer( p.position.x, p.position.y, p.radius )
+                drawer = tkcircledrawer.TkCircleDrawer( p.position.x, p.position.y, p.radius )
                 drawer.draw( self.canvas )
             else:
                 raise TypeError( 'Unknown player object "{0}" in data.'.format(p) )

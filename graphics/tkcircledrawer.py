@@ -1,6 +1,6 @@
 import graphics.tkdrawer as tkdrawer
 
-class CircleDrawer( tkdrawer.TkDrawer ):
+class TkCircleDrawer( tkdrawer.TkDrawer ):
     ''' Drawer for circles.
 
     Member:
