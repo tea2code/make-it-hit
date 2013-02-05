@@ -8,8 +8,8 @@ class TkGraphics( tickable.Tickable ):
     ''' This class handles the visualisation of the current state. 
     
     Member:
-    canvas -- The canvas object.
-    window -- The window object.
+    canvas -- The canvas object (Canvas).
+    window -- The window object (Tk).
     '''
     
     window = None
@@ -38,7 +38,7 @@ class TkGraphics( tickable.Tickable ):
         self.canvas.delete( tkinter.ALL )
         
         # Drawer factory.
-        drawerFactory = tkdrawerfactory.TkDrawFactory()
+        drawerFactory = tkdrawerfactory.TkDrawerFactory()
         
         # Draw players.
         for p in data.players:

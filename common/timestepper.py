@@ -6,12 +6,12 @@ class Timestepper:
     elapsed. The function will be executed as long time is left in this frame.
     
     Member:
-    accumulator -- Accumulates the frame times.
-    deltaTime -- The target difference between two frames.
-    func -- The function to execute. Must take time and deltaTime as parameter.
-    maxFrameTime -- Maximum frame time to avoid spiral of death.
-    time -- The accumulated time.
-    _currentTime -- The current timestamp.
+    accumulator -- Accumulates the frame times (float).
+    deltaTime -- The target difference between two frames (float).
+    func -- The function to execute. Must take time and deltaTime as parameter (Function).
+    maxFrameTime -- Maximum frame time to avoid spiral of death (float).
+    time -- The accumulated time (float).
+    _currentTime -- The current timestamp (float).
     '''
 
     accumulator = 0
@@ -67,6 +67,7 @@ class Timestepper:
             self.accumulator -= self.deltaTime
     
     def __hiresTime( self ):
+        ''' Returns time in fraction of a second. '''
         return time.perf_counter()
         
     def __str__( self ):
