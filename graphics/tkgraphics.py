@@ -1,4 +1,4 @@
-﻿from . import tkcircledrawer
+﻿from . import tkdrawerfactory
 from common import tickable
 from data import circle
 
@@ -37,10 +37,10 @@ class TkGraphics( tickable.Tickable ):
         # Reset everything.
         self.canvas.delete( tkinter.ALL )
         
+        # Drawer factory.
+        drawerFactory = tkdrawerfactory.TkDrawFactory()
+        
         # Draw players.
         for p in data.players:
-            if isinstance( p, circle.Circle ):
-                drawer = tkcircledrawer.TkCircleDrawer( p.position.x, p.position.y, p.radius )
-                drawer.draw( self.canvas )
-            else:
-                raise TypeError( 'Unknown player object "{0}" in data.'.format(p) )
+            drawer = drawerFactory.createFrom( object )
+            drawer.draw( self.canvas )

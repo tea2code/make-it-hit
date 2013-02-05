@@ -15,7 +15,7 @@ class TkCircleDrawer( tkdrawer.TkDrawer ):
     
     def __init__( self, radius, x, y ):
         ''' Test:
-        >>> c = CircleDrawer( 1, 2, 3 )
+        >>> c = TkCircleDrawer( 1, 2, 3 )
         >>> c.radius
         1
         >>> c.x
