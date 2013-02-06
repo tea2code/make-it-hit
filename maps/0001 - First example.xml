@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<level parser="1">
+    <author>tea2code</author>
+    <date>2013-01-14</date>
+    <description>First example of a game map aka level.</description>
+    <map>
+        <border>10</border>
+        <height>650</height>
+        <objects>
+            <rect>
+                <angle>-30</angle>
+                <height>100</height>
+                <width>200</width>
+                <x>310</x>
+                <y>310</y>
+            </rect>
+            <rect>
+                <angle>0</angle>
+                <height>50</height>
+                <width>50</width>
+                <x>500</x>
+                <y>200</y>
+            </rect>
+        </objects>
+        <players>
+            <circle>
+                <radius>10</radius>
+                <x>50</x>
+                <y>50</y>
+            </circle>
+        </players>
+        <targets>
+            <target>
+                <circle>
+                    <radius>20</radius>
+                    <x>600</x>
+                    <y>600</y>
+                </circle>
+                <points>100</points>
+            </target>
+        </targets>
+        <width>650</width>
+    </map>
+    <name>First Example</name>
+    <timelimit>5000</timelimit>
+    <version>1</version>
+</level>

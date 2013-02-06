@@ -1,3 +1,62 @@
 # Make It Hit
 
 A little game where you must shoot objects to targets.
+
+## Level Format
+ 
+If not mentioned otherwise all values are strings. Integer, floating-point or boolean values are marked. A level without all required values might not work at all.
+
+As this game is developed the map parser will evolve. Changes (added and removed features) will be marked. You should always stay compatible with the current version.
+
+Current Version: __1__
+ 
+### Level
+
+#### Attributes:
+- parser -- The parser version for this map. You should always use the newest (see above). Required.
+
+#### Elements:
+- author -- The author. Default empty.
+- date -- Date of last update. Default empty.
+- description -- A brief description. Default empty.
+- map -- The map. See below. Required.
+- name -- The name. Required.
+- timelimit -- The timelimit to solve. Required.
+- version -- The version. Default empty.
+ 
+### Map
+
+#### Elements:
+- border -- The width of the border. Integer. Required.
+- height -- The height of the map. Integer. Required.
+- objects -- List of objects. Currently only rectangles are supported. See below. Required.
+- players -- List of players. See below. Required.
+- targets -- List of targets. See below. Required.
+- width -- The width of the map. Integer. Required.
+ 
+### Player
+
+#### Elements:
+- *object* -- The player object. See below. Currently only circles are supported. Required.
+ 
+### Target
+
+### Elements:
+- *object* -- The target object. See below. Required.
+- points -- Number of points received if hitting this target. Integer. Required.
+ 
+### Object: Circle
+
+#### Elements:
+- radius -- The radius of the circle. Integer. Required.
+- x -- The x-component of the center. Integer. Required.
+- y -- The y-component of the center. Integer. Required.
+ 
+### Object: Rect
+
+#### Elements:
+- angle -- The angle of the rectangle. Float. Required.
+- height -- The height of the rectangle. Integer. Required.
+- width -- The width of the rectangle. Integer. Required.
+- x -- The x-component of the center. Integer. Required.
+- y -- The y-component of the center. Integer. Required.
