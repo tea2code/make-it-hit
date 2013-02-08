@@ -21,7 +21,7 @@ Current Version: __1__
 - description -- A brief description. Default empty.
 - map -- The map. See below. Required.
 - name -- The name. Required.
-- timelimit -- The timelimit to solve. Required.
+- timelimit -- The timelimit to solve the level in milliseconds. Integer. Required.
 - version -- The version. Default empty.
  
 ### Map

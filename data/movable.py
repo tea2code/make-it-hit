@@ -102,7 +102,7 @@ class Movable(metaclass = ABCMeta):
         >>> print(m)
         Movable(forces [], mass 0.00, momentum Vector2d(0.00, 0.00), position Vector2d(0.00, 0.00))
         '''
-        forces = ", ".join( [str(element) for element in self._forces]  )
+        forces = ', '.join( [str(element) for element in self._forces] )
         template = 'Movable(forces [{0}], mass {1:.2f}, momentum {2}, position {3})'
         return template.format(forces, self.mass, self.momentum, self.position)
         

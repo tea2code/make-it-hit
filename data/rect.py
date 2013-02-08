@@ -4,9 +4,9 @@ class Rect( movable.Movable ):
     ''' Class representing a rectangle. 
     
     Member:
-    angle -- The angle in degree of the rect (int).
-    height -- The height of the rect (int).
-    width -- The width of the rect (int).
+    angle -- The angle in degree of the rect (float).
+    height -- The height of the rect (float).
+    width -- The width of the rect (float).
     '''
     angle = 0
     height = 1
