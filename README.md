@@ -13,7 +13,7 @@ Current Version: __1__
 ### Level
 
 #### Attributes:
-- parser -- The parser version for this map. You should always use the newest (see above). Required.
+- parser -- The parser version for this map. You should always use the newest (see above). Integer. Required.
 
 #### Elements:
 - author -- The author. Default empty.
