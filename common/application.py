@@ -2,6 +2,9 @@ from common import timestepper
 from data import data
 from graphics import tkgraphics
 
+import argparse
+import os
+
 class Application:
     ''' Application/Main class.
 
@@ -33,6 +36,16 @@ class Application:
         
     def begin( self ):
         ''' Start the application. '''
+        
+        # Read arguments.
+        parser = argparse.ArgumentParser( description='Provide the level path as an argument.' )
+        parser.add_argument( 'level' )
+        args = parser.parse_args()
+        
+        # Check if level exits.
+        if not os.path.exists( args.level ):
+            raise FileNotFoundError( 'The level "'+args.level+'" was not found.' )
+        
         # Initialize data.
         self._data = data.Data()
         
