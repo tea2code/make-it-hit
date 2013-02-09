@@ -40,7 +40,11 @@ class TkGraphics( tickable.Tickable ):
         # Drawer factory.
         drawerFactory = tkdrawerfactory.TkDrawerFactory()
         
+        # Check if level already exists.
+        if data.level is None:
+            return
+        
         # Draw players.
-        for p in data.players:
+        for p in data.level.map.players:
             drawer = drawerFactory.createFrom( object )
             drawer.draw( self.canvas )
