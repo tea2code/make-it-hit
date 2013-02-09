@@ -9,6 +9,7 @@ import data.rect
 import data.movable
 import data.target
 import graphics.tkcircledrawer
+import level.levelparser
 
 if __name__ == '__main__':
     import doctest
@@ -23,3 +24,4 @@ if __name__ == '__main__':
     doctest.testmod( data.target )
     doctest.testmod( data.movable ) # Should be after extending modules.
     doctest.testmod( graphics.tkcircledrawer )
+    doctest.testmod( level.levelparser )

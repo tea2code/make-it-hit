@@ -72,6 +72,12 @@ class LevelParser():
     _errorInteger = 'Element "{0}" must be an integer.'
     _errorMissing = 'Missing element "{0}".'
 
+    def __init__( self ):
+        ''' Test:
+        >>> l = LevelParser()
+        >>> l.level
+        '''
+    
     def parse( self, file ):
         ''' Parses a level file. Throws xml.etree.ElementTree.ParseError or level.levelparsererror.
         Returns the resulting level object. '''

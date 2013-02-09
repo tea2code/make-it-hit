@@ -6,12 +6,12 @@ class Data:
     
     Member:
     deltaTime -- The time difference since the last step (float).
-    players -- List of player objects (data.movable).
+    level -- The level to play (data.level).
     time -- The accumulated time of all steps (float).
     '''
 
     deltaTime = 0
-    players = []
+    level = None
     time = 0
     
     def __init__( self ):
@@ -19,8 +19,7 @@ class Data:
         >>> d = Data()
         >>> d.deltaTime
         0
-        >>> len(d.players)
-        0
+        >>> d.level
         >>> d.time
         0
         '''
