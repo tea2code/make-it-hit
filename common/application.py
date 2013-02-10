@@ -1,6 +1,7 @@
 from common import timestepper
 from data import data
 from graphics import tkgraphics
+from input import tkinput
 
 import argparse
 import os
@@ -9,14 +10,16 @@ class Application:
     ''' Application/Main class.
 
     Member:
+    forceScale -- Scaling factor for force input vectors (float).
     frameTime -- "Should be" time of one frame (float).
     loopTime -- The overall refreshing time of the main loop int milliseconds (int). 
-    _data -- The "global" data object (Data).
-    _graphics -- The module responsible for visualizing the data (Graphics).
-    _timestepper -- The frame ticker (TimeStepper).
+    _data -- The "global" data object (data.data).
+    _graphics -- The module responsible for visualizing the data (graphics.graphics).
+    _timestepper -- The frame ticker (common.timestepper).
     '''
     
     frameTime = 0.1
+    forceScale = 1.0
     loopTime = 100
     _graphics = None
     _data = None
@@ -27,6 +30,8 @@ class Application:
         >>> a = Application()
         >>> a.frameTime
         0.1
+        >>> a.forceScale
+        1.0
         >>> a.loopTime
         100
         >>> a._graphics
@@ -55,6 +60,10 @@ class Application:
         # Initialize time stepper.
         self._timestepper = timestepper.Timestepper( self.frameTime, self.calculateNextState )
         self._timestepper.time = self.frameTime
+        
+        # Initialize and activate input module.
+        self.input = tkinput.TkInput( self._data, self._graphics.window )
+        self.input.forceScale = self.forceScale
         
         # Start.
         self._timestepper.start()
