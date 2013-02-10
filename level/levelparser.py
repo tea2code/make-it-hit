@@ -1,4 +1,5 @@
-﻿from data import vector2d
+﻿from common import formulary
+from data import vector2d
 from data import circle
 from data import level
 from data import map
@@ -67,7 +68,7 @@ class LevelParser():
     TAG_Y = 'y'
     
     level = None
-    supportedParser = [1]
+    supportedParser = ['1']
     
     _errorInteger = 'Element "{0}" must be an integer.'
     _errorMissing = 'Missing element "{0}".'
@@ -99,10 +100,10 @@ class LevelParser():
     
     def __parseCircle( self, circleRoot ):
         ''' Parses circle and returns it. '''
-        circle = circle.Circle()
-        circle.position = self.__parseVector2d( circleRoot )
-        circle.radius = self.__readReqInteger( circleRoot, self.TAG_RADIUS )
-        return circle
+        c = circle.Circle()
+        c.position = self.__parseVector2d( circleRoot )
+        c.radius = self.__readReqInteger( circleRoot, self.TAG_RADIUS )
+        return c
     
     def __parseLevel( self, levelRoot ):
         ''' Parses the level. '''
@@ -152,8 +153,8 @@ class LevelParser():
         else:
             raise error.LevelParserError( self._errorMissing.format(self.TAG_OBJECTS) )
         if objects:
-            for object in objects:
-                self.level.map.objects.append( self.__parseRect(object) )
+            for o in objects:
+                self.level.map.objects.append( self.__parseRect(o) )
         else:
             raise error.LevelParserError( self._errorMissing.format(self.TAG_OBJECTS) )
         
@@ -170,31 +171,31 @@ class LevelParser():
         else:
             raise error.LevelParserError( self._errorMissing.format(self.TAG_TARGETS) )
         if targets:
-            for target in targets:
-                self.level.map.targets.append( self.__parseTarget(target) )
+            for t in targets:
+                self.level.map.targets.append( self.__parseTarget(t) )
         else:
             raise error.LevelParserError( self._errorMissing.format(self.TAG_TARGET) )
 
     def __parseTarget( self, targetRoot ):
         ''' Parses a target and returns it. '''
-        target = target.Target()
-        target.points = self.__readReqInteger( targetRoot, self.TAG_POINTS )
+        t = target.Target()
+        t.points = self.__readReqInteger( targetRoot, self.TAG_POINTS )
         object = targetRoot.find( self.TAG_CIRCLE )
         if object is not None:
-            target.object = self.__parseCircle( object )
+            t.object = self.__parseCircle( object )
         object = targetRoot.find( self.TAG_RECT )
         if object is not None:
-            target.object = self.__parseRect( object )
-        return target
+            t.object = self.__parseRect( object )
+        return t
         
     def __parseRect( self, rectRoot ):
         ''' Parses a rectangle and returns it. '''
-        rect = rect.Rect()
-        rect.angle = self.__readReqInteger( rectRoot, self.TAG_ANGLE )
-        rect.height = self.__readReqInteger( rectRoot, self.TAG_HEIGHT )
-        rect.width = self.__readReqInteger( rectRoot, self.TAG_WIDTH )
-        rect.position = self.__parseVector2d( rectRoot )
-        return rect
+        r = rect.Rect()
+        r.angle = self.__readReqInteger( rectRoot, self.TAG_ANGLE )
+        r.height = self.__readReqInteger( rectRoot, self.TAG_HEIGHT )
+        r.width = self.__readReqInteger( rectRoot, self.TAG_WIDTH )
+        r.position = self.__parseVector2d( rectRoot )
+        return r
     
     def __parseVector2d( self, vectorRoot ):
         ''' Parses a vector and returns it. '''
@@ -205,9 +206,9 @@ class LevelParser():
     def __readReqInteger( self, root, tag ):
         ''' Tries to read a required integer tag. Returns integer or raises error. '''
         element = root.find( tag )
-        if element is not None and element.text.isdigit():
+        if element is not None and formulary.stringIsInt( element.text ):
             return int( element.text )
-        elif element is not None and not element.text.isdigit():
+        elif element is not None and not formulary.stringIsInt( element.text ):
             raise error.LevelParserError( self._errorInteger.format(tag) )
         else:
             raise error.LevelParserError( self._errorMissing.format(tag) )
