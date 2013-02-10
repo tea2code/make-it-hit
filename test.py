@@ -1,4 +1,5 @@
 import common.application
+import common.formulary
 import common.timestepper
 import data.circle
 import data.data
@@ -14,6 +15,7 @@ import level.levelparser
 if __name__ == '__main__':
     import doctest
     doctest.testmod( common.application )
+    doctest.testmod( common.formulary )
     doctest.testmod( common.timestepper )
     doctest.testmod( data.circle )
     doctest.testmod( data.data )
