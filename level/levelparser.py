@@ -24,7 +24,7 @@ class LevelParser():
     TAG_MAP -- Map element.
     TAG_NAME -- Name element.
     TAG_OBJECTS -- Objects element.
-    TAG_PLAYERS -- Players element.
+    TAG_PLAYER -- Player element.
     TAG_POINTS -- Points element.
     TAG_RADIUS -- Radius element.
     TAG_RECT -- Rectangle element.
@@ -42,7 +42,7 @@ class LevelParser():
     _errorMissing -- Text template for missing element errors.
     '''
 
-    ATTR_PARSER = 1
+    ATTR_PARSER = 'parser'
     TAG_ANGLE = 'angle'
     TAG_AUTHOR = 'author'
     TAG_BORDER = 'border'
@@ -54,7 +54,7 @@ class LevelParser():
     TAG_MAP = 'map'
     TAG_NAME = 'name'
     TAG_OBJECTS = 'objects'
-    TAG_PLAYERS = 'players'
+    TAG_PLAYER = 'player'
     TAG_POINTS = 'points'
     TAG_RADIUS = 'radius'
     TAG_RECT = 'rect'
@@ -158,17 +158,9 @@ class LevelParser():
             raise error.LevelParserError( self._errorMissing.format(self.TAG_OBJECTS) )
         
         # Players.
-        playersElement = mapRoot.find( self.TAG_PLAYERS )
-        players = []
-        if playersElement is not None:
-            players.extend( playersElement.findall(self.TAG_CIRCLE) )
-        else:
-            raise error.LevelParserError( self._errorMissing.format(self.TAG_PLAYERS) )
-        if players:
-            for player in players:
-                self.level.map.players.append( self.__parseCircle(player) )
-        else:
-            raise error.LevelParserError( self._errorMissing.format(self.TAG_PLAYERS) )
+        player = self.__readReqObject( mapRoot, self.TAG_PLAYER )
+        playerObject = self.__readReqObject( player, self.TAG_CIRCLE )
+        self.level.map.player = self.__parseCircle( playerObject )
         
         # Targets.
         targetsElement = mapRoot.find( self.TAG_TARGETS )

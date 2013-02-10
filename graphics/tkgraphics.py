@@ -44,7 +44,6 @@ class TkGraphics( tickable.Tickable ):
         if data.level is None:
             return
         
-        # Draw players.
-        for p in data.level.map.players:
-            drawer = drawerFactory.createFrom( object )
-            drawer.draw( self.canvas )
+        # Draw player.
+        drawer = drawerFactory.createFrom( data.level.map.player )
+        drawer.draw( self.canvas )

@@ -23,13 +23,13 @@
                 <y>200</y>
             </rect>
         </objects>
-        <players>
+        <player>
             <circle>
                 <radius>10</radius>
                 <x>50</x>
                 <y>50</y>
             </circle>
-        </players>
+        </player>
         <targets>
             <target>
                 <circle>

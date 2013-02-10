@@ -30,7 +30,7 @@ Current Version: __1__
 - border -- The width of the border. Integer. Required.
 - height -- The height of the map. Integer. Required.
 - objects -- List of objects. Currently only rectangles are supported. See below. Required.
-- players -- List of players. See below. Required.
+- player -- The player. See below. Required.
 - targets -- List of targets. See below. Required.
 - width -- The width of the map. Integer. Required.
  
