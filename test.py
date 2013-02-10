@@ -9,6 +9,8 @@ import data.rect
 import data.movable
 import data.target
 import data.vector2d
+import fps.fps
+import fps.fpscounter
 import graphics.tkcircledrawer
 import level.levelparser
 
@@ -25,5 +27,7 @@ if __name__ == '__main__':
     doctest.testmod( data.target )
     doctest.testmod( data.vector2d )
     doctest.testmod( data.movable ) # Should be after extending modules.
+    doctest.testmod( fps.fps )
+    doctest.testmod( fps.fpscounter )
     doctest.testmod( graphics.tkcircledrawer )
     doctest.testmod( level.levelparser )

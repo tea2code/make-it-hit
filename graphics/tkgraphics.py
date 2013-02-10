@@ -47,3 +47,6 @@ class TkGraphics( tickable.Tickable ):
         # Draw player.
         drawer = drawerFactory.createFrom( data.level.map.player )
         drawer.draw( self.canvas )
+        
+        # Set window title with current frames per second.
+        self.window.title( data.windowTitle.format(data.level.name, data.fps) )
