@@ -1,5 +1,5 @@
 ﻿from abc import ABCMeta
-from common import vector2d
+from data import vector2d
 
 class Movable(metaclass = ABCMeta):
     ''' This abstract class represents a movable object. 

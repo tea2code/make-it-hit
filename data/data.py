@@ -1,6 +1,4 @@
-﻿from common import vector2d
-
-class Data:
+﻿class Data:
     ''' This class represents all the data available in the game. This is equivalent to 
     the current state. 
     

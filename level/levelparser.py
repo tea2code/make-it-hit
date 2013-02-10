@@ -1,4 +1,4 @@
-﻿from common import vector2d
+﻿from data import vector2d
 from data import circle
 from data import level
 from data import map
