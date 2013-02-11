@@ -3,6 +3,7 @@ from data import data
 from fps import fps
 from graphics import tkgraphics
 from input import tkinput
+from physics import physics
 
 import argparse
 import os
@@ -32,6 +33,7 @@ class Application:
     _fps = None
     _graphics = None
     _input = None
+    _physics = None
     _timestepper = None
     
     def __init__( self ):
@@ -49,6 +51,7 @@ class Application:
         >>> a._fps
         >>> a._graphics
         >>> a._input
+        >>> a._physics
         >>> a._timestepper
         '''
         
@@ -74,6 +77,9 @@ class Application:
         # Initialize graphics.
         self._graphics = tkgraphics.TkGraphics( self._data )
         
+        # Initialize physics.
+        self._physics = physics.Physics()
+        
         # Initialize time stepper.
         self._timestepper = timestepper.Timestepper( self.frameTime, self.calculateNextState )
         self._timestepper.time = self.frameTime
@@ -91,6 +97,7 @@ class Application:
         ''' Callback function for the frame ticker. Executes all modules on the data. '''
         self._data.deltaTime = dt
         self._data.time = t
+        self._physics.tick( self._data )
         self._fps.tick( self._data ) 
         self._graphics.tick( self._data )
     
