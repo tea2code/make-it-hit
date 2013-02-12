@@ -1,4 +1,6 @@
-﻿class Vector2d:
+﻿from common import formulary
+
+class Vector2d:
     ''' Class representing an 2D vector. 
     
     Member:
@@ -34,7 +36,20 @@
         0
         '''
         return Vector2d( 0, 0 )
-        
+    
+    def length( self ):
+        ''' Calculates the length of a vector.
+
+        Test:
+        >>> print( '{0:.3f}'.format(Vector2d( 1, 1 ).length()) )
+        1.414
+        >>> print( '{0:.3f}'.format(Vector2d( 45, 127 ).length()) )
+        134.737
+        >>> print( '{0:.3f}'.format(Vector2d( 5, 3 ).length()) )
+        5.831
+        '''
+        return formulary.pythagoreanC( self.x, self.y )
+    
     def __add__( self, other ):
         ''' Add two vectors using + operator. Returns the resulting vector. 
         

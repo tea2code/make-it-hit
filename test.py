@@ -13,7 +13,7 @@ import fps.fps
 import fps.fpscounter
 import graphics.tkcircledrawer
 import level.levelparser
-#import physics.circlecirclecollider
+import physics.circlecirclecollider
 import physics.circlerectcollider
 import physics.colliderfactory
 import physics.movestate

@@ -1,4 +1,4 @@
-import math
+﻿import math
 
 def euclideanDistance( x1, y1, x2, y2 ):
     ''' Calculates the euclidean distance between two points in second dimension.
@@ -9,9 +9,20 @@ def euclideanDistance( x1, y1, x2, y2 ):
     '''
     a = math.fabs( x1 - x2 )
     b = math.fabs( y1 - y2 )
-    c = math.sqrt( (a * a) + (b * b) )
+    c = pythagoreanC( a, b )
     return c
+  
+def pythagoreanC( a, b ):
+    ''' Calculates c of the pythagorean theorem: c² = a² + b² 
     
+    Test:
+    >>> print( '{0:.2f}'.format(pythagoreanC(2, 5)) )
+    5.39
+    >>> print( '{0:.2f}'.format(pythagoreanC(45.563, 131.34)) )
+    139.02
+    '''
+    return math.sqrt( (a * a) + (b * b) )
+  
 def rotateX( x, y, angle ):
     ''' Rotates the x-component of a coordinate using the angle (degree). Positiv direction is 
     counterclock wise.
