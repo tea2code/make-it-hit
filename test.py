@@ -35,7 +35,7 @@ if __name__ == '__main__':
     doctest.testmod( fps.fpscounter )
     doctest.testmod( graphics.tkcircledrawer )
     doctest.testmod( level.levelparser )
-    #doctest.testmod( physics.circlecirclecollider )
+    doctest.testmod( physics.circlecirclecollider )
     doctest.testmod( physics.circlerectcollider )
     doctest.testmod( physics.colliderfactory )
     doctest.testmod( physics.movestate )
