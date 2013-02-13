@@ -50,10 +50,19 @@ class CircleCircleCollider( collider.Collider ):
 
         isCollided = (vector.length() <= distance)
         
+        x = 0
+        y = 0
         if isCollided:
-            pass
+            x = (((self._circle1.position.x * self._circle2.radius) + 
+                  (self._circle2.position.x * self._circle1.radius)) / 
+                  (self._circle1.radius + self._circle2.radius))
+            y = (((self._circle1.position.y * self._circle2.radius) + 
+                  (self._circle2.position.y * self._circle1.radius)) / 
+                  (self._circle1.radius + self._circle2.radius))
         
         c = collision.Collision( isCollided )
+        c.x = x
+        c.y = y
         return c
         
 if __name__ == '__main__':
