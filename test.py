@@ -11,6 +11,7 @@ import data.vector2d
 import formulary.pythagorean
 import formulary.rotation
 import formulary.stringnumber
+import formulary.vector
 import fps.fps
 import fps.fpscounter
 import graphics.tkcircledrawer
@@ -19,7 +20,6 @@ import physics.circlecirclecollider
 import physics.circlerectcollider
 import physics.colliderfactory
 import physics.movestate
-import physics.reflector
 
 if __name__ == '__main__':
     import doctest
@@ -32,10 +32,11 @@ if __name__ == '__main__':
     doctest.testmod( data.rect )
     doctest.testmod( data.target )
     doctest.testmod( data.vector2d )
-    doctest.testmod( data.movable ) # Should be after extending modules.
+    doctest.testmod( data.movable ) # Should be after extending modules. TODO: Probably will be fixed with #31.
     doctest.testmod( formulary.pythagorean )
     doctest.testmod( formulary.rotation )
     doctest.testmod( formulary.stringnumber )
+    doctest.testmod( formulary.vector )
     doctest.testmod( fps.fps )
     doctest.testmod( fps.fpscounter )
     doctest.testmod( graphics.tkcircledrawer )
@@ -44,4 +45,3 @@ if __name__ == '__main__':
     doctest.testmod( physics.circlerectcollider )
     doctest.testmod( physics.colliderfactory )
     doctest.testmod( physics.movestate )
-    doctest.testmod( physics.reflector )
