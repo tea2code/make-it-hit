@@ -1,4 +1,4 @@
-﻿from common import formulary
+﻿from formulary import pythagorean
 
 class Vector2d:
     ''' Class representing an 2D vector. 
@@ -48,7 +48,7 @@ class Vector2d:
         >>> print( '{0:.3f}'.format(Vector2d( 5, 3 ).length()) )
         5.831
         '''
-        return formulary.pythagoreanC( self.x, self.y )
+        return pythagorean.solveC( self.x, self.y )
     
     def __add__( self, other ):
         ''' Add two vectors using + operator. Returns the resulting vector. 

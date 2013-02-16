@@ -1,5 +1,4 @@
 import common.application
-import common.formulary
 import common.timestepper
 import data.circle
 import data.data
@@ -9,6 +8,9 @@ import data.rect
 import data.movable
 import data.target
 import data.vector2d
+import formulary.pythagorean
+import formulary.rotation
+import formulary.stringnumber
 import fps.fps
 import fps.fpscounter
 import graphics.tkcircledrawer
@@ -17,11 +19,11 @@ import physics.circlecirclecollider
 import physics.circlerectcollider
 import physics.colliderfactory
 import physics.movestate
+import physics.reflector
 
 if __name__ == '__main__':
     import doctest
     doctest.testmod( common.application )
-    doctest.testmod( common.formulary )
     doctest.testmod( common.timestepper )
     doctest.testmod( data.circle )
     doctest.testmod( data.data )
@@ -31,6 +33,9 @@ if __name__ == '__main__':
     doctest.testmod( data.target )
     doctest.testmod( data.vector2d )
     doctest.testmod( data.movable ) # Should be after extending modules.
+    doctest.testmod( formulary.pythagorean )
+    doctest.testmod( formulary.rotation )
+    doctest.testmod( formulary.stringnumber )
     doctest.testmod( fps.fps )
     doctest.testmod( fps.fpscounter )
     doctest.testmod( graphics.tkcircledrawer )
@@ -39,3 +44,4 @@ if __name__ == '__main__':
     doctest.testmod( physics.circlerectcollider )
     doctest.testmod( physics.colliderfactory )
     doctest.testmod( physics.movestate )
+    doctest.testmod( physics.reflector )

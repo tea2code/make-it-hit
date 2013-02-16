@@ -1,6 +1,6 @@
 from . import collider
 from . import collision
-from common import formulary
+from formulary import pythagorean
 
 import math
 
@@ -91,7 +91,7 @@ class CircleRectCollider( collider.Collider ):
             
         # Determine collision.
         isCollided = False
-        distance = formulary.euclideanDistance( cx, cy, x, y )
+        distance = pythagorean.euclideanDistance( cx, cy, x, y )
         if distance < self._circle.radius:
             isCollided = True
         
