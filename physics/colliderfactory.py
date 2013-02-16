@@ -33,7 +33,7 @@ class ColliderFactory:
          
         # Unknown objects. Can not be collided.
         else:
-            raise nocollidererror.NoColliderError( 'No collider object for "{0}" and "{1}".'.format(object1, object2) )
+            raise nocollidererror.NoColliderError( 'No collider object for "{0}" and "{1}" found.'.format(object1, object2) )
             
 if __name__ == '__main__':
     print( 'Executing doctest.' )

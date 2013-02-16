@@ -20,6 +20,8 @@ import physics.circlecirclecollider
 import physics.circlerectcollider
 import physics.colliderfactory
 import physics.movestate
+import physics.circlerectreflector
+import physics.circlecirclereflector
 
 if __name__ == '__main__':
     import doctest
@@ -45,3 +47,5 @@ if __name__ == '__main__':
     doctest.testmod( physics.circlerectcollider )
     doctest.testmod( physics.colliderfactory )
     doctest.testmod( physics.movestate )
+    doctest.testmod( physics.circlecirclereflector )
+    doctest.testmod( physics.circlerectreflector )
