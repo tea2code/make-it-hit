@@ -4,6 +4,7 @@ from fps import fps
 from graphics import tkgraphics
 from input import tkinput
 from physics import physics
+from postframe import postframe
 
 import argparse
 import os
@@ -18,15 +19,17 @@ class Application:
     loopTime -- The overall refreshing time of the main loop int milliseconds (int). 
     windowTitle -- Template for window title.
     _data -- The "global" data object (data.data).
-    _fps -- The module responsible to count frames per second (fps.fps).
+    _fps -- The module responsible to count frames per second (fps).
     _graphics -- The module responsible for visualizing the data (graphics.tkgraphics).
     _input -- The module responsible for user input (input.tkinput).
+    _physics -- The module responsible for physics calculation (physics.physics).
+    _postFrame -- The module responsible for after frame tasks (postframe.postframe).
     _timestepper -- The frame ticker (common.timestepper).
     '''
     
     fpsCounterMeasures = 10
-    frameTime = 0.1
     forceScale = 1.0
+    frameTime = 0.1
     loopTime = 100
     windowTitle = ''
     _data = None
@@ -34,6 +37,7 @@ class Application:
     _graphics = None
     _input = None
     _physics = None
+    _postFrame = None
     _timestepper = None
     
     def __init__( self ):
@@ -80,6 +84,9 @@ class Application:
         # Initialize physics.
         self._physics = physics.Physics()
         
+        # Initialize postframe.
+        self._postFrame = postframe.PostFrame()
+        
         # Initialize time stepper.
         self._timestepper = timestepper.Timestepper( self.frameTime, self.calculateNextState )
         self._timestepper.time = self.frameTime
@@ -100,6 +107,7 @@ class Application:
         self._physics.tick( self._data )
         self._fps.tick( self._data ) 
         self._graphics.tick( self._data )
+        self._postFrame.tick( self.data )
     
     def __callNextState( self ):
         ''' Return to main loop. '''
