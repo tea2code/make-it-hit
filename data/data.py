@@ -12,6 +12,7 @@ class Data:
     mousePressed -- True if mouse button is pressed.
     time -- The accumulated time of all steps (float).
     windowTitle -- Template for window title.
+    _borders -- List of rectangles representing the borders (data.rect). 
     '''
 
     deltaTime = 0
@@ -21,6 +22,8 @@ class Data:
     mousePressed = False
     time = 0
     windowTitle = ''
+    
+    _borders = []
     
     def __init__( self ):
         ''' Test: 

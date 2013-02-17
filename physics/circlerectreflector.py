@@ -13,26 +13,21 @@ class CircleRectReflector( reflector.Reflector ):
     Member:
     _circle -- The circle (data.circle).
     _rect -- The rectangle (data.rect).
-    _x -- The x-component of the reflection point (float).
-    _y -- The y-component of the reflection point (float).
     '''
     
     _circle = None
     _rect = None
-    _x = 0
-    _y = 0
     
-    def __init__( self, circle, rect, x, y ):
+    def __init__( self, circle, rect ):
         ''' The circle is assumed to be moving and the rect static. Reflection happens at 
         reflection point (x, y). '''
         self._circle = circle
         self._rect = rect
-        self._x = x
-        self._y = y
     
-    def reflect( self ):
+    def reflect( self, x, y ):
         ''' Calculates reflection between two circles. Returns the resulting momentum vector. 
         Raises ReflectionNotOnLineError if reflection is not on the line of the rect.
+        Takes the position of the reflection point as argument.
         
         Test:
         >>> from data import circle
@@ -50,8 +45,8 @@ class CircleRectReflector( reflector.Reflector ):
         >>> r.height = 4
         >>> x = -2
         >>> y = 2
-        >>> reflector = CircleRectReflector( c, r, x, y )
-        >>> v = reflector.reflect()
+        >>> reflector = CircleRectReflector( c, r )
+        >>> v = reflector.reflect( x, y )
         >>> print( '{0:.2f}, {1:.2f}'.format(v.x, v.y) )
         -4.00, 2.00
         '''
@@ -64,11 +59,11 @@ class CircleRectReflector( reflector.Reflector ):
         yMinus = -heightHalf
 
         # Rotate reflection point back and move to origin.
-        rotatedX = rotation.rotateX( self._x - self._rect.position.x, 
-                                     self._y - self._rect.position.y, 
+        rotatedX = rotation.rotateX( x - self._rect.position.x, 
+                                     y - self._rect.position.y, 
                                      -self._rect.angle )
-        rotatedY = rotation.rotateY( self._x - self._rect.position.x, 
-                                     self._y - self._rect.position.y,
+        rotatedY = rotation.rotateY( x - self._rect.position.x, 
+                                     y - self._rect.position.y,
                                      -self._rect.angle )
         
         # Prepare comparison.

@@ -12,26 +12,21 @@ class CircleCircleReflector( reflector.Reflector ):
     Member:
     _circle1 -- The first circle (data.circle).
     _circle2 -- The second circle (data.circle).
-    _x -- The x-component of the collision point (float).
-    _y -- The y-component of the collision point (float).
     '''
     
     _circle1 = None
     _circle2 = None
-    _x = 0
-    _y = 0
     
-    def __init__( self, circle1, circle2, x, y ):
+    def __init__( self, circle1, circle2,  ):
         ''' The first circle is assumed to be moving and the second static. Reflection happens at 
         collision point (x, y). '''
         self._circle1 = circle1
         self._circle2 = circle2
-        self._x = x
-        self._y = y
     
-    def reflect( self ):
+    def reflect( self, x, y ):
         ''' Calculates reflection between two circles. Returns the resulting momentum vector. 
         Raises ReflectionNotOnLineError if reflection is not on the line of the rect.
+        Takes the position of the reflection point as argument.
         
         Test:
         >>> from data import circle
@@ -47,15 +42,15 @@ class CircleCircleReflector( reflector.Reflector ):
         >>> c2.radius = 2
         >>> x = -2
         >>> y = 2
-        >>> reflector = CircleCircleReflector( c1, c2, x, y )
-        >>> v = reflector.reflect()
+        >>> reflector = CircleCircleReflector( c1, c2 )
+        >>> v = reflector.reflect( x, y )
         >>> print( '{0:.2f}, {1:.2f}'.format(v.x, v.y) )
         -4.00, 2.00
         '''
         
         # Move reflection point to origin.
-        reflectionX = self._x - self._circle2.position.x
-        reflectionY = self._y - self._circle2.position.y
+        reflectionX = x - self._circle2.position.x
+        reflectionY = y - self._circle2.position.y
         
         # Prepare comparison.
         epsilon = comparison.epsilon()
