@@ -42,7 +42,7 @@ class Physics( tickable.Tickable ):
         player.position = newState.position
         
         # Interaction of player with borders.
-        self.__interact( player, self._borders(data) )
+        self.__interact( player, self.__borders(data) )
         
         # Interaction of player with objects.
         self.__interact( player, data.level.map.objects )
@@ -51,8 +51,8 @@ class Physics( tickable.Tickable ):
         ''' Calculates a list of rectangles representing the borders. '''
         if not data._borders:
             border = data.level.map.border
-            height = data.level.height
-            width = data.level.width
+            height = data.level.map.height
+            width = data.level.map.width
             
             # Left.
             left = rect.Rect()

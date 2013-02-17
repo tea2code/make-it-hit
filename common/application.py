@@ -1,6 +1,8 @@
 from common import timestepper
 from data import data
 from fps import fps
+from gamerules import gamerules
+from gamerules import gamestarter
 from graphics import tkgraphics
 from input import tkinput
 from physics import physics
@@ -20,6 +22,7 @@ class Application:
     windowTitle -- Template for window title.
     _data -- The "global" data object (data.data).
     _fps -- The module responsible to count frames per second (fps).
+    _gamerules -- The module responsible for implementing game rules (gamerules.gamerules).
     _graphics -- The module responsible for visualizing the data (graphics.tkgraphics).
     _input -- The module responsible for user input (input.tkinput).
     _physics -- The module responsible for physics calculation (physics.physics).
@@ -34,6 +37,7 @@ class Application:
     windowTitle = ''
     _data = None
     _fps = None
+    _gamerules = None
     _graphics = None
     _input = None
     _physics = None
@@ -53,9 +57,11 @@ class Application:
         100
         >>> a._data
         >>> a._fps
+        >>> a._gamerules
         >>> a._graphics
         >>> a._input
         >>> a._physics
+        >>> a._postFrame
         >>> a._timestepper
         '''
         
@@ -75,8 +81,15 @@ class Application:
         self._data = data.Data()
         self._data.windowTitle = self.windowTitle
         
+        # Initialize game.
+        gameStarter = gamestarter.GameStarter()
+        gameStarter.load( self._data, args.level )
+        
         # Initialize fps counter.
         self._fps = fps.Fps( self.fpsCounterMeasures, 2 * self.fpsCounterMeasures )
+        
+        # Initialize game rules.
+        self._gamerules = gamerules.GameRules()
         
         # Initialize graphics.
         self._graphics = tkgraphics.TkGraphics( self._data )

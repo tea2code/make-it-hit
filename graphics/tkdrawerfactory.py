@@ -1,5 +1,6 @@
 from . import notdrawableerror
 from . import tkcircledrawer
+from data import circle
 
 class TkDrawerFactory:
     ''' Factory for tk drawer classes. '''
@@ -9,7 +10,7 @@ class TkDrawerFactory:
         If no drawer is found throws NotDrawableError. '''
         
         # Circle.
-        if isinstance( p, circle.Circle ):
+        if isinstance( object, circle.Circle ):
             return tkcircledrawer.TkCircleDrawer( object.position.x, object.position.y, object.radius )
             
         # Unknown object. Can not be drawn.
