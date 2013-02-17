@@ -1,3 +1,41 @@
+import math
+import sys
+
+def epsilon():
+    ''' Epsilon value you should use for comparison of floats. '''
+    return sys.float_info.epsilon
+
+def floatEqual( a, b, epsilon ):
+    ''' Compares to floats with a given epsilon. Normaly you should use epsilon().
+
+    Test:
+    >>> floatEqual( 0, 0, epsilon() )
+    True
+    >>> floatEqual( 0.0000, 0.0000, epsilon() )
+    True
+    >>> floatEqual( 1, 0, epsilon() )
+    False
+    >>> floatEqual( 0.0, 0.00001, epsilon() )
+    False
+    >>> floatEqual( 4.00001, 4.00001, epsilon() )
+    True
+    >>> floatEqual( 125352.00001, 125352.00001, epsilon() )
+    True'''
+    absA = math.fabs( a )
+    absB = math.fabs( b )
+    diff = math.fabs( a - b )
+
+    # Shortcut, handles infinities.
+    if a == b:
+        return True
+    # One or both are zero.
+    elif a * b == 0:
+        # Relative error is not meaningful here.
+        return diff < (epsilon * epsilon)
+    # Use relative error.
+    else:
+        return diff / (absA + absB) < epsilon
+
 def stringIsFloat( string ):
     ''' Checks if a string is a integer.
 

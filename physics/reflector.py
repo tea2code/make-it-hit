@@ -5,4 +5,4 @@ class Reflector(metaclass = ABCMeta):
 
     @abstractmethod
     def reflect( self ):
-        ''' The derived class must implement this method. '''
+        ''' The derived class must implement this method. Must return the resulting momentum vector.'''
