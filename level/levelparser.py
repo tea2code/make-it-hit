@@ -4,7 +4,7 @@ from data import level
 from data import map
 from data import rect
 from data import target
-from formulary import stringnumber
+from formulary import comparison
 from level import levelparsererror as error
 
 import xml.etree.ElementTree as Et
@@ -206,9 +206,9 @@ class LevelParser():
     def __readReqInteger( self, root, tag ):
         ''' Tries to read a required integer tag. Returns integer or raises error. '''
         element = root.find( tag )
-        if element is not None and stringnumber.stringIsInt( element.text ):
+        if element is not None and comparison.stringIsInt( element.text ):
             return int( element.text )
-        elif element is not None and not stringnumber.stringIsInt( element.text ):
+        elif element is not None and not comparison.stringIsInt( element.text ):
             raise error.LevelParserError( self._errorInteger.format(tag) )
         else:
             raise error.LevelParserError( self._errorMissing.format(tag) )

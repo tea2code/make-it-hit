@@ -8,9 +8,9 @@ import data.rect
 import data.movable
 import data.target
 import data.vector2d
+import formulary.comparison
 import formulary.pythagorean
 import formulary.rotation
-import formulary.stringnumber
 import formulary.vector
 import fps.fps
 import fps.fpscounter
@@ -35,9 +35,9 @@ if __name__ == '__main__':
     doctest.testmod( data.target )
     doctest.testmod( data.vector2d )
     doctest.testmod( data.movable ) # Should be after extending modules. TODO: Probably will be fixed with #31.
+    doctest.testmod( formulary.comparison )
     doctest.testmod( formulary.pythagorean )
     doctest.testmod( formulary.rotation )
-    doctest.testmod( formulary.stringnumber )
     doctest.testmod( formulary.vector )
     doctest.testmod( fps.fps )
     doctest.testmod( fps.fpscounter )
