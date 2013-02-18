@@ -18,7 +18,9 @@ class TkGraphics( tickable.Tickable ):
     def __init__( self, data ):
         ''' The parameter data which contains the window settings. '''
         self.window = tkinter.Tk()
-        self.canvas = tkinter.Canvas( self.window )
+        self.canvas = tkinter.Canvas( self.window, width = data.level.map.width, 
+                                      height = data.level.map.height )
+        self.canvas.config( background = 'white' )
         self.canvas.pack()
         
     def after( self, time, function ):
@@ -39,6 +41,16 @@ class TkGraphics( tickable.Tickable ):
         
         # Drawer factory.
         drawerFactory = tkdrawerfactory.TkDrawerFactory()
+        
+        # Draw objects.
+        for object in data.level.map.objects:
+            drawer = drawerFactory.createFrom( object )
+            drawer.draw( self.canvas )
+        
+        # Draw targets.
+        for target in data.level.map.targets:
+            drawer = drawerFactory.createFrom( target.object )
+            drawer.draw( self.canvas )
         
         # Draw player.
         drawer = drawerFactory.createFrom( data.level.map.player )
