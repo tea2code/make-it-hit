@@ -42,6 +42,13 @@ class Physics( tickable.Tickable ):
         
         # Interaction of player with objects.
         self.__interact( player, data.level.map.objects )
+        
+        # Check if player hits target.
+        for target in data.level.map.targets:
+            collider = self._colliderFactory.createFrom( player, target.object )
+            collision = collider.collide()
+            if collision.isCollided:
+                print( 'Target hit. You got {0} points.'.format(target.points) )
 
     def __borders( self, data ):
         ''' Calculates a list of rectangles representing the borders. '''
