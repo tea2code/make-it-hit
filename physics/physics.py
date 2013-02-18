@@ -23,10 +23,6 @@ class Physics( tickable.Tickable ):
 
         Calculates the physic on all objects. '''
     
-        # Check if level already exists.
-        if data.level is None:
-            return
-    
         player = data.level.map.player
     
         # Move player.
