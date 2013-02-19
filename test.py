@@ -2,9 +2,12 @@ import common.application
 import common.enum
 import common.timestepper
 import data.circle
+import data.collisionevent
 import data.data
+import data.event
 import data.level
 import data.map
+import data.pointsevent
 import data.rect
 import data.movable
 import data.target
@@ -30,9 +33,12 @@ if __name__ == '__main__':
     doctest.testmod( common.enum )
     doctest.testmod( common.timestepper )
     doctest.testmod( data.circle )
+    doctest.testmod( data.collisionevent )
     doctest.testmod( data.data )
+    doctest.testmod( data.event )
     doctest.testmod( data.level )
     doctest.testmod( data.map )
+    doctest.testmod( data.pointsevent )
     doctest.testmod( data.rect )
     doctest.testmod( data.target )
     doctest.testmod( data.vector2d )
