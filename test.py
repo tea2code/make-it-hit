@@ -1,4 +1,5 @@
 import common.application
+import common.enum
 import common.timestepper
 import data.circle
 import data.data
@@ -26,6 +27,7 @@ import physics.circlecirclereflector
 if __name__ == '__main__':
     import doctest
     doctest.testmod( common.application )
+    doctest.testmod( common.enum )
     doctest.testmod( common.timestepper )
     doctest.testmod( data.circle )
     doctest.testmod( data.data )
