@@ -3,7 +3,9 @@ from . import moveheun
 from . import movestate
 from . import reflectorfactory
 from common import tickable
+from data import collisionevent
 from data import rect
+from data import targetevent
 from data import vector2d
 
 class Physics( tickable.Tickable ):
@@ -38,17 +40,20 @@ class Physics( tickable.Tickable ):
         player.position = newState.position
         
         # Interaction of player with borders.
-        self.__interact( player, self.__borders(data) )
+        events = self.__interact( player, self.__borders(data) )
+        data.events.extend( events )
         
         # Interaction of player with objects.
-        self.__interact( player, data.level.map.objects )
+        events = self.__interact( player, data.level.map.objects )
+        data.events.extend( events )
         
         # Check if player hits target.
         for target in data.level.map.targets:
             collider = self._colliderFactory.createFrom( player, target.object )
             collision = collider.collide()
             if collision.isCollided:
-                print( 'Target hit. You got {0} points.'.format(target.points) )
+                event = targetevent.TargetEvent( target, collision.x, collision.y )
+                data.events.append( event )
 
     def __borders( self, data ):
         ''' Calculates a list of rectangles representing the borders. '''
@@ -88,10 +93,14 @@ class Physics( tickable.Tickable ):
         return data._borders
         
     def __interact( self, player, objects ):
-        ''' Calculates interaction of player with objects. '''
+        ''' Calculates interaction of player with objects. Returns list of events.'''
+        events = []
         for object in objects:
             collider = self._colliderFactory.createFrom( player, object )
             collision = collider.collide()
             if collision.isCollided:
                 reflector = self._reflectorFactory.createFrom( player, object )
                 player.momentum = reflector.reflect( collision.x, collision.y )
+                event = collisionevent.CollisionEvent( object, collision.x, collision.y )
+                events.append( event )
+        return events

@@ -120,6 +120,7 @@ class Application:
         self._physics.tick( self._data )
         self._fps.tick( self._data ) 
         self._graphics.tick( self._data )
+        self._gamerules.tick( self._data )
         self._postFrame.tick( self._data )
     
     def __callNextState( self ):

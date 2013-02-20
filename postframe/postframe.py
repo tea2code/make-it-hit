@@ -6,3 +6,5 @@ class PostFrame( tickable.Tickable ):
     def tick( self, data ):
         ''' Implementation of Tickable.tick().'''
     
+        # Clear events.
+        del data.events[:]

@@ -6,6 +6,7 @@ class Data:
     
     Member:
     deltaTime -- The time difference since the last step (float).
+    events -- List of events in this frame (data.event).
     fps -- The current frame rate (int).
     level -- The level to play (data.level).
     mousePosition -- The current mouse position if pressed.
@@ -16,6 +17,7 @@ class Data:
     '''
 
     deltaTime = 0
+    events = []
     fps = 0
     level = None
     mousePosition = vector2d.Vector2d.nullVector()

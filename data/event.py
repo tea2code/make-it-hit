@@ -8,15 +8,15 @@ class Event(metaclass = ABCMeta):
     type -- The type of the event.
     '''
     
-    TYPES = enum.createSeq( 'COLLISION', 'POINTS' )
+    TYPES = enum.createSeq( 'COLLISION', 'POINTS', 'TARGET' )
     
     def __init__( self ):
         ''' 
         
         Test:
         >>> e = Event()
-        >>> e.type = Event.TYPES.POINTS
-        >>> e.type is Event.TYPES.POINTS
+        >>> e.type = Event.TYPES.TARGET
+        >>> e.type is Event.TYPES.TARGET
         True
         >>> e.type is Event.TYPES.COLLISION
         False

@@ -67,7 +67,7 @@ class CircleRectReflector( reflector.Reflector ):
                                      -self._rect.angle )
         
         # Prepare comparison.
-        epsilon = comparison.epsilon()
+        epsilon = 0.1
         pointX1 = 0
         pointY1 = 0
         pointX2 = 0

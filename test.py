@@ -11,6 +11,7 @@ import data.pointsevent
 import data.rect
 import data.movable
 import data.target
+import data.targetevent
 import data.vector2d
 import formulary.comparison
 import formulary.pythagorean
@@ -41,6 +42,7 @@ if __name__ == '__main__':
     doctest.testmod( data.pointsevent )
     doctest.testmod( data.rect )
     doctest.testmod( data.target )
+    doctest.testmod( data.targetevent )
     doctest.testmod( data.vector2d )
     doctest.testmod( data.movable ) # Should be after extending modules. TODO: Probably will be fixed with #31.
     doctest.testmod( formulary.comparison )
