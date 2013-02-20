@@ -11,6 +11,7 @@ class Data:
     level -- The level to play (data.level).
     mousePosition -- The current mouse position if pressed.
     mousePressed -- True if mouse button is pressed.
+    points -- Number of points (int).
     time -- The accumulated time of all steps (float).
     windowTitle -- Template for window title.
     _borders -- List of rectangles representing the borders (data.rect). 
@@ -22,6 +23,7 @@ class Data:
     level = None
     mousePosition = vector2d.Vector2d.nullVector()
     mousePressed = False
+    points = 0
     time = 0
     windowTitle = ''
     

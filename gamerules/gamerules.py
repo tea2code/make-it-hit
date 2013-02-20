@@ -14,8 +14,11 @@ class GameRules( tickable.Tickable ):
         for event in data.events:
             # Collision events.
             if isinstance( event, collisionevent.CollisionEvent ):
-                print( 'Collision at ({0}, {1}) with "{2}"'.format(event.x, event.y, event.object) )
+                data.points -= 1
             
             # Target events.
             elif isinstance( event, targetevent.TargetEvent ):
-                print( 'Target hit at ({0}, {1}) with "{2}"'.format(event.x, event.y, event.target) )
+                data.points += event.target.points
+                print( 'Points: {0}'.format(data.points) )
+                
+        
