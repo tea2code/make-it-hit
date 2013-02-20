@@ -8,7 +8,7 @@ class Event(metaclass = ABCMeta):
     type -- The type of the event.
     '''
     
-    TYPES = enum.createSeq( 'COLLISION', 'POINTS', 'TARGET' )
+    TYPES = enum.createSeq( 'COLLISION', 'POINTS', 'TARGET', 'VICTORY' )
     
     def __init__( self ):
         ''' 
