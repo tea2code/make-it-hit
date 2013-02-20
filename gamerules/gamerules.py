@@ -1,23 +1,16 @@
 ﻿from common import tickable
 from data import collisionevent
 from data import targetevent
-from data import victoryevent
 
 class GameRules( tickable.Tickable ):
-    ''' Controls the rules in a game. 
-    
-    Member:
-    _active -- Stops handling events if false.
-    '''
-    
-    _active = True
+    ''' Controls the rules in a game.'''
     
     def tick( self, data ):
         ''' Implementation of Tickable.tick().
 
         Checks the game rules.'''
         
-        if not self._active:
+        if data.state is not data.STATES.PLAYING:
             return
         
         # Event handling:
@@ -29,8 +22,6 @@ class GameRules( tickable.Tickable ):
             # Target events.
             elif isinstance( event, targetevent.TargetEvent ):
                 data.points += event.target.points
-                print( 'Points: {0}'.format(data.points) )
+                data.state = data.STATES.VICTORY
                 
-                data.events.append( victoryevent.VictoryEvent() )
-                self._active = False
-        
+                print( 'Points: {0}'.format(data.points) )        

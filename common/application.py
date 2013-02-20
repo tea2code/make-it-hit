@@ -121,7 +121,6 @@ class Application:
         self._fps.tick( self._data ) 
         self._graphics.tick( self._data )
         self._gamerules.tick( self._data )
-        self._input.tick( self._data )
         self._postFrame.tick( self._data )
     
     def __callNextState( self ):

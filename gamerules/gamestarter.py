@@ -10,6 +10,5 @@ class GameStarter:
         to start.'''
         levelLoader = levelloader.LevelLoader()
         data.level = levelLoader.load( levelFile )
-
-        # Initialize player.
         data.level.map.player.mass = 1
+        data.state = data.STATES.PLAYING

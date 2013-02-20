@@ -1,6 +1,5 @@
 from common import tickable
 from data import vector2d
-from data import victoryevent
 
 class TkInput( tickable.Tickable ):
     ''' This class handles input events from tkinter. 
@@ -8,12 +7,10 @@ class TkInput( tickable.Tickable ):
     Member:
     data -- The data object.
     forceScale -- Scaling factor for force vector.
-    _active -- If true forces will be added.
     '''
     
     data = None
     forceScale = 1
-    _active = True
     
     def __init__( self, data, window ):
         ''' Initializes input module with the data object and binds input event callbacks 
@@ -26,13 +23,18 @@ class TkInput( tickable.Tickable ):
     def tick( self, data ):
         ''' Implementation of Tickable.tick().
 
-        Checks for end of game. Should be executed just before any event cleanup. '''
+        Checks for end of game.'''
         
         # Event handling:
         for event in data.events:
-            # Victory events.
-            if isinstance( event, victoryevent.VictoryEvent ):
-                self._active = False
+            # Collision events.
+            if isinstance( event, collisionevent.CollisionEvent ):
+                data.points -= 1
+            
+            # Target events.
+            elif isinstance( event, targetevent.TargetEvent ):
+                data.points += event.target.points
+                print( 'Points: {0}'.format(data.points) )
     
     def __mouseMotion( self, event ):
         ''' Handles mouse motion while button is pressed. '''
@@ -46,9 +48,9 @@ class TkInput( tickable.Tickable ):
     def __mouseReleased( self, event ):
         ''' Handles mouse button pressed event. '''
         self.data.mousePressed = False
-        
-        if not self._active:
-            return;
+
+        if self.data.state is not self.data.STATES.PLAYING:
+            return
         
         # Calculate force vector.
         force = self.data.mousePosition - self.data.level.map.player.position
