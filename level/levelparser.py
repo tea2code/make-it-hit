@@ -123,7 +123,7 @@ class LevelParser():
         self.level.name = self.__readReqString( levelRoot, self.TAG_NAME )
         
         # Time limit.
-        self.level.timelimit = self.__readReqInteger( levelRoot, self.TAG_TIMELIMIT )
+        self.level.timeLimit = self.__readReqInteger( levelRoot, self.TAG_TIMELIMIT )
         
         # Version.
         self.level.version = self.__readString( levelRoot, self.TAG_VERSION, self.level.version )

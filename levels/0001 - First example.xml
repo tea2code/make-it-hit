@@ -43,6 +43,6 @@
         <width>650</width>
     </map>
     <name>First Example</name>
-    <timelimit>5000</timelimit>
+    <timelimit>10000</timelimit>
     <version>1</version>
 </level>

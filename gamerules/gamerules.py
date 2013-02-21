@@ -1,6 +1,7 @@
 ﻿from common import tickable
 from data import collisionevent
 from data import targetevent
+from formulary import comparison
 
 class GameRules( tickable.Tickable ):
     ''' Controls the rules in a game.'''
@@ -25,3 +26,11 @@ class GameRules( tickable.Tickable ):
                 data.state = data.STATES.VICTORY
                 
                 print( 'Points: {0}'.format(data.points) )        
+                
+        # Check rest time.
+        timeMs = data.time * 1000
+        if timeMs >= data.level.timeLimit:
+            data.state = data.STATES.GAMEOVER
+      
+            template = 'Gameover. You are out of time after {0:.2f} seconds. Time limit was {1:.2f} seconds.'
+            print( template.format(data.time, data.level.timeLimit / 1000) )        

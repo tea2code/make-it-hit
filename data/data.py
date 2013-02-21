@@ -17,7 +17,7 @@ class Data:
     mousePressed -- True if mouse button is pressed.
     points -- Number of points (int).
     state -- The current game state (enum).
-    time -- The accumulated time of all steps (float).
+    time -- The accumulated time of all steps in seconds (float).
     windowTitle -- Template for window title.
     _borders -- List of rectangles representing the borders (data.rect). 
     '''
