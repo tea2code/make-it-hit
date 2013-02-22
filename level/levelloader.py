@@ -1,4 +1,4 @@
-﻿from . import levelparser
+﻿from level import levelparser
 
 class LevelLoader():
     ''' Loads levels from files. '''

@@ -1,8 +1,8 @@
-﻿from . import notdrawableerror
-from . import tkcircledrawer
-from . import tkrectdrawer
-from data import circle
+﻿from data import circle
 from data import rect
+from graphics import notdrawableerror
+from graphics import tkcircledrawer
+from graphics import tkrectdrawer
 
 class TkDrawerFactory:
     ''' Factory for tk drawer classes. '''

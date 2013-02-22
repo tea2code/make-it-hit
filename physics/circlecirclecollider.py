@@ -1,5 +1,5 @@
-﻿from . import collider
-from . import collision
+﻿from physics import collider
+from physics import collision
 
 import math
 

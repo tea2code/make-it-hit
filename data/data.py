@@ -1,4 +1,4 @@
-﻿from . import vector2d
+﻿from data import vector2d
 from common import enum
 
 class Data:

@@ -1,8 +1,8 @@
-﻿from . import circlecirclereflector
-from . import circlerectreflector
-from . import noreflectorerror
-from data import circle
+﻿from data import circle
 from data import rect
+from physics import circlecirclereflector
+from physics import circlerectreflector
+from physics import noreflectorerror
 
 class ReflectorFactory:
     ''' Factory of reflector objects. '''

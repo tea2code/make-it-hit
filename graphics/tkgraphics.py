@@ -1,4 +1,4 @@
-﻿from . import tkdrawerfactory
+﻿from graphics import tkdrawerfactory
 from common import tickable
 from data import circle
 

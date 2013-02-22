@@ -1,9 +1,9 @@
-﻿from . import reflectionnotonlineerror
-from . import reflector
-from data import vector2d
+﻿from data import vector2d
 from formulary import comparison
 from formulary import rotation
 from formulary import vector
+from physics import reflectionnotonlineerror
+from physics import reflector
 
 import math
 

@@ -1,8 +1,8 @@
-﻿from . import circlecirclecollider
-from . import circlerectcollider
-from . import nocollidererror
-from data import circle
+﻿from data import circle
 from data import rect
+from physics import circlecirclecollider
+from physics import circlerectcollider
+from physics import nocollidererror
 
 class ColliderFactory:
     ''' Factory of collider objects. '''

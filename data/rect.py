@@ -1,4 +1,4 @@
-﻿from . import movable
+﻿from data import movable
 
 class Rect( movable.Movable ):
     ''' Class representing a rectangle. 

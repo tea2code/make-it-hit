@@ -1,4 +1,4 @@
-﻿from . import movable
+﻿from data import movable
 
 class Circle( movable.Movable ):
     ''' Class representing a circle. 

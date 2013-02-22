@@ -1,4 +1,4 @@
-﻿from . import movestate
+﻿from physics import movestate
 
 class MoveHeun:
     ''' Integration for moveable objects with position x and velocity v. '''

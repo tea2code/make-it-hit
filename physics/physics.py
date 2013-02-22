@@ -1,12 +1,12 @@
-﻿from . import colliderfactory
-from . import moveheun
-from . import movestate
-from . import reflectorfactory
-from common import tickable
+﻿from common import tickable
 from data import collisionevent
 from data import rect
 from data import targetevent
 from data import vector2d
+from physics import colliderfactory
+from physics import moveheun
+from physics import movestate
+from physics import reflectorfactory
 
 class Physics( tickable.Tickable ):
     ''' This class calculates the physical reactions of all objects. 

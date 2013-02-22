@@ -1,5 +1,5 @@
 ﻿from common import tickable
-from . import fpscounter
+from fps import fpscounter
 
 class Fps( tickable.Tickable ):
     ''' This class calculates the frame rate. 

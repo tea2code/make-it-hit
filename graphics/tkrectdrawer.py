@@ -1,6 +1,5 @@
 ﻿from formulary import rotation
-
-import graphics.tkdrawer as tkdrawer
+from graphics import tkdrawer
 
 class TkRectDrawer( tkdrawer.TkDrawer ):
     ''' Drawer for rectangles.

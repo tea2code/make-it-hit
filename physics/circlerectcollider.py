@@ -1,6 +1,6 @@
-﻿from . import collider
-from . import collision
-from formulary import pythagorean
+﻿from formulary import pythagorean
+from physics import collider
+from physics import collision
 
 import math
 

@@ -1,4 +1,4 @@
-﻿from . import event
+﻿from data import event
 
 class PointsEvent( event.Event ):
     ''' A points event. 
