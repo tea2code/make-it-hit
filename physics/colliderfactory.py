@@ -1,4 +1,4 @@
-from . import circlecirclecollider
+﻿from . import circlecirclecollider
 from . import circlerectcollider
 from . import nocollidererror
 from data import circle

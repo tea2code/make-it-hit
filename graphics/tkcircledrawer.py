@@ -1,4 +1,4 @@
-import graphics.tkdrawer as tkdrawer
+﻿import graphics.tkdrawer as tkdrawer
 
 class TkCircleDrawer( tkdrawer.TkDrawer ):
     ''' Drawer for circles.

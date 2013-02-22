@@ -1,4 +1,4 @@
-from . import event
+﻿from . import event
 
 class CollisionEvent( event.Event ):
     ''' A collision event. 

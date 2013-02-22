@@ -1,4 +1,4 @@
-import math
+﻿import math
 
 def rotateX( x, y, angle ):
     ''' Rotates the x-component of a coordinate using the angle (degree). Positiv direction is 

@@ -1,4 +1,4 @@
-import math
+﻿import math
 import sys
 
 def epsilon():

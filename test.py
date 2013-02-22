@@ -1,4 +1,4 @@
-import common.application
+﻿import common.application
 import common.enum
 import common.timestepper
 import data.circle
@@ -13,7 +13,6 @@ import data.movable
 import data.target
 import data.targetevent
 import data.vector2d
-import data.victoryevent
 import formulary.comparison
 import formulary.pythagorean
 import formulary.rotation
@@ -45,7 +44,6 @@ if __name__ == '__main__':
     doctest.testmod( data.target )
     doctest.testmod( data.targetevent )
     doctest.testmod( data.vector2d )
-    doctest.testmod( data.victoryevent )
     doctest.testmod( data.movable ) # Should be after extending modules. TODO: Probably will be fixed with #31.
     doctest.testmod( formulary.comparison )
     doctest.testmod( formulary.pythagorean )

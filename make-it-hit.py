@@ -1,4 +1,4 @@
-from common import application
+﻿from common import application
 
 import math
 

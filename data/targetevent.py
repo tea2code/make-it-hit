@@ -1,4 +1,4 @@
-from . import event
+﻿from . import event
 
 class TargetEvent( event.Event ):
     ''' A target hit event. 

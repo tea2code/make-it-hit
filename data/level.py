@@ -1,4 +1,4 @@
-class Level:
+﻿class Level:
     ''' Class representing a level.
     
     Member:

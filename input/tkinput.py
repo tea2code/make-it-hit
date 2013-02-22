@@ -1,4 +1,4 @@
-from common import tickable
+﻿from common import tickable
 from data import vector2d
 
 class TkInput( tickable.Tickable ):

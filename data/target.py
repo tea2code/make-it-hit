@@ -1,4 +1,4 @@
-class Target:
+﻿class Target:
     ''' Represents a target object.
 
     Member:

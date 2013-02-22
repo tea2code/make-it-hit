@@ -1,4 +1,4 @@
-class Collision:
+﻿class Collision:
     ''' Represents a collision result object.
 
     Member:

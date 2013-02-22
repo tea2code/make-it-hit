@@ -1,4 +1,4 @@
-def createSeq(*sequential, **named):
+﻿def createSeq(*sequential, **named):
     ''' Creates enum from given keys and adds sequential, numeric value beginning at 0. 
     
     Test:

@@ -1,4 +1,4 @@
-from . import reflectionnotonlineerror
+﻿from . import reflectionnotonlineerror
 from . import reflector
 from data import vector2d
 from formulary import comparison
