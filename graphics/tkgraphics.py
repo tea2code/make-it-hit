@@ -1,4 +1,5 @@
-﻿from graphics import tkdrawerfactory
+﻿from graphics import tkborderdrawer
+from graphics import tkdrawerfactory
 from common import tickable
 from data import circle
 
@@ -36,6 +37,13 @@ class TkGraphics( tickable.Tickable ):
         # Reset everything.
         self.canvas.delete( tkinter.ALL )
         
+        # Set window title with current frames per second.
+        self.window.title( data.windowTitle.format(data.level.name, data.fps) )
+        
+        # Draw border.
+        drawer = tkborderdrawer.TkBorderDrawer( data.level.map.border )
+        drawer.draw( self.canvas )
+        
         # Drawer factory.
         drawerFactory = tkdrawerfactory.TkDrawerFactory()
         
@@ -53,5 +61,9 @@ class TkGraphics( tickable.Tickable ):
         drawer = drawerFactory.createFrom( data.level.map.player )
         drawer.draw( self.canvas )
         
-        # Set window title with current frames per second.
-        self.window.title( data.windowTitle.format(data.level.name, data.fps) )
+        # Draw input vector.
+        if data.mousePressed:
+            self.canvas.create_line( data.level.map.player.position.x, 
+                                     data.level.map.player.position.y, 
+                                     data.mousePosition.x , data.mousePosition.y, 
+                                     arrow = 'last', fill = 'blue' )

@@ -19,6 +19,7 @@ import formulary.rotation
 import formulary.vector
 import fps.fps
 import fps.fpscounter
+import graphics.tkborderdrawer
 import graphics.tkcircledrawer
 import graphics.tkrectdrawer
 import level.levelparser
@@ -55,6 +56,7 @@ if __name__ == '__main__':
     doctest.testmod( formulary.vector )
     doctest.testmod( fps.fps )
     doctest.testmod( fps.fpscounter )
+    doctest.testmod( graphics.tkborderdrawer )
     doctest.testmod( graphics.tkcircledrawer )
     doctest.testmod( graphics.tkrectdrawer )
     doctest.testmod( level.levelparser )

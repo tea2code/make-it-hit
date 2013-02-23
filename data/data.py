@@ -13,12 +13,12 @@ class Data:
     events -- List of events in this frame (data.event).
     fps -- The current frame rate (int).
     level -- The level to play (data.level).
-    mousePosition -- The current mouse position if pressed.
-    mousePressed -- True if mouse button is pressed.
+    mousePosition -- The current mouse position if pressed (data.vector2d).
+    mousePressed -- True if mouse button is pressed (boolean).
     points -- Number of points (int).
     state -- The current game state (enum).
     time -- The accumulated time of all steps in seconds (float).
-    windowTitle -- Template for window title.
+    windowTitle -- Template for window title (string).
     _borders -- List of rectangles representing the borders (data.rect). 
     '''
     
