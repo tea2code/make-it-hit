@@ -13,7 +13,7 @@ class TkRectDrawer( tkdrawer.TkDrawer ):
     '''
     
     def __init__( self, angle, height, width, x, y ):
-        ''' Initializes the rect.
+        ''' Initializes the rect drawer.
         
         Test:
         >>> r = TkRectDrawer( 1, 2, 3, 4, 5 )

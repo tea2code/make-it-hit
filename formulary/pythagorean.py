@@ -7,11 +7,21 @@ def euclideanDistance( x1, y1, x2, y2 ):
     >>> print( '{0:.4f}'.format(euclideanDistance(2, -1, -2, 2)) )
     5.0000
     '''
-    a = math.fabs( x1 - x2 )
-    b = math.fabs( y1 - y2 )
+    a = x1 - x2
+    b = y1 - y2
     c = solveC( a, b )
     return c
-  
+
+def pointToLineDistance( x1, y1, x2, y2, x3, y3 ):
+    ''' Calculates distance between a point (x1, y1) and a line defined by (x2, y2) and (x3, y3). 
+    
+    Test:
+    >>> print( '{0:.2f}'.format(pointToLineDistance(1, 0, 0, -1, 0, 1)) )
+    1.00
+    '''
+    normalLength = euclideanDistance( x2, y2, x3, y3 )
+    return math.fabs( (x1 - x2) * (y3 - y2) - (y1 - y2) * (x3 - x2) ) / normalLength
+    
 def solveC( a, b ):
     ''' Calculates c of the pythagorean theorem: c² = a² + b² 
     

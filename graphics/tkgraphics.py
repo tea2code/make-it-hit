@@ -1,7 +1,9 @@
-﻿from graphics import tkborderdrawer
-from graphics import tkdrawerfactory
-from common import tickable
+﻿from common import tickable
 from data import circle
+from data import collisionevent
+from graphics import tkborderdrawer
+from graphics import tkcollisiondrawer
+from graphics import tkdrawerfactory
 
 import tkinter
 
@@ -60,6 +62,15 @@ class TkGraphics( tickable.Tickable ):
         # Draw player.
         drawer = drawerFactory.createFrom( data.level.map.player )
         drawer.draw( self.canvas )
+        
+        # Draw collisions.
+        #for event in data.events:
+        #    if isinstance( event, collisionevent.CollisionEvent ):
+        #        drawer = tkcollisiondrawer.TkCollisionDrawer( event, drawerFactory )
+        #        drawer.color = 'red'
+        #        drawer.fill = 'red'
+        #        drawer.line = 2
+        #        drawer.draw( self.canvas )
         
         # Draw input vector.
         if data.mousePressed:

@@ -1,11 +1,8 @@
 ﻿from data import vector2d
-from formulary import comparison
+from formulary import pythagorean as py
 from formulary import rotation
 from formulary import vector
-from physics import reflectionnotonlineerror
 from physics import reflector
-
-import math
 
 class CircleRectReflector( reflector.Reflector ):
     ''' Calculates reflection between a circle and a rectangle.
@@ -30,7 +27,6 @@ class CircleRectReflector( reflector.Reflector ):
     
     def reflect( self, x, y ):
         ''' Calculates reflection between two circles. Returns the resulting momentum vector. 
-        Raises ReflectionNotOnLineError if reflection is not on the line of the rect.
         Takes the position of the reflection point as argument.
         
         Test:
@@ -71,40 +67,43 @@ class CircleRectReflector( reflector.Reflector ):
                                      -self._rect.angle )
         
         # Prepare comparison.
-        epsilon = 0.1
         pointX1 = 0
         pointY1 = 0
         pointX2 = 0
         pointY2 = 0
-                     
+        
+        left, up, right = range(3)
+        dists = []
+        dists.append( py.pointToLineDistance(rotatedX, rotatedY, xMinus, yMinus, xMinus, yPlus) )
+        dists.append( py.pointToLineDistance(rotatedX, rotatedY, xMinus, yPlus,  xPlus,  yPlus) )
+        dists.append( py.pointToLineDistance(rotatedX, rotatedY, xPlus,  yMinus, xPlus,  yPlus) )
+        dists.append( py.pointToLineDistance(rotatedX, rotatedY, xMinus, yMinus, xPlus,  yMinus) )
+        line = dists.index( min(dists) )
+        
         # Left.
-        if comparison.floatEqual( xMinus, rotatedX, epsilon ):
+        if line is left:
             pointX1 = xMinus
             pointY1 = yMinus
             pointX2 = xMinus
             pointY2 = yPlus
         # Up.
-        elif comparison.floatEqual( yPlus, rotatedY, epsilon ):
+        elif line is up:
             pointX1 = xMinus
             pointY1 = yPlus
             pointX2 = xPlus
             pointY2 = yPlus
         # Right.
-        elif comparison.floatEqual( xPlus, rotatedX, epsilon ):
+        elif line is right:
             pointX1 = xPlus
             pointY1 = yMinus
             pointX2 = xPlus
             pointY2 = yPlus
         # Down.
-        elif comparison.floatEqual( yMinus, rotatedY, epsilon ):
+        else:
             pointX1 = xMinus
             pointY1 = yMinus
             pointX2 = xPlus
             pointY2 = yMinus
-        else:
-            template = 'The reflection point an the line of the rectangle do not match.'
-            error = template.format( rotatedX, xMinus, xPlus )
-            raise reflectionnotonlineerror.ReflectionNotOnLineError( error )
         
         # Rotate line points.
         pointX1 = rotation.rotateX( pointX1, pointY1, self._rect.angle ) + self._rect.position.x

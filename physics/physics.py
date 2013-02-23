@@ -88,7 +88,7 @@ class Physics( tickable.Tickable ):
             bottom.position = vector2d.Vector2d( width / 2, height - border / 2 )
             bottom.height = border
             bottom.width = width
-            data._borders.append( bottom )            
+            data._borders.append( bottom )   
         
         return data._borders
         

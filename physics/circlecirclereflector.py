@@ -1,10 +1,7 @@
 ﻿from data import vector2d
 from formulary import comparison
 from formulary import vector
-from physics import reflectionnotonlineerror
 from physics import reflector
-
-import math
 
 class CircleCircleReflector( reflector.Reflector ):
     ''' Calculates reflection between two circles. 
@@ -28,7 +25,6 @@ class CircleCircleReflector( reflector.Reflector ):
     
     def reflect( self, x, y ):
         ''' Calculates reflection between two circles. Returns the resulting momentum vector. 
-        Raises ReflectionNotOnLineError if reflection is not on the line of the rect.
         Takes the position of the reflection point as argument.
         
         Test:
@@ -56,7 +52,7 @@ class CircleCircleReflector( reflector.Reflector ):
         reflectionY = y - self._circle2.position.y
         
         # Prepare comparison.
-        epsilon = comparison.epsilon()
+        epsilon = 0.001
         
         # Default values are used it the tangent line is vertical.
         pointX1 = reflectionX

@@ -21,6 +21,7 @@ import fps.fps
 import fps.fpscounter
 import graphics.tkborderdrawer
 import graphics.tkcircledrawer
+import graphics.tkcollisiondrawer
 import graphics.tkrectdrawer
 import level.levelparser
 import physics.circlecirclecollider
@@ -58,6 +59,7 @@ if __name__ == '__main__':
     doctest.testmod( fps.fpscounter )
     doctest.testmod( graphics.tkborderdrawer )
     doctest.testmod( graphics.tkcircledrawer )
+    doctest.testmod( graphics.tkcollisiondrawer )
     doctest.testmod( graphics.tkrectdrawer )
     doctest.testmod( level.levelparser )
     doctest.testmod( physics.circlecirclecollider )

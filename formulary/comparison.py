@@ -1,25 +1,20 @@
 ﻿import math
-import sys
-
-def epsilon():
-    ''' Epsilon value you should use for comparison of floats. '''
-    return sys.float_info.epsilon
 
 def floatEqual( a, b, epsilon ):
-    ''' Compares to floats with a given epsilon. Normaly you should use epsilon().
+    ''' Compares to floats with a given epsilon. Normaly you should use 0.001.
 
     Test:
-    >>> floatEqual( 0, 0, epsilon() )
+    >>> floatEqual( 0, 0, 0.001 )
     True
-    >>> floatEqual( 0.0000, 0.0000, epsilon() )
+    >>> floatEqual( 0.0000, 0.0000, 0.001 )
     True
-    >>> floatEqual( 1, 0, epsilon() )
+    >>> floatEqual( 1, 0, 0.001 )
     False
-    >>> floatEqual( 0.0, 0.00001, epsilon() )
+    >>> floatEqual( 0.0, 0.00001, 0.001 )
     False
-    >>> floatEqual( 4.00001, 4.00001, epsilon() )
+    >>> floatEqual( 4.00001, 4.00001, 0.001 )
     True
-    >>> floatEqual( 125352.00001, 125352.00001, epsilon() )
+    >>> floatEqual( 125352.00001, 125352.00001, 0.001 )
     True'''
     absA = math.fabs( a )
     absB = math.fabs( b )

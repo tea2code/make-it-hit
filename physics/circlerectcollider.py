@@ -73,7 +73,7 @@ class CircleRectCollider( collider.Collider ):
         # Closest point.
         x = 0
         y = 0
-        
+
         # Find the closest x-coordinate from center of circle.
         rectWidthHalf = self._rect.width * 0.5
         if cx < self._rect.position.x - rectWidthHalf:
