@@ -7,8 +7,6 @@ class Circle( movable.Movable ):
     radius -- Radius of the circle (float).
     '''
     
-    radius = 1
-    
     def __init__( self ):
         ''' Test:
         >>> c = Circle()
@@ -16,6 +14,7 @@ class Circle( movable.Movable ):
         1
         '''
         super().__init__()
+        self.radius = 1
         
     def __str__( self ):
         ''' Test:

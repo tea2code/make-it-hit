@@ -8,30 +8,25 @@ class Movable(metaclass = ABCMeta):
     mass -- The mass of the object (float).
     momentum -- The momentum of the object (common.vector2d).
     position -- The position of the object (common.vector2d).
-    
     _forces -- List of force vectors (common.vector2d).
     '''
-    
-    mass = 0
-    momentum = None
-    position = None
-    
-    _forces = []
     
     def __init__( self ):
         ''' Test:
         >>> m = Movable()
-        >>> m._forces
-        []
         >>> m.mass
         0
         >>> m.position.x == 0 and m.position.y == 0
         True
         >>> m.momentum.x == 0 and m.momentum.y == 0
         True
+        >>> m._forces
+        []
         '''
-        self.momentum = vector2d.Vector2d.nullVector()
+        self.mass = 0
         self.position = vector2d.Vector2d.nullVector()
+        self.momentum = vector2d.Vector2d.nullVector()
+        self._forces = []
     
     def addForce( self, force ):
         ''' Adds force to object (Vector2d). Returns this.

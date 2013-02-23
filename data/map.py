@@ -10,13 +10,6 @@
     width -- The width of the map (float).
     '''
     
-    border = 0
-    height = 1
-    objects = []
-    player = None
-    targets = []
-    width = 1
-    
     def __init__( self ):
         ''' Test:
         >>> m = Map()
@@ -32,6 +25,12 @@
         >>> m.width
         1
         '''
+        self.border = 0
+        self.height = 1
+        self.objects = []
+        self.player = None
+        self.targets = []
+        self.width = 1
     
     def __str__( self ):
         ''' Test:

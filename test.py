@@ -30,6 +30,7 @@ import physics.colliderfactory
 import physics.collision
 import physics.movestate
 import physics.reflectorfactory
+import postframe.postframe
 
 if __name__ == '__main__':
     import doctest
@@ -42,12 +43,12 @@ if __name__ == '__main__':
     doctest.testmod( data.event )
     doctest.testmod( data.level )
     doctest.testmod( data.map )
+    doctest.testmod( data.movable )
     doctest.testmod( data.pointsevent )
     doctest.testmod( data.rect )
     doctest.testmod( data.target )
     doctest.testmod( data.targetevent )
     doctest.testmod( data.vector2d )
-    doctest.testmod( data.movable ) # Should be after extending modules. TODO: Probably will be fixed with #31.
     doctest.testmod( formulary.comparison )
     doctest.testmod( formulary.pythagorean )
     doctest.testmod( formulary.rotation )
@@ -65,4 +66,5 @@ if __name__ == '__main__':
     doctest.testmod( physics.collision )
     doctest.testmod( physics.movestate )
     doctest.testmod( physics.reflectorfactory )
+    doctest.testmod( postframe.postframe )
 

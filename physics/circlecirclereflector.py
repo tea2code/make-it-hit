@@ -14,12 +14,15 @@ class CircleCircleReflector( reflector.Reflector ):
     _circle2 -- The second circle (data.circle).
     '''
     
-    _circle1 = None
-    _circle2 = None
-    
-    def __init__( self, circle1, circle2,  ):
+    def __init__( self, circle1, circle2 ):
         ''' The first circle is assumed to be moving and the second static. Reflection happens at 
-        collision point (x, y). '''
+        collision point (x, y). 
+        Test:
+        >>> c = CircleCircleReflector(None, None)
+        >>> c._circle1
+        >>> c._circle2
+        '''
+        super().__init__()
         self._circle1 = circle1
         self._circle2 = circle2
     

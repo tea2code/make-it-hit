@@ -2,14 +2,11 @@
     ''' Represents a collision result object.
 
     Member:
-    isCollided -- True if collision occured else false.
-    x -- The x-component of the point of collision.
-    y -- The y-component of the point of collision.
+    isCollided -- True if collision occured else false (boolean).
+    x -- The x-component of the point of collision (int).
+    y -- The y-component of the point of collision (int).
     '''
-    isCollided = False
-    x = 0
-    y = 0
-    
+
     def __init__( self, isCollided ):
         ''' Initialize object.
         
@@ -23,6 +20,8 @@
         0
         '''
         self.isCollided = isCollided
+        self.x = 0
+        self.y = 0
         
     def __str__( self ):
         ''' Test:

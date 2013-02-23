@@ -10,11 +10,6 @@ class MoveState:
     position -- The position (data.vector2d).
     '''
     
-    force = None
-    mass = 0
-    momentum = None
-    position = None
-    
     def __init__( self ):
         ''' Test:
         >>> m = MoveState()
@@ -28,6 +23,7 @@ class MoveState:
         True
         '''
         self.force = vector2d.Vector2d.nullVector()
+        self.mass = 0
         self.momentum = vector2d.Vector2d.nullVector()
         self.position = vector2d.Vector2d.nullVector()
 

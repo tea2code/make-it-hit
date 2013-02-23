@@ -16,7 +16,8 @@ class PointsEvent( event.Event ):
         True
         >>> e.points
         2
-        '''         
+        '''     
+        super().__init__()
         self.type = event.Event.TYPES.POINTS
         self.points = points
         

@@ -37,10 +37,11 @@ class LevelParser():
     TAG_X -- X element.
     TAG_Y -- Y element.
     
+    Member:
     level -- The resulting level object.
     supportedParser -- List of supported parser versions
-    
-    _errorMissing -- Text template for missing element errors.
+    _errorInteger -- Text template for not an integer error.
+    _errorMissing -- Text template for missing element error.
     '''
 
     ATTR_PARSER = 'parser'
@@ -66,18 +67,16 @@ class LevelParser():
     TAG_WIDTH = 'width'
     TAG_X = 'x'
     TAG_Y = 'y'
-    
-    level = None
-    supportedParser = ['1']
-    
-    _errorInteger = 'Element "{0}" must be an integer.'
-    _errorMissing = 'Missing element "{0}".'
 
     def __init__( self ):
         ''' Test:
         >>> l = LevelParser()
         >>> l.level
         '''
+        self.level = None
+        self.supportedParser = ['1']
+        self._errorInteger = 'Element "{0}" must be an integer.'
+        self._errorMissing = 'Missing element "{0}".'
     
     def parse( self, file ):
         ''' Parses a level file. Throws xml.etree.ElementTree.ParseError or level.levelparsererror.

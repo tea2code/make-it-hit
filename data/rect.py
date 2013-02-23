@@ -8,9 +8,6 @@ class Rect( movable.Movable ):
     height -- The height of the rect (float).
     width -- The width of the rect (float).
     '''
-    angle = 0
-    height = 1
-    width = 1
     
     def __init__( self ):
         ''' Test: 
@@ -23,6 +20,9 @@ class Rect( movable.Movable ):
         1
         '''
         super().__init__()
+        self.angle = 0
+        self.height = 1
+        self.width = 1
         
     def __str__( self ):
         ''' Test:

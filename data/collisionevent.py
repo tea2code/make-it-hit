@@ -22,7 +22,8 @@ class CollisionEvent( event.Event ):
         2
         >>> e.y
         6
-        '''         
+        '''       
+        super().__init__()
         self.type = event.Event.TYPES.COLLISION
         self.object = object
         self.x = x

@@ -8,9 +8,6 @@ class Vector2d:
     y - The y component (float).
     '''
     
-    x = 0
-    y = 0
-    
     def __init__( self, x, y ):
         ''' Constructor with the x and y component as parameters. 
         

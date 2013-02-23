@@ -10,10 +10,6 @@ class FpsCounter():
     _lastTime -- Previous timestamp.
     '''
     
-    maxNum = 0
-    measurements = deque([])
-    _lastTime = 0
-    
     def __init__( self, maxNum = 20 ):
         ''' Parameter maxNum gives the maximum number of stored measurements. 
         
@@ -27,6 +23,9 @@ class FpsCounter():
         0
         '''
         self.maxNum = maxNum
+        self.measurements = deque([])
+        self._lastTime = 0
+    
         
     def fps( self ):
         ''' Calculates the frames per second returns it as a floating point number. 

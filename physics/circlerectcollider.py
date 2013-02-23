@@ -12,10 +12,13 @@ class CircleRectCollider( collider.Collider ):
     _rect -- The rect (data.rect).
     '''
     
-    _circle = None
-    _rect = None
-    
     def __init__( self, circle, rect ):
+        ''' Test:
+        >>> c = CircleRectCollider(None, None)
+        >>> c._circle
+        >>> c._rect
+        '''
+        super().__init__()
         self._circle = circle
         self._rect = rect
     

@@ -11,14 +11,6 @@
     version -- The version (string).
     '''
     
-    author = ''
-    date = ''
-    description = ''
-    map = None
-    name = ''
-    timeLimit = 0 
-    version = ''
-    
     def __init__( self ):
         ''' Test:
         >>> l = Level()
@@ -36,6 +28,13 @@
         >>> l.version
         ''
         '''
+        self.author = ''
+        self.date = ''
+        self.description = ''
+        self.map = None
+        self.name = ''
+        self.timeLimit = 0 
+        self.version = ''
         
     def __str__( self ):
         ''' Test:

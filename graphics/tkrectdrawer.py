@@ -12,12 +12,6 @@ class TkRectDrawer( tkdrawer.TkDrawer ):
     y -- The y-component of the center of the rectangle (int).
     '''
     
-    angle = 0
-    height = 1
-    width = 1
-    x = 0
-    y = 0
-    
     def __init__( self, angle, height, width, x, y ):
         ''' Initializes the rect.
         
@@ -34,6 +28,7 @@ class TkRectDrawer( tkdrawer.TkDrawer ):
         >>> r.y
         5
         '''
+        super().__init__()
         self.angle = angle
         self.height = height
         self.width = width

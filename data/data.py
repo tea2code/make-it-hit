@@ -23,24 +23,13 @@ class Data:
     '''
     
     STATES = enum.createSeq( 'PLAYING', 'VICTORY', 'GAMEOVER' )
-
-    deltaTime = 0
-    events = []
-    fps = 0
-    level = None
-    mousePosition = vector2d.Vector2d.nullVector()
-    mousePressed = False
-    points = 0
-    state = None
-    time = 0
-    windowTitle = ''
-    
-    _borders = []
     
     def __init__( self ):
         ''' Test: 
         >>> d = Data()
         >>> d.deltaTime
+        0
+        >>> len(d.events)
         0
         >>> d.fps
         0
@@ -49,13 +38,27 @@ class Data:
         True
         >>> d.mousePressed
         False
+        >>> d.points
+        0
         >>> d.state
         >>> d.time
         0
         >>> d.windowTitle
         ''
+        >>> len(d._borders)
+        0
         '''
-        
+        self.deltaTime = 0
+        self.events = []
+        self.fps = 0
+        self.level = None
+        self.mousePosition = vector2d.Vector2d.nullVector()
+        self.mousePressed = False
+        self.points = 0
+        self.state = None
+        self.time = 0
+        self.windowTitle = ''
+        self._borders = []
     
 if __name__ == '__main__':
     print( 'Executing doctest.' )

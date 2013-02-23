@@ -30,31 +30,19 @@ class Application:
     _timestepper -- The frame ticker (common.timestepper).
     '''
     
-    fpsCounterMeasures = 10
-    forceScale = 1.0
-    frameTime = 0.1
-    loopTime = 100
-    windowTitle = ''
-    _data = None
-    _fps = None
-    _gamerules = None
-    _graphics = None
-    _input = None
-    _physics = None
-    _postFrame = None
-    _timestepper = None
-    
     def __init__( self ):
         ''' Test:
         >>> a = Application()
         >>> a.fpsCounterMeasures
         10
-        >>> a.frameTime
-        0.1
         >>> a.forceScale
         1.0
+        >>> a.frameTime
+        0.1
         >>> a.loopTime
         100
+        >>> a.windowTitle
+        ''
         >>> a._data
         >>> a._fps
         >>> a._gamerules
@@ -64,6 +52,19 @@ class Application:
         >>> a._postFrame
         >>> a._timestepper
         '''
+        self.fpsCounterMeasures = 10
+        self.forceScale = 1.0
+        self.frameTime = 0.1
+        self.loopTime = 100
+        self.windowTitle = ''
+        self._data = None
+        self._fps = None
+        self._gamerules = None
+        self._graphics = None
+        self._input = None
+        self._physics = None
+        self._postFrame = None
+        self._timestepper = None
         
     def begin( self ):
         ''' Start the application. '''

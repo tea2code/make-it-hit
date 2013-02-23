@@ -9,13 +9,11 @@ class TkInput( tickable.Tickable ):
     forceScale -- Scaling factor for force vector.
     '''
     
-    data = None
-    forceScale = 1
-    
     def __init__( self, data, window ):
         ''' Initializes input module with the data object and binds input event callbacks 
-        to window. '''
+        to window.'''
         self.data = data
+        self.forceScale = 1
         window.bind( '<B1-Motion>', self.__mouseMotion )
         window.bind( '<ButtonPress-1>', self.__mousePressed )
         window.bind( '<ButtonRelease-1>', self.__mouseReleased )

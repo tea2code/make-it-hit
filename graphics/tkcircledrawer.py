@@ -9,10 +9,6 @@ class TkCircleDrawer( tkdrawer.TkDrawer ):
     y -- The y-component of the position of the circle (float).
     '''
     
-    radius = 1
-    x = 0
-    y = 0
-    
     def __init__( self, radius, x, y ):
         ''' Test:
         >>> c = TkCircleDrawer( 1, 2, 3 )
@@ -23,6 +19,7 @@ class TkCircleDrawer( tkdrawer.TkDrawer ):
         >>> c.y
         3
         '''
+        super().__init__()
         self.radius = radius
         self.x = x
         self.y = y

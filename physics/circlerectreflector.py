@@ -15,12 +15,16 @@ class CircleRectReflector( reflector.Reflector ):
     _rect -- The rectangle (data.rect).
     '''
     
-    _circle = None
-    _rect = None
-    
     def __init__( self, circle, rect ):
         ''' The circle is assumed to be moving and the rect static. Reflection happens at 
-        reflection point (x, y). '''
+        reflection point (x, y). 
+        
+        Test:
+        >>> c = CircleRectReflector(None, None)
+        >>> c._circle
+        >>> c._rect
+        '''
+        super().__init__()
         self._circle = circle
         self._rect = rect
     

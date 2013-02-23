@@ -9,9 +9,10 @@ class TkDrawer(metaclass = ABCMeta):
     line -- The line width (float).
     '''
     
-    color = 'black'
-    fill = ''
-    line = 1
+    def __init__( self ):
+        self.color = 'black'
+        self.fill = ''
+        self.line = 1
     
     @abstractmethod
     def draw( self, canvas ):

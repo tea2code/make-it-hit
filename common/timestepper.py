@@ -13,13 +13,6 @@ class Timestepper:
     time -- The accumulated time (float).
     _currentTime -- The current timestamp (float).
     '''
-
-    accumulator = 0
-    deltaTime = 0
-    func = None
-    maxFrameTime = 0.25
-    time = 0
-    _currentTime = 0
     
     def __init__( self, deltaTime, func ):
         ''' Test:
@@ -37,8 +30,12 @@ class Timestepper:
         >>> t._currentTime
         0
         '''
+        self.accumulator = 0
         self.deltaTime = deltaTime
         self.func = func
+        self.maxFrameTime = 0.25
+        self.time = 0
+        self._currentTime = 0
         
     def start( self ):
         ''' Start the stepper. 

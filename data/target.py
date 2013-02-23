@@ -3,10 +3,8 @@
 
     Member:
     object -- The visible object (data.movable).
-    points -- The point value the player receives if he hits the target (int). '''
-    
-    object = None
-    points = 0
+    points -- The point value the player receives if he hits the target (int). 
+    '''
     
     def __init__( self ):
         ''' Test:
@@ -15,6 +13,8 @@
         >>> t.points
         0
         '''
+        self.object = None
+        self.points = 0
         
     def __str__( self ):
         ''' Test:

@@ -11,10 +11,13 @@ class CircleCircleCollider( collider.Collider ):
     _circle2 -- The second circle (data.circle).
     '''
     
-    _circle1 = None
-    _circle2 = None
-    
     def __init__( self, circle1, circle2 ):
+        ''' Test:
+        >>> c = CircleCircleCollider(None, None)
+        >>> c._circle1
+        >>> c._circle2
+        '''
+        super().__init__()
         self._circle1 = circle1
         self._circle2 = circle2
     

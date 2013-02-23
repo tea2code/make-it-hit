@@ -22,7 +22,8 @@ class TargetEvent( event.Event ):
         2
         >>> e.y
         6
-        '''         
+        '''      
+        super().__init__()
         self.type = event.Event.TYPES.TARGET
         self.target = target
         self.x = x
