@@ -22,7 +22,7 @@ class GameRules( tickable.Tickable ):
             # Target events.
             elif isinstance( event, targetevent.TargetEvent ):
                 data.points += event.target.points
-                data.points -= round( data.time ) * 5
+                data.points -= round( data.time * 5 )
                 data.state = data.STATES.VICTORY
                 
                 print( 'Points: {0}'.format(data.points) )        
