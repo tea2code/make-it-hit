@@ -2,6 +2,10 @@
 
 A little game where you must shoot objects to targets.
 
+## Changelog
+
+- [2012-02-23] Version 1: Basically a improved version of the prototype. Better map/level format with improved parser.
+
 ## Level Format
  
 If not mentioned otherwise all values are strings. Integer, floating-point or boolean values are marked. A level without all required values might not work at all.
