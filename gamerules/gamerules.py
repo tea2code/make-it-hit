@@ -1,7 +1,6 @@
 ﻿from common import tickable
 from data import collisionevent
 from data import targetevent
-from formulary import comparison
 
 class GameRules( tickable.Tickable ):
     ''' Controls the rules in a game.'''
@@ -23,6 +22,7 @@ class GameRules( tickable.Tickable ):
             # Target events.
             elif isinstance( event, targetevent.TargetEvent ):
                 data.points += event.target.points
+                data.points -= round( data.time ) * 5
                 data.state = data.STATES.VICTORY
                 
                 print( 'Points: {0}'.format(data.points) )        
