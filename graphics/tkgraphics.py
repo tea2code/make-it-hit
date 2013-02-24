@@ -55,6 +55,8 @@ class TkGraphics( tickable.Tickable ):
         for target in data.level.map.targets:
             drawer = drawerFactory.createFrom( target.object )
             drawer.draw( self.canvas )
+            self.canvas.create_text( target.object.position.x, target.object.position.y, 
+                                     text = '{0}'.format(target.points), fill = drawer.color )
         
         # Draw player.
         drawer = drawerFactory.createFrom( data.level.map.player )
