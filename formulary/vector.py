@@ -1,4 +1,7 @@
-﻿import math
+﻿from formulary import comparison
+from formulary import pythagorean
+
+import math
 
 def reflectAtLine( x1, y1, x2, y2, x3, y3 ):
     ''' Reflects vector 1 at the line between vectors 2 and 3. Returns the x-component 
@@ -25,9 +28,13 @@ def reflectAtLine( x1, y1, x2, y2, x3, y3 ):
     dy = y3 - y2
     
     # Calculate normal with unit length.
-    length = math.sqrt( dy * dy + dx * dx )
-    nx = -dy / length
-    ny = dx / length
+    length = pythagorean.solveC( dy, dx )
+    nx = -dy
+    ny = dx
+
+    if not comparison.floatEqual( length, 0, 0.00001 ):
+        nx /= length
+        ny /= length
     
     # Dot product of vector 1 and normal.
     dotProduct = x1 * nx + y1 * ny

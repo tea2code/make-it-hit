@@ -2,6 +2,7 @@
 from graphics import tkborderdrawer
 from graphics import tkdrawerfactory
 
+import colorsys
 import tkinter
 
 class TkGraphics( tickable.Tickable ):
@@ -73,7 +74,8 @@ class TkGraphics( tickable.Tickable ):
         
         # Draw input vector.
         if data.mousePressed:
+            color = 'blue'
             self.canvas.create_line( data.level.map.player.position.x, 
                                      data.level.map.player.position.y, 
                                      data.mousePosition.x , data.mousePosition.y, 
-                                     arrow = 'last', fill = 'blue' )
+                                     arrow = 'last', fill = color, width = 2 )

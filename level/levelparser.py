@@ -158,8 +158,6 @@ class LevelParser():
                     self.level.map.objects.append( self.__parseCircle(o) )
                 elif o.tag == self.TAG_RECT:
                     self.level.map.objects.append( self.__parseRect(o) )
-        else:
-            raise error.LevelParserError( self._errorMissing.format(self.TAG_OBJECTS) )
         
         # Players.
         player = self.__readReqObject( mapRoot, self.TAG_PLAYER )

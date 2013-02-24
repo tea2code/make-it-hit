@@ -79,7 +79,7 @@ class CircleRectReflector( reflector.Reflector ):
         dists.append( py.pointToLineDistance(rotatedX, rotatedY, xPlus,  yMinus, xPlus,  yPlus) )
         dists.append( py.pointToLineDistance(rotatedX, rotatedY, xMinus, yMinus, xPlus,  yMinus) )
         line = dists.index( min(dists) )
-        
+
         # Left.
         if line is left:
             pointX1 = xMinus
@@ -104,16 +104,16 @@ class CircleRectReflector( reflector.Reflector ):
             pointY1 = yMinus
             pointX2 = xPlus
             pointY2 = yMinus
-        
+            
         # Rotate line points.
-        pointX1 = rotation.rotateX( pointX1, pointY1, self._rect.angle ) + self._rect.position.x
-        pointY1 = rotation.rotateY( pointX1, pointY1, self._rect.angle ) + self._rect.position.y
-        pointX2 = rotation.rotateX( pointX2, pointY2, self._rect.angle ) + self._rect.position.x
-        pointY2 = rotation.rotateY( pointX2, pointY2, self._rect.angle ) + self._rect.position.y
+        rotatedX1 = rotation.rotateX( pointX1, pointY1, self._rect.angle ) + self._rect.position.x
+        rotatedY1 = rotation.rotateY( pointX1, pointY1, self._rect.angle ) + self._rect.position.y
+        rotatedX2 = rotation.rotateX( pointX2, pointY2, self._rect.angle ) + self._rect.position.x
+        rotatedY2 = rotation.rotateY( pointX2, pointY2, self._rect.angle ) + self._rect.position.y
         
         # Calculate result.
         x, y = vector.reflectAtLine( self._circle.momentum.x, self._circle.momentum.y,
-                                     pointX1, pointY1, pointX2, pointY2 )
+                                     rotatedX1, rotatedY1, rotatedX2, rotatedY2 )
         return vector2d.Vector2d( x, y )
         
 if __name__ == '__main__':
