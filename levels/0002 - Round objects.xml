@@ -50,6 +50,6 @@
         <width>650</width>
     </map>
     <name>Round Objects</name>
-    <timelimit>10000</timelimit>
+    <timelimit>5000</timelimit>
     <version>1</version>
 </level>

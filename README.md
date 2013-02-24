@@ -8,7 +8,14 @@ A little game where you must shoot objects to targets.
 
 ## Points
 
-Every target gives a specific amount of points. Currently you get a penalty of five points for every bumb with an object or the border and for every second you geht another penalty of five points.
+### Plus Points:
+- Every target gives a specific amount of points. 
+- Every bumb with an object or the border gives two points.
+- And for every second left you get 5 points (fractions are calculated).
+
+### Minus Points:
+
+- Currently nothing.
 
 ## Level Format
  
