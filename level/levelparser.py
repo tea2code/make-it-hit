@@ -148,12 +148,16 @@ class LevelParser():
         objectsElement = mapRoot.find( self.TAG_OBJECTS )
         objects = []
         if objectsElement is not None:
+            objects.extend( objectsElement.findall(self.TAG_CIRCLE) )
             objects.extend( objectsElement.findall(self.TAG_RECT) )
         else:
             raise error.LevelParserError( self._errorMissing.format(self.TAG_OBJECTS) )
         if objects:
             for o in objects:
-                self.level.map.objects.append( self.__parseRect(o) )
+                if o.tag == self.TAG_CIRCLE:
+                    self.level.map.objects.append( self.__parseCircle(o) )
+                elif o.tag == self.TAG_RECT:
+                    self.level.map.objects.append( self.__parseRect(o) )
         else:
             raise error.LevelParserError( self._errorMissing.format(self.TAG_OBJECTS) )
         

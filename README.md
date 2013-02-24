@@ -29,7 +29,7 @@ Current Version: __1__
 - description -- A brief description. Default empty.
 - map -- The map. See below. Required.
 - name -- The name. Required.
-- timelimit -- The timelimit to solve the level in milliseconds. Integer. Required.
+- timelimit -- The time limit to solve the level in milliseconds. Integer. Required.
 - version -- The version. Default empty.
  
 ### Map
@@ -37,7 +37,7 @@ Current Version: __1__
 #### Elements:
 - border -- The width of the border. Integer. Required.
 - height -- The height of the map. Integer. Required.
-- objects -- List of objects. Currently only rectangles are supported. See below. Required.
+- objects -- List of objects. See below. Required.
 - player -- The player. See below. Required.
 - targets -- List of targets. See below. Required.
 - width -- The width of the map. Integer. Required.
@@ -60,7 +60,7 @@ Current Version: __1__
 - x -- The x-component of the center. Integer. Required.
 - y -- The y-component of the center. Integer. Required.
  
-### Object: Rect
+### Object: Rect(angle)
 
 #### Elements:
 - angle -- The angle of the rectangle. Float. Required.

@@ -1,14 +1,11 @@
 ﻿from common import tickable
-from data import circle
-from data import collisionevent
 from graphics import tkborderdrawer
-from graphics import tkcollisiondrawer
 from graphics import tkdrawerfactory
 
 import tkinter
 
 class TkGraphics( tickable.Tickable ):
-    ''' This class handles the visualisation of the current state. 
+    ''' This class handles the visualization of the current state. 
     
     Member:
     canvas -- The canvas object (Canvas).
