@@ -6,6 +6,11 @@ A little game where you must shoot objects to targets.
 
 - [2012-02-23] Version 1: Basically a improved version of the prototype. Better map/level format with improved parser.
 
+## Known Bugs:
+
+- Collision detection can fail (for example with high speed) so that the player enters objects.
+- After colliding the player moves along the edge of the object. Probably same as above.
+
 ## Points
 
 ### Plus Points:
