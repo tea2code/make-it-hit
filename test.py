@@ -17,6 +17,7 @@ import formulary.comparison
 import formulary.pythagorean
 import formulary.rotation
 import formulary.vector
+import formulary.screenconvert
 import fps.fps
 import fps.fpscounter
 import graphics.tkborderdrawer
@@ -55,6 +56,7 @@ if __name__ == '__main__':
     doctest.testmod( formulary.pythagorean )
     doctest.testmod( formulary.rotation )
     doctest.testmod( formulary.vector )
+    doctest.testmod( formulary.screenconvert )
     doctest.testmod( fps.fps )
     doctest.testmod( fps.fpscounter )
     doctest.testmod( graphics.tkborderdrawer )
