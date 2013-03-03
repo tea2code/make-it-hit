@@ -1,5 +1,7 @@
 ﻿from common import tickable
-from data import vector2d
+from data import collisionevent
+from data import targetevent
+from formulary import screenconvert
 
 class TkInput( tickable.Tickable ):
     ''' This class handles input events from tkinter. 
@@ -57,5 +59,7 @@ class TkInput( tickable.Tickable ):
         
     def __storeMousePos( self, event ):
         ''' Stores the mouse position of an event in data. '''
-        self.data.mousePosition.x = event.x
-        self.data.mousePosition.y = event.y
+        self.data.mousePosition.x = screenconvert.screenToWorld( event.x, 
+                                                                 self.data.screenXCoefficient )
+        self.data.mousePosition.y = screenconvert.screenToWorld( event.y, 
+                                                                 self.data.screenYCoefficient )
