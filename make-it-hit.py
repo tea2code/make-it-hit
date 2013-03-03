@@ -12,5 +12,7 @@ if __name__ == '__main__':
     app.frameTime = 1 / framesPerSecond
     app.forceScale = forceScale
     app.loopTime = math.floor( app.frameTime * 100 )
+    app.windowHeight = 800
     app.windowTitle = windowTitle
+    app.windowWidth = 900
     app.begin()

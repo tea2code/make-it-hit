@@ -19,7 +19,9 @@ class Application:
     forceScale -- Scaling factor for force input vectors (float).
     frameTime -- "Should be" time of one frame (float).
     loopTime -- The overall refreshing time of the main loop int milliseconds (int). 
+    windowHeight -- The height of the window (int).
     windowTitle -- Template for window title.
+    windowWidth -- The width of the window (int).
     _data -- The "global" data object (data.data).
     _fps -- The module responsible to count frames per second (fps).
     _gamerules -- The module responsible for implementing game rules (gamerules.gamerules).
@@ -41,8 +43,12 @@ class Application:
         0.1
         >>> a.loopTime
         100
+        >>> a.windowHeight
+        0
         >>> a.windowTitle
         ''
+        >>> a.windowWidth
+        0
         >>> a._data
         >>> a._fps
         >>> a._gamerules
@@ -56,7 +62,9 @@ class Application:
         self.forceScale = 1.0
         self.frameTime = 0.1
         self.loopTime = 100
+        self.windowHeight = 0
         self.windowTitle = ''
+        self.windowWidth = 0
         self._data = None
         self._fps = None
         self._gamerules = None
@@ -80,7 +88,9 @@ class Application:
         
         # Initialize data.
         self._data = data.Data()
+        self._data.windowHeight = self.windowHeight
         self._data.windowTitle = self.windowTitle
+        self._data.windowWidth = self.windowWidth
         
         # Initialize game.
         gameStarter = gamestarter.GameStarter()

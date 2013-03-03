@@ -2,7 +2,6 @@
 from graphics import tkborderdrawer
 from graphics import tkdrawerfactory
 
-import colorsys
 import tkinter
 
 class TkGraphics( tickable.Tickable ):
@@ -16,8 +15,8 @@ class TkGraphics( tickable.Tickable ):
     def __init__( self, data ):
         ''' The parameter data which contains the window settings. '''
         self.window = tkinter.Tk()
-        self.canvas = tkinter.Canvas( self.window, width = data.level.map.width, 
-                                      height = data.level.map.height )
+        self.canvas = tkinter.Canvas( self.window, width = data.windowWidth, 
+                                      height = data.windowHeight )
         self.canvas.config( background = 'white' )
         self.canvas.pack()
         
@@ -41,7 +40,8 @@ class TkGraphics( tickable.Tickable ):
         self.window.title( data.windowTitle.format(data.level.name, data.fps) )
         
         # Draw border.
-        drawer = tkborderdrawer.TkBorderDrawer( data.level.map.border )
+        drawer = tkborderdrawer.TkBorderDrawer( data.level.map.height, data.level.map.width, 
+                                                data.level.map.border )
         drawer.draw( self.canvas )
         
         # Drawer factory.

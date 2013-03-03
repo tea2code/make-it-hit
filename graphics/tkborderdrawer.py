@@ -4,18 +4,24 @@ class TkBorderDrawer( tkdrawer.TkDrawer ):
     ''' Draws the border of a map. 
     
     Member:
-    width -- The width of the border.
+    mapHeight -- The height of the map (int).
+    mapWidth -- The width of the map (int).
+    width -- The width of the border (int).
     '''
     
-    def __init__( self, width ):
-        ''' Constructor which sets the width of the border.
-
-        Test:
-        >>> t = TkBorderDrawer( 10 )
+    def __init__( self, mapHeight, mapWidth, width ):
+        ''' Test:
+        >>> t = TkBorderDrawer( 100, 200, 10 )
+        >>> t.mapHeight
+        100
+        >>> t.mapWidth
+        200
         >>> t.width
         10
         '''
         super().__init__()
+        self.mapHeight = mapHeight
+        self.mapWidth = mapWidth
         self.width = width
         
     def draw( self, canvas ):
@@ -24,8 +30,8 @@ class TkBorderDrawer( tkdrawer.TkDrawer ):
         
         x0 = self.width
         y0 = self.width
-        x1 = int( canvas.cget('width') ) - self.width
-        y1 = int( canvas.cget('height') ) - self.width
+        x1 = self.mapWidth - self.width
+        y1 = self.mapHeight - self.width
         canvas.create_rectangle( x0, y0, x1, y1,
                                  width = self.line, fill = self.fill, outline = self.color )
      

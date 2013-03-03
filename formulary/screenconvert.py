@@ -44,9 +44,9 @@ def worldToScreen( coordinate, coefficient ):
     
     Test:
     >>> print( '{:.2f}'.format(worldToScreen(6, 0.625)) )
-    3.75
+    4.00
     '''
-    return coordinate * coefficient
+    return round(coordinate * coefficient)
   
 def worldToScreenCoord( x, y, coefficientX, coefficientY ):
     ''' Converts world coordinates (float) to screen coordinates (int) using the given 
@@ -55,9 +55,9 @@ def worldToScreenCoord( x, y, coefficientX, coefficientY ):
     Test:
     >>> x,y = worldToScreenCoord(6.00, 4.99, 0.625, 0.667)
     >>> print( '{:.2f}'.format(x) )
-    3.75
+    4.00
     >>> print( '{:.2f}'.format(y) )
-    3.33
+    3.00
     '''
     return worldToScreen( x, coefficientX ), worldToScreen( y, coefficientY )
     
@@ -68,9 +68,9 @@ def worldToScreenVector( vector, coefficientX, coefficientY ):
     Test:
     >>> v = worldToScreenVector(vector2d.Vector2d(6, 4.99), 0.625, 0.667)
     >>> print( '{:.2f}'.format(v.x) )
-    3.75
+    4.00
     >>> print( '{:.2f}'.format(v.y) )
-    3.33
+    3.00
     '''
     x = worldToScreen( vector.x, coefficientX )
     y = worldToScreen( vector.y, coefficientY )

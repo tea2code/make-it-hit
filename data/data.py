@@ -18,7 +18,9 @@ class Data:
     points -- Number of points (int).
     state -- The current game state (enum).
     time -- The accumulated time of all steps in seconds (float).
+    windowHeight -- The height of the window (int).
     windowTitle -- Template for window title (string).
+    windowWidth -- The width of the window (int).
     _borders -- List of rectangles representing the borders (data.rect). 
     '''
     
@@ -43,8 +45,12 @@ class Data:
         >>> d.state
         >>> d.time
         0
+        >>> d.windowHeight
+        0
         >>> d.windowTitle
         ''
+        >>> d.windowWidth
+        0
         >>> len(d._borders)
         0
         '''
@@ -57,7 +63,9 @@ class Data:
         self.points = 0
         self.state = None
         self.time = 0
+        self.windowHeight = 0
         self.windowTitle = ''
+        self.windowWidth = 0
         self._borders = []
     
 if __name__ == '__main__':
