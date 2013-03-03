@@ -2,7 +2,7 @@ from data import vector2d
 
 def screenToWorld( coordinate, coefficient ):
     ''' Converts screen coordinate (int) to world coordinate (float) using the given 
-    coefficient. 
+    coefficient. The coefficient is the world to screen coefficient which will be converted.
     
     Test:
     >>> print( '{:.2f}'.format(screenToWorld(3.75, 0.625)) )
@@ -12,7 +12,7 @@ def screenToWorld( coordinate, coefficient ):
 
 def screenToWorldCoord( x, y, coefficientX, coefficientY ):
     ''' Converts screen coordinates (int) to world coordinates (float) using the given 
-    coefficients. 
+    coefficients. The coefficient is the world to screen coefficient which will be converted.
     
     Test:
     >>> x,y = screenToWorldCoord(3.75, 3.33, 0.625, 0.667)
@@ -25,7 +25,7 @@ def screenToWorldCoord( x, y, coefficientX, coefficientY ):
 
 def screenToWorldVector( vector, coefficientX, coefficientY ):
     ''' Converts screen coordinates (vector2d) to world coordinates (vector2d) using the 
-    given coefficients. 
+    given coefficients. The coefficient is the world to screen coefficient which will be converted.
     
     Test:
     >>> v = screenToWorldVector(vector2d.Vector2d(3.75, 3.33), 0.625, 0.667)
@@ -40,7 +40,7 @@ def screenToWorldVector( vector, coefficientX, coefficientY ):
 
 def worldToScreen( coordinate, coefficient ):
     ''' Converts world coordinate (float) to screen coordinate (int) using the given 
-    coefficient. 
+    coefficient. The coefficient is the world to screen coefficient.
     
     Test:
     >>> print( '{:.2f}'.format(worldToScreen(6, 0.625)) )
@@ -50,7 +50,7 @@ def worldToScreen( coordinate, coefficient ):
   
 def worldToScreenCoord( x, y, coefficientX, coefficientY ):
     ''' Converts world coordinates (float) to screen coordinates (int) using the given 
-    coefficients. 
+    coefficients. The coefficient is the world to screen coefficient.
     
     Test:
     >>> x,y = worldToScreenCoord(6.00, 4.99, 0.625, 0.667)
@@ -63,7 +63,7 @@ def worldToScreenCoord( x, y, coefficientX, coefficientY ):
     
 def worldToScreenVector( vector, coefficientX, coefficientY ):
     ''' Converts world coordinates (vector2d) to screen coordinates (vector2d) using the 
-    given coefficients. 
+    given coefficients. The coefficient is the world to screen coefficient.
     
     Test:
     >>> v = worldToScreenVector(vector2d.Vector2d(6, 4.99), 0.625, 0.667)

@@ -60,6 +60,14 @@ class TkRectDrawer( tkdrawer.TkDrawer ):
         y3 = rotation.rotateY( xMinus, yPlus, self.angle ) + self.y
         
         # Draw.
+        x0 = self.worldToScreenX( x0 )
+        y0 = self.worldToScreenY( y0 )
+        x1 = self.worldToScreenX( x1 )
+        y1 = self.worldToScreenY( y1 )
+        x2 = self.worldToScreenX( x2 )
+        y2 = self.worldToScreenY( y2 )
+        x3 = self.worldToScreenX( x3 )
+        y3 = self.worldToScreenY( y3 )
         canvas.create_polygon( x0, y0, x1, y1, x2, y2, x3, y3, 
                                width = self.line, fill = self.fill, outline = self.color )
 

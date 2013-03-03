@@ -1,4 +1,5 @@
 ﻿from common import tickable
+from formulary import screenconvert
 from graphics import tkborderdrawer
 from graphics import tkdrawerfactory
 
@@ -42,6 +43,7 @@ class TkGraphics( tickable.Tickable ):
         # Draw border.
         drawer = tkborderdrawer.TkBorderDrawer( data.level.map.height, data.level.map.width, 
                                                 data.level.map.border )
+        self.__initDrawer( drawer, data )
         drawer.draw( self.canvas )
         
         # Drawer factory.
@@ -50,17 +52,21 @@ class TkGraphics( tickable.Tickable ):
         # Draw objects.
         for object in data.level.map.objects:
             drawer = drawerFactory.createFrom( object )
+            self.__initDrawer( drawer, data )
             drawer.draw( self.canvas )
         
         # Draw targets.
         for target in data.level.map.targets:
             drawer = drawerFactory.createFrom( target.object )
+            self.__initDrawer( drawer, data )
             drawer.draw( self.canvas )
-            self.canvas.create_text( target.object.position.x, target.object.position.y, 
-                                     text = '{0}'.format(target.points), fill = drawer.color )
+            x = drawer.worldToScreenX( target.object.position.x )
+            y = drawer.worldToScreenY( target.object.position.y )
+            self.canvas.create_text( x, y, text = '{0}'.format(target.points), fill = drawer.color )
         
         # Draw player.
         drawer = drawerFactory.createFrom( data.level.map.player )
+        self.__initDrawer( drawer, data )
         drawer.draw( self.canvas )
         
         # Draw collisions.
@@ -75,7 +81,13 @@ class TkGraphics( tickable.Tickable ):
         # Draw input vector.
         if data.mousePressed:
             color = 'blue'
-            self.canvas.create_line( data.level.map.player.position.x, 
-                                     data.level.map.player.position.y, 
-                                     data.mousePosition.x , data.mousePosition.y, 
-                                     arrow = 'last', fill = color, width = 2 )
+            x0 = screenconvert.worldToScreen( data.level.map.player.position.x, data.screenXCoefficient )
+            y0 = screenconvert.worldToScreen( data.level.map.player.position.y, data.screenYCoefficient )
+            x1 = screenconvert.worldToScreen( data.mousePosition.x, data.screenXCoefficient )
+            y1 = screenconvert.worldToScreen( data.mousePosition.y, data.screenYCoefficient )
+            self.canvas.create_line( x0, y0, x1, y1, arrow = 'last', fill = color, width = 2 )
+            
+    def __initDrawer( self, drawer, data ):
+        ''' Initializes drawer. '''
+        drawer.screenXCoefficient = data.screenXCoefficient
+        drawer.screenYCoefficient = data.screenYCoefficient

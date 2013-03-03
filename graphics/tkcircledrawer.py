@@ -25,8 +25,11 @@ class TkCircleDrawer( tkdrawer.TkDrawer ):
         self.y = y
 
     def draw( self, canvas ):
-        canvas.create_oval( self.x - self.radius, self.y - self.radius, 
-                            self.x + self.radius, self.y + self.radius, 
+        x0 = self.worldToScreenX( self.x - self.radius )
+        y0 = self.worldToScreenY( self.y - self.radius )
+        x1 = self.worldToScreenX( self.x + self.radius )
+        y1 = self.worldToScreenY( self.y + self.radius )
+        canvas.create_oval( x0, y0, x1, y1, 
                             width = self.line, fill = self.fill, outline = self.color )
 
 if __name__ == '__main__':

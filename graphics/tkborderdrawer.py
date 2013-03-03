@@ -28,10 +28,10 @@ class TkBorderDrawer( tkdrawer.TkDrawer ):
         if self.width < 0:
             return
         
-        x0 = self.width
-        y0 = self.width
-        x1 = self.mapWidth - self.width
-        y1 = self.mapHeight - self.width
+        x0 = self.worldToScreenX( self.width )
+        y0 = self.worldToScreenY( self.width )
+        x1 = self.worldToScreenX( self.mapWidth - self.width )
+        y1 = self.worldToScreenY( self.mapHeight - self.width )
         canvas.create_rectangle( x0, y0, x1, y1,
                                  width = self.line, fill = self.fill, outline = self.color )
      

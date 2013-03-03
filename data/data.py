@@ -16,6 +16,8 @@ class Data:
     mousePosition -- The current mouse position if pressed (data.vector2d).
     mousePressed -- True if mouse button is pressed (boolean).
     points -- Number of points (int).
+    screenXCoefficient -- Coefficient for world to screen conversion in x direction (float).
+    screenYCoefficient -- Coefficient for world to screen conversion in y direction (float).
     state -- The current game state (enum).
     time -- The accumulated time of all steps in seconds (float).
     windowHeight -- The height of the window (int).
@@ -42,6 +44,10 @@ class Data:
         False
         >>> d.points
         0
+        >>> d.screenXCoefficient
+        1
+        >>> d.screenYCoefficient
+        1
         >>> d.state
         >>> d.time
         0
@@ -61,6 +67,8 @@ class Data:
         self.mousePosition = vector2d.Vector2d.nullVector()
         self.mousePressed = False
         self.points = 0
+        self.screenXCoefficient = 1
+        self.screenYCoefficient = 1
         self.state = None
         self.time = 0
         self.windowHeight = 0

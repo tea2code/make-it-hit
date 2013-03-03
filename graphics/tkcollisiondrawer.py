@@ -30,14 +30,10 @@ class TkCollisionDrawer( tkdrawer.TkDrawer ):
         drawer.draw( canvas )
         
         # Draw collision point marker.
-        canvas.create_line( self.event.x - 10, self.event.y,
-                            self.event.x + 10, self.event.y, 
-                            width = self.line, fill = self.fill )
-        canvas.create_line( self.event.x, self.event.y - 10, 
-                            self.event.x, self.event.y + 10, 
-                            width = self.line, fill = self.fill )
-        
-        
+        x = self.worldToScreenX( self.event.x )
+        y = self.worldToScreenY( self.event.y )
+        canvas.create_line( x - 10, y, x + 10, y, width = self.line, fill = self.fill )
+        canvas.create_line( x, y - 10, x, y + 10, width = self.line, fill = self.fill )
 
 if __name__ == '__main__':
     print( 'Executing doctest.' )
