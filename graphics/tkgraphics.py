@@ -10,16 +10,31 @@ class TkGraphics( tickable.Tickable ):
     
     Member:
     canvas -- The canvas object (Canvas).
+    menuBarWidth -- The width of the menu bar (int).
     window -- The window object (Tk).
+    _barFrame -- The frame of the menu bar (Frame).
+    _canvasFrame -- The frame of the canvas object (Frame).
     '''
     
     def __init__( self, data ):
         ''' The parameter data which contains the window settings. '''
+        
+        self.menuBarWidth = 100
+        data.screenXCoefficient = (data.windowWidth - self.menuBarWidth) / data.level.map.width
+        data.screenYCoefficient = data.windowHeight / data.level.map.height
+        
         self.window = tkinter.Tk()
-        self.canvas = tkinter.Canvas( self.window, width = data.windowWidth, 
-                                      height = data.windowHeight )
+        
+        self._canvasFrame = tkinter.Frame( self.window )
+        self.canvas = tkinter.Canvas( self._canvasFrame, height = data.windowHeight,
+                                      width = data.windowWidth - self.menuBarWidth  )
         self.canvas.config( background = 'white' )
         self.canvas.pack()
+        self._canvasFrame.pack( side = tkinter.LEFT )
+        
+        self._barFrame = tkinter.Frame( self.window, height = data.windowHeight,
+                                        width = self.menuBarWidth )
+        self._barFrame.pack( side = tkinter.RIGHT )
         
     def after( self, time, function ):
         ''' Calls function after time in milliseconds. '''

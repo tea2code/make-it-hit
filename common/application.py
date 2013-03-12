@@ -116,7 +116,7 @@ class Application:
         self._timestepper.time = self.frameTime
         
         # Initialize and activate input module.
-        self._input = tkinput.TkInput( self._data, self._graphics.window )
+        self._input = tkinput.TkInput( self._data, self._graphics.canvas )
         self._input.forceScale = self.forceScale
         
         # Start.

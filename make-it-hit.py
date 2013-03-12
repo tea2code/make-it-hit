@@ -11,8 +11,8 @@ if __name__ == '__main__':
     app.fpsCounterMeasures = framesPerSecond
     app.frameTime = 1 / framesPerSecond
     app.forceScale = forceScale
-    app.loopTime = math.floor( app.frameTime * 100 )
+    app.loopTime = math.floor( app.frameTime * 1000 )
     app.windowHeight = 1000
     app.windowTitle = windowTitle
-    app.windowWidth = 1000
+    app.windowWidth = 1100
     app.begin()
