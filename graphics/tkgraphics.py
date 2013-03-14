@@ -10,31 +10,43 @@ class TkGraphics( tickable.Tickable ):
     
     Member:
     canvas -- The canvas object (Canvas).
-    menuBarWidth -- The width of the menu bar (int).
     window -- The window object (Tk).
     _barFrame -- The frame of the menu bar (Frame).
     _canvasFrame -- The frame of the canvas object (Frame).
+    _pointsLabel -- Label for points (Label).
+    _timeLabel -- Label for rest game time (Label).
     '''
     
     def __init__( self, data ):
         ''' The parameter data which contains the window settings. '''
         
-        self.menuBarWidth = 100
-        data.screenXCoefficient = (data.windowWidth - self.menuBarWidth) / data.level.map.width
+        # Define width of menu bar and calculate world-screen conversion coefficients.
+        menuBarWidth = 100
+        data.screenXCoefficient = (data.windowWidth - menuBarWidth) / data.level.map.width
         data.screenYCoefficient = data.windowHeight / data.level.map.height
         
+        # Create window.
         self.window = tkinter.Tk()
         
+        # Create canvas on one side...
         self._canvasFrame = tkinter.Frame( self.window )
         self.canvas = tkinter.Canvas( self._canvasFrame, height = data.windowHeight,
-                                      width = data.windowWidth - self.menuBarWidth  )
+                                      width = data.windowWidth - menuBarWidth  )
         self.canvas.config( background = 'white' )
         self.canvas.pack()
         self._canvasFrame.pack( side = tkinter.LEFT )
         
+        # ...and the menu bar on the other.
         self._barFrame = tkinter.Frame( self.window, height = data.windowHeight,
-                                        width = self.menuBarWidth )
+                                        width = menuBarWidth )
+        self._barFrame.config( background = 'white' )
         self._barFrame.pack( side = tkinter.RIGHT )
+        
+        # Add time and point labels to menu bar.
+        self._timeLabel = tkinter.Label( self._barFrame, text = "Time: " + self.__formatTime(data) )
+        self._timeLabel.pack()
+        self._pointsLabel = tkinter.Label( self._barFrame, text = "Points: " + self.__formatPoints(data) )
+        self._pointsLabel.pack()
         
     def after( self, time, function ):
         ''' Calls function after time in milliseconds. '''
@@ -101,6 +113,20 @@ class TkGraphics( tickable.Tickable ):
             x1 = screenconvert.worldToScreen( data.mousePosition.x, data.screenXCoefficient )
             y1 = screenconvert.worldToScreen( data.mousePosition.y, data.screenYCoefficient )
             self.canvas.create_line( x0, y0, x1, y1, arrow = 'last', fill = color, width = 2 )
+        
+        # Update menu bar.    
+        self._timeLabel.config( text = "Time: " + self.__formatTime(data) )
+        self._pointsLabel.config( text = "Points: " + self.__formatPoints(data) )
+     
+    def __formatPoints( self, data ):
+        ''' Formats current points from data and returns it as a string. '''
+        return '{}'.format( data.points )
+     
+    def __formatTime( self, data ):
+        ''' Formats the current game time from data and returns it as a string. '''
+        currentTime = (data.level.timeLimit / 1000)  - data.time
+        currentTime = max( currentTime, 0 )
+        return '{:.2f}s'.format( currentTime )
             
     def __initDrawer( self, drawer, data ):
         ''' Initializes drawer. '''
