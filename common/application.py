@@ -2,7 +2,6 @@
 from data import data
 from fps import fps
 from gamerules import gamerules
-from gamerules import gamestarter
 from graphics import tkgraphics
 from input import tkinput
 from physics import physics
@@ -88,13 +87,11 @@ class Application:
         
         # Initialize data.
         self._data = data.Data()
+        self._data.levelList.append( args.level )
+        self._data.state = self._data.STATES.LOADING
         self._data.windowHeight = self.windowHeight
         self._data.windowTitle = self.windowTitle
         self._data.windowWidth = self.windowWidth
-        
-        # Initialize game.
-        gameStarter = gamestarter.GameStarter()
-        gameStarter.load( self._data, args.level )
         
         # Initialize fps counter.
         self._fps = fps.Fps( self.fpsCounterMeasures, 2 * self.fpsCounterMeasures )
@@ -126,13 +123,15 @@ class Application:
         
     def calculateNextState( self, t, dt ):
         ''' Callback function for the frame ticker. Executes all modules on the data. '''
-        self._data.deltaTime = dt
-        self._data.time = t
+        
         self._physics.tick( self._data )
         self._fps.tick( self._data ) 
-        self._graphics.tick( self._data )
         self._gamerules.tick( self._data )
+        self._graphics.tick( self._data )
         self._postFrame.tick( self._data )
+        
+        self._data.deltaTime = dt
+        self._data.time += dt
     
     def __callNextState( self ):
         ''' Return to main loop. '''

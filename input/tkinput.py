@@ -1,9 +1,6 @@
-﻿from common import tickable
-from data import collisionevent
-from data import targetevent
-from formulary import screenconvert
+﻿from formulary import screenconvert
 
-class TkInput( tickable.Tickable ):
+class TkInput():
     ''' This class handles input events from tkinter. 
     
     Member:
@@ -19,22 +16,6 @@ class TkInput( tickable.Tickable ):
         window.bind( '<B1-Motion>', self.__mouseMotion )
         window.bind( '<ButtonPress-1>', self.__mousePressed )
         window.bind( '<ButtonRelease-1>', self.__mouseReleased )
-    
-    def tick( self, data ):
-        ''' Implementation of Tickable.tick().
-
-        Checks for end of game.'''
-        
-        # Event handling:
-        for event in data.events:
-            # Collision events.
-            if isinstance( event, collisionevent.CollisionEvent ):
-                data.points -= 1
-            
-            # Target events.
-            elif isinstance( event, targetevent.TargetEvent ):
-                data.points += event.target.points
-                print( 'Points: {0}'.format(data.points) )
     
     def __mouseMotion( self, event ):
         ''' Handles mouse motion while button is pressed. '''

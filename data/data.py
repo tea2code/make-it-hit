@@ -13,6 +13,7 @@ class Data:
     events -- List of events in this frame (data.event).
     fps -- The current frame rate (int).
     level -- The level to play (data.level).
+    levelList -- List of level pathes to load next. Current is the first entry (string).
     mousePosition -- The current mouse position if pressed (data.vector2d).
     mousePressed -- True if mouse button is pressed (boolean).
     points -- Number of points (int).
@@ -26,7 +27,7 @@ class Data:
     _borders -- List of rectangles representing the borders (data.rect). 
     '''
     
-    STATES = enum.createSeq( 'PLAYING', 'VICTORY', 'GAMEOVER' )
+    STATES = enum.createSeq( 'LOADING', 'PLAYING', 'VICTORY', 'GAMEOVER' )
     
     def __init__( self ):
         ''' Test: 
@@ -38,6 +39,8 @@ class Data:
         >>> d.fps
         0
         >>> d.level
+        >>> len(d.levelList)
+        0
         >>> d.mousePosition.x == 0 and d.mousePosition.y == 0
         True
         >>> d.mousePressed
@@ -64,6 +67,7 @@ class Data:
         self.events = []
         self.fps = 0
         self.level = None
+        self.levelList = []
         self.mousePosition = vector2d.Vector2d.nullVector()
         self.mousePressed = False
         self.points = 0

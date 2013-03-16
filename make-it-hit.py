@@ -14,5 +14,5 @@ if __name__ == '__main__':
     app.loopTime = math.floor( app.frameTime * 1000 )
     app.windowHeight = 1000
     app.windowTitle = windowTitle
-    app.windowWidth = 1100
+    app.windowWidth = 1000
     app.begin()

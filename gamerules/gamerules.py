@@ -1,6 +1,7 @@
 ﻿from common import tickable
 from data import collisionevent
 from data import targetevent
+from gamerules import gamestarter
 
 class GameRules( tickable.Tickable ):
     ''' Controls the rules in a game.'''
@@ -10,8 +11,20 @@ class GameRules( tickable.Tickable ):
 
         Checks the game rules.'''
         
-        if data.state is not data.STATES.PLAYING:
-            return
+        if data.state is data.STATES.LOADING:
+            self.__loading( data )
+            
+        elif data.state is data.STATES.PLAYING:
+            self.__playing( data )  
+            
+    def __loading( self, data ):
+        ''' Handles loading state of game. '''  
+        # Initialize game.
+        gameStarter = gamestarter.GameStarter()
+        gameStarter.load( data, data.levelList[0] )
+        
+    def __playing( self, data ):
+        ''' Handles playing state of game. '''
         
         timeMs = data.time * 1000
         
@@ -35,4 +48,4 @@ class GameRules( tickable.Tickable ):
       
             template = 'Game Over. You are out of time after {0:.2f} seconds. Time limit was ' \
                        '{1:.2f} seconds.'
-            print( template.format(data.time, data.level.timeLimit / 1000) )        
+            print( template.format(data.time, data.level.timeLimit / 1000) )      

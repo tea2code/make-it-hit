@@ -7,6 +7,12 @@ class GameStarter:
         ''' Loads the level and initializes it. After this method call the game is ready 
         to start.'''
         levelLoader = levelloader.LevelLoader()
+        
+        data.events = []
         data.level = levelLoader.load( levelFile )
         data.level.map.player.mass = 1
+        data.points = 0
+        data.screenXCoefficient = data.windowWidth / data.level.map.width
+        data.screenYCoefficient = data.windowHeight / data.level.map.height
         data.state = data.STATES.PLAYING
+        data.time = 0

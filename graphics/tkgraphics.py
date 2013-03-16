@@ -20,32 +20,29 @@ class TkGraphics( tickable.Tickable ):
     def __init__( self, data ):
         ''' The parameter data which contains the window settings. '''
         
-        # Define width of menu bar and calculate world-screen conversion coefficients.
-        menuBarWidth = 100
-        data.screenXCoefficient = (data.windowWidth - menuBarWidth) / data.level.map.width
-        data.screenYCoefficient = data.windowHeight / data.level.map.height
-        
         # Create window.
         self.window = tkinter.Tk()
+        self.window.config( background = 'white' )
         
         # Create canvas on one side...
         self._canvasFrame = tkinter.Frame( self.window )
+        self._canvasFrame.pack( side = tkinter.LEFT )
         self.canvas = tkinter.Canvas( self._canvasFrame, height = data.windowHeight,
-                                      width = data.windowWidth - menuBarWidth  )
+                                      width = data.windowWidth  )
         self.canvas.config( background = 'white' )
         self.canvas.pack()
-        self._canvasFrame.pack( side = tkinter.LEFT )
         
         # ...and the menu bar on the other.
-        self._barFrame = tkinter.Frame( self.window, height = data.windowHeight,
-                                        width = menuBarWidth )
+        self._barFrame = tkinter.Frame( self.window )
         self._barFrame.config( background = 'white' )
-        self._barFrame.pack( side = tkinter.RIGHT )
+        self._barFrame.pack( side = tkinter.RIGHT, anchor = tkinter.N )
         
         # Add time and point labels to menu bar.
-        self._timeLabel = tkinter.Label( self._barFrame, text = "Time: " + self.__formatTime(data) )
+        self._timeLabel = tkinter.Label( self._barFrame, text = "Time: -" )
+        self._timeLabel.config( background = 'white', padx = 10 )
         self._timeLabel.pack()
-        self._pointsLabel = tkinter.Label( self._barFrame, text = "Points: " + self.__formatPoints(data) )
+        self._pointsLabel = tkinter.Label( self._barFrame, text = "Points: -" )
+        self._pointsLabel.config( background = 'white', padx = 10 )
         self._pointsLabel.pack()
         
     def after( self, time, function ):
@@ -60,6 +57,9 @@ class TkGraphics( tickable.Tickable ):
         ''' Implementation of Tickable.tick().
 
         Draws the current state (data) on the canvas. '''
+        
+        if data.state is data.STATES.LOADING:
+            return;
         
         # Reset everything.
         self.canvas.delete( tkinter.ALL )
@@ -114,9 +114,10 @@ class TkGraphics( tickable.Tickable ):
             y1 = screenconvert.worldToScreen( data.mousePosition.y, data.screenYCoefficient )
             self.canvas.create_line( x0, y0, x1, y1, arrow = 'last', fill = color, width = 2 )
         
-        # Update menu bar.    
-        self._timeLabel.config( text = "Time: " + self.__formatTime(data) )
+        # Update menu bar.   
         self._pointsLabel.config( text = "Points: " + self.__formatPoints(data) )
+        if data.state is data.STATES.PLAYING: 
+            self._timeLabel.config( text = "Time: " + self.__formatTime(data) )
      
     def __formatPoints( self, data ):
         ''' Formats current points from data and returns it as a string. '''

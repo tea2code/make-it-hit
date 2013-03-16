@@ -25,6 +25,9 @@ class Physics( tickable.Tickable ):
 
         Calculates the physic on all objects. '''
     
+        if data.state is data.STATES.LOADING:
+            return;
+    
         player = data.level.map.player
     
         # Move player.
