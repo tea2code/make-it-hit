@@ -105,7 +105,7 @@ class Application:
         # Initialize physics.
         self._physics = physics.Physics()
         
-        # Initialize postframe.
+        # Initialize post frame.
         self._postFrame = postframe.PostFrame()
         
         # Initialize time stepper.
@@ -113,7 +113,8 @@ class Application:
         self._timestepper.time = self.frameTime
         
         # Initialize and activate input module.
-        self._input = tkinput.TkInput( self._data, self._graphics.canvas )
+        self._input = tkinput.TkInput( self._data, self._graphics.canvas, 
+                                       self._graphics.restartBtn )
         self._input.forceScale = self.forceScale
         
         # Start.

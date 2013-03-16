@@ -10,10 +10,12 @@ class TkGraphics( tickable.Tickable ):
     
     Member:
     canvas -- The canvas object (Canvas).
+    restartBtn -- The restart button (Button).
     window -- The window object (Tk).
     _barFrame -- The frame of the menu bar (Frame).
     _canvasFrame -- The frame of the canvas object (Frame).
     _pointsLabel -- Label for points (Label).
+    _spacers -- List of empty spacer labels (Label)
     _timeLabel -- Label for rest game time (Label).
     '''
     
@@ -38,12 +40,23 @@ class TkGraphics( tickable.Tickable ):
         self._barFrame.pack( side = tkinter.RIGHT, anchor = tkinter.N )
         
         # Add time and point labels to menu bar.
+        self.spacers = []
+        self.spacers.append( tkinter.Label(self._barFrame, background = 'white').pack() )
+        
         self._timeLabel = tkinter.Label( self._barFrame, text = "Time: -" )
         self._timeLabel.config( background = 'white', padx = 10 )
         self._timeLabel.pack()
+        
         self._pointsLabel = tkinter.Label( self._barFrame, text = "Points: -" )
         self._pointsLabel.config( background = 'white', padx = 10 )
         self._pointsLabel.pack()
+        
+        self.spacers.append( tkinter.Label(self._barFrame, background = 'white').pack() )
+        
+        # Add restart button to menu bar.
+        self.restartBtn = tkinter.Button( self._barFrame, text = "Restart" )
+        self.restartBtn.config( background = 'white', padx = 10 )
+        self.restartBtn.pack()
         
     def after( self, time, function ):
         ''' Calls function after time in milliseconds. '''
