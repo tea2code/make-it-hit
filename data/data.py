@@ -27,7 +27,7 @@ class Data:
     _borders -- List of rectangles representing the borders (data.rect). 
     '''
     
-    STATES = enum.createSeq( 'LOADING', 'PLAYING', 'VICTORY', 'GAMEOVER' )
+    STATES = enum.createSeq( 'LOADING', 'STARTING', 'PLAYING', 'VICTORY', 'GAMEOVER' )
     
     def __init__( self ):
         ''' Test: 

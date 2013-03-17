@@ -76,10 +76,25 @@ class TkGraphics( tickable.Tickable ):
         
         # Reset everything.
         self.canvas.delete( tkinter.ALL )
-        
-        # Set window title with current frames per second.
-        self.window.title( data.windowTitle.format(data.level.name, data.fps) )
-        
+
+        self.__drawMap( data )
+        self.__drawInput( data )
+        self.__showControls( data )
+
+    
+    def __drawInput( self, data ):
+        ''' Draw user interaction. '''
+        # Draw input vector.
+        if data.mousePressed:
+            color = 'blue'
+            x0 = screenconvert.worldToScreen( data.level.map.player.position.x, data.screenXCoefficient )
+            y0 = screenconvert.worldToScreen( data.level.map.player.position.y, data.screenYCoefficient )
+            x1 = screenconvert.worldToScreen( data.mousePosition.x, data.screenXCoefficient )
+            y1 = screenconvert.worldToScreen( data.mousePosition.y, data.screenYCoefficient )
+            self.canvas.create_line( x0, y0, x1, y1, arrow = 'last', fill = color, width = 2 )
+     
+    def __drawMap( self, data ):
+        ''' Draws map. '''
         # Draw border.
         drawer = tkborderdrawer.TkBorderDrawer( data.level.map.height, data.level.map.width, 
                                                 data.level.map.border )
@@ -108,29 +123,6 @@ class TkGraphics( tickable.Tickable ):
         drawer = drawerFactory.createFrom( data.level.map.player )
         self.__initDrawer( drawer, data )
         drawer.draw( self.canvas )
-        
-        # Draw collisions.
-        #for event in data.events:
-        #    if isinstance( event, collisionevent.CollisionEvent ):
-        #        drawer = tkcollisiondrawer.TkCollisionDrawer( event, drawerFactory )
-        #        drawer.color = 'red'
-        #        drawer.fill = 'red'
-        #        drawer.line = 2
-        #        drawer.draw( self.canvas )
-        
-        # Draw input vector.
-        if data.mousePressed:
-            color = 'blue'
-            x0 = screenconvert.worldToScreen( data.level.map.player.position.x, data.screenXCoefficient )
-            y0 = screenconvert.worldToScreen( data.level.map.player.position.y, data.screenYCoefficient )
-            x1 = screenconvert.worldToScreen( data.mousePosition.x, data.screenXCoefficient )
-            y1 = screenconvert.worldToScreen( data.mousePosition.y, data.screenYCoefficient )
-            self.canvas.create_line( x0, y0, x1, y1, arrow = 'last', fill = color, width = 2 )
-        
-        # Update menu bar.   
-        self._pointsLabel.config( text = "Points: " + self.__formatPoints(data) )
-        if data.state is data.STATES.PLAYING: 
-            self._timeLabel.config( text = "Time: " + self.__formatTime(data) )
      
     def __formatPoints( self, data ):
         ''' Formats current points from data and returns it as a string. '''
@@ -146,3 +138,14 @@ class TkGraphics( tickable.Tickable ):
         ''' Initializes drawer. '''
         drawer.screenXCoefficient = data.screenXCoefficient
         drawer.screenYCoefficient = data.screenYCoefficient
+        
+    def __showControls( self, data ):
+        ''' Show window elements and controls. '''
+        
+        # Set window title with current frames per second.
+        self.window.title( data.windowTitle.format(data.level.name, data.fps) )
+        
+        # Update menu bar.   
+        self._pointsLabel.config( text = "Points: " + self.__formatPoints(data) )
+        if data.state is data.STATES.PLAYING: 
+            self._timeLabel.config( text = "Time: " + self.__formatTime(data) )

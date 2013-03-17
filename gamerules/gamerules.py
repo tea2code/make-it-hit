@@ -11,11 +11,14 @@ class GameRules( tickable.Tickable ):
 
         Checks the game rules.'''
         
-        if data.state is data.STATES.LOADING:
-            self.__loading( data )
-            
-        elif data.state is data.STATES.PLAYING:
+        if data.state is data.STATES.PLAYING:
             self.__playing( data )  
+        
+        elif data.state is data.STATES.STARTING:
+            self.__starting( data )
+        
+        elif data.state is data.STATES.LOADING:
+            self.__loading( data )
             
     def __loading( self, data ):
         ''' Handles loading state of game. '''  
@@ -38,14 +41,12 @@ class GameRules( tickable.Tickable ):
             elif isinstance( event, targetevent.TargetEvent ):
                 data.points += event.target.points
                 data.points += round( (data.level.timeLimit - timeMs) * 0.005 )
-                data.state = data.STATES.VICTORY
-                
-                print( 'Points: {0}'.format(data.points) )        
+                data.state = data.STATES.VICTORY     
                 
         # Check rest time.
         if timeMs >= data.level.timeLimit:
-            data.state = data.STATES.GAMEOVER
-      
-            template = 'Game Over. You are out of time after {0:.2f} seconds. Time limit was ' \
-                       '{1:.2f} seconds.'
-            print( template.format(data.time, data.level.timeLimit / 1000) )      
+            data.state = data.STATES.GAMEOVER    
+            
+    def __starting( self, data ):
+        ''' Handles starting state of game. '''
+        data.state = data.STATES.PLAYING

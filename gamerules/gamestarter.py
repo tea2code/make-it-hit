@@ -14,5 +14,5 @@ class GameStarter:
         data.points = 0
         data.screenXCoefficient = data.windowWidth / data.level.map.width
         data.screenYCoefficient = data.windowHeight / data.level.map.height
-        data.state = data.STATES.PLAYING
+        data.state = data.STATES.STARTING
         data.time = 0
