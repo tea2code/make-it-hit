@@ -49,4 +49,7 @@ class GameRules( tickable.Tickable ):
             
     def __starting( self, data ):
         ''' Handles starting state of game. '''
-        data.state = data.STATES.PLAYING
+        
+        if data.time * 1000 >= data.startTime:
+            data.time = 0
+            data.state = data.STATES.PLAYING

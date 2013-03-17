@@ -20,6 +20,7 @@ class Data:
     screenXCoefficient -- Coefficient for world to screen conversion in x direction (float).
     screenYCoefficient -- Coefficient for world to screen conversion in y direction (float).
     state -- The current game state (enum).
+    startTime -- Time before level starts in milliseconds (int).
     time -- The accumulated time of all steps in seconds (float).
     windowHeight -- The height of the window (int).
     windowTitle -- Template for window title (string).
@@ -52,6 +53,8 @@ class Data:
         >>> d.screenYCoefficient
         1
         >>> d.state
+        >>> d.startTime
+        0
         >>> d.time
         0
         >>> d.windowHeight
@@ -74,6 +77,7 @@ class Data:
         self.screenXCoefficient = 1
         self.screenYCoefficient = 1
         self.state = None
+        self.startTime = 0
         self.time = 0
         self.windowHeight = 0
         self.windowTitle = ''

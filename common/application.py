@@ -18,6 +18,7 @@ class Application:
     forceScale -- Scaling factor for force input vectors (float).
     frameTime -- "Should be" time of one frame (float).
     loopTime -- The overall refreshing time of the main loop int milliseconds (int). 
+    startTime -- Time before level starts in milliseconds (int).
     windowHeight -- The height of the window (int).
     windowTitle -- Template for window title.
     windowWidth -- The width of the window (int).
@@ -42,6 +43,8 @@ class Application:
         0.1
         >>> a.loopTime
         100
+        >>> a.startTime
+        0
         >>> a.windowHeight
         0
         >>> a.windowTitle
@@ -61,6 +64,7 @@ class Application:
         self.forceScale = 1.0
         self.frameTime = 0.1
         self.loopTime = 100
+        self.startTime = 0
         self.windowHeight = 0
         self.windowTitle = ''
         self.windowWidth = 0
@@ -89,6 +93,7 @@ class Application:
         self._data = data.Data()
         self._data.levelList.append( args.level )
         self._data.state = self._data.STATES.LOADING
+        self._data.startTime = self.startTime
         self._data.windowHeight = self.windowHeight
         self._data.windowTitle = self.windowTitle
         self._data.windowWidth = self.windowWidth

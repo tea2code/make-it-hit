@@ -98,12 +98,12 @@ class Physics( tickable.Tickable ):
     def __interact( self, player, objects ):
         ''' Calculates interaction of player with objects. Returns list of events.'''
         events = []
-        for object in objects:
-            collider = self._colliderFactory.createFrom( player, object )
+        for mapObject in objects:
+            collider = self._colliderFactory.createFrom( player, mapObject )
             collision = collider.collide()
             if collision.isCollided:
-                reflector = self._reflectorFactory.createFrom( player, object )
+                reflector = self._reflectorFactory.createFrom( player, mapObject )
                 player.momentum = reflector.reflect( collision.x, collision.y )
-                event = collisionevent.CollisionEvent( object, collision.x, collision.y )
+                event = collisionevent.CollisionEvent( mapObject, collision.x, collision.y )
                 events.append( event )
         return events

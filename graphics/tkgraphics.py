@@ -105,8 +105,8 @@ class TkGraphics( tickable.Tickable ):
         drawerFactory = tkdrawerfactory.TkDrawerFactory()
         
         # Draw objects.
-        for object in data.level.map.objects:
-            drawer = drawerFactory.createFrom( object )
+        for mapObject in data.level.map.objects:
+            drawer = drawerFactory.createFrom( mapObject )
             self.__initDrawer( drawer, data )
             drawer.draw( self.canvas )
         
@@ -117,7 +117,7 @@ class TkGraphics( tickable.Tickable ):
             drawer.draw( self.canvas )
             x = drawer.worldToScreenX( target.object.position.x )
             y = drawer.worldToScreenY( target.object.position.y )
-            self.canvas.create_text( x, y, text = '{0}'.format(target.points), fill = drawer.color )
+            self.canvas.create_text( x, y, text = target.points, fill = drawer.color )
         
         # Draw player.
         drawer = drawerFactory.createFrom( data.level.map.player )
@@ -130,7 +130,13 @@ class TkGraphics( tickable.Tickable ):
      
     def __formatTime( self, data ):
         ''' Formats the current game time from data and returns it as a string. '''
-        currentTime = (data.level.timeLimit / 1000)  - data.time
+        
+        restTime = data.level.timeLimit
+        if data.state is data.STATES.STARTING:
+            restTime = data.startTime
+        restTime /= 1000
+        
+        currentTime = restTime  - data.time
         currentTime = max( currentTime, 0 )
         return '{:.2f}s'.format( currentTime )
             
@@ -147,5 +153,5 @@ class TkGraphics( tickable.Tickable ):
         
         # Update menu bar.   
         self._pointsLabel.config( text = "Points: " + self.__formatPoints(data) )
-        if data.state is data.STATES.PLAYING: 
+        if data.state in [data.STATES.PLAYING, data.STATES.STARTING]: 
             self._timeLabel.config( text = "Time: " + self.__formatTime(data) )
