@@ -85,7 +85,8 @@ class TkGraphics( tickable.Tickable ):
     def __drawInput( self, data ):
         ''' Draw user interaction. '''
         # Draw input vector.
-        if data.mousePressed:
+        
+        if data.mousePressed and data.state in [data.STATES.STARTING, data.STATES.PLAYING]:
             color = 'blue'
             x0 = screenconvert.worldToScreen( data.level.map.player.position.x, data.screenXCoefficient )
             y0 = screenconvert.worldToScreen( data.level.map.player.position.y, data.screenYCoefficient )

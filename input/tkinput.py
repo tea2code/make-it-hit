@@ -45,7 +45,8 @@ class TkInput():
    
     def __restart( self ):
         ''' Restarts game. '''
-        self.data.state = self.data.STATES.LOADING
+        if self.data.state is not self.data.STATES.VICTORY:
+            self.data.state = self.data.STATES.LOADING
    
     def __restartBtnPressed( self ):
         ''' Handles pressing the restart button. '''

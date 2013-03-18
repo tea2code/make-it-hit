@@ -41,7 +41,11 @@ class GameRules( tickable.Tickable ):
             elif isinstance( event, targetevent.TargetEvent ):
                 data.points += event.target.points
                 data.points += round( (data.level.timeLimit - timeMs) * 0.005 )
-                data.state = data.STATES.VICTORY     
+                data.state = data.STATES.VICTORY   
+                  
+                data.levelList.pop( 0 )
+                if data.levelList:
+                    data.state = data.STATES.LOADING  
                 
         # Check rest time.
         if timeMs >= data.level.timeLimit:

@@ -81,17 +81,18 @@ class Application:
         ''' Start the application. '''
         
         # Read arguments.
-        parser = argparse.ArgumentParser( description='Provide the level path as an argument.' )
-        parser.add_argument( 'level' )
+        parser = argparse.ArgumentParser( description='Provide the level pathes as an arguments.' )
+        parser.add_argument( 'levels', nargs = '+' )
         args = parser.parse_args()
         
-        # Check if level exits.
-        if not os.path.exists( args.level ):
-            raise FileNotFoundError( 'The level "'+args.level+'" was not found.' )
+        # Check if levels exit.
+        for level in args.levels:
+            if not os.path.exists( level ):
+                raise FileNotFoundError( 'The level "'+level+'" was not found.' )
         
         # Initialize data.
         self._data = data.Data()
-        self._data.levelList.append( args.level )
+        self._data.levelList = args.levels
         self._data.state = self._data.STATES.LOADING
         self._data.startTime = self.startTime
         self._data.windowHeight = self.windowHeight
