@@ -15,7 +15,8 @@ class TkGraphics( tickable.Tickable ):
     _barFrame -- The frame of the menu bar (Frame).
     _canvasFrame -- The frame of the canvas object (Frame).
     _pointsLabel -- Label for points (Label).
-    _spacers -- List of empty spacer labels (Label)
+    _spacers -- List of empty spacer labels (Label).
+    _stateLabel -- Label to show the current state (Label).
     _timeLabel -- Label for rest game time (Label).
     '''
     
@@ -43,18 +44,21 @@ class TkGraphics( tickable.Tickable ):
         self.spacers = []
         self.spacers.append( tkinter.Label(self._barFrame, background = 'white').pack() )
         
-        self._timeLabel = tkinter.Label( self._barFrame, text = "Time: -" )
-        self._timeLabel.config( background = 'white', padx = 10 )
+        self._timeLabel = tkinter.Label( self._barFrame, text = 'Time: -' )
+        self._timeLabel.config( background = 'white', padx = 30 )
         self._timeLabel.pack()
         
-        self._pointsLabel = tkinter.Label( self._barFrame, text = "Points: -" )
-        self._pointsLabel.config( background = 'white', padx = 10 )
+        self._pointsLabel = tkinter.Label( self._barFrame, text = 'Points: -' )
+        self._pointsLabel.config( background = 'white', padx = 30 )
         self._pointsLabel.pack()
         
-        self.spacers.append( tkinter.Label(self._barFrame, background = 'white').pack() )
+        self._stateLabel = tkinter.Label( self._barFrame, text = 'Loading' )
+        self._stateLabel.config( background = 'white' )
+        self._stateLabel.pack()
         
-        # Add restart button to menu bar.
-        self.restartBtn = tkinter.Button( self._barFrame, text = "Restart" )
+        self.spacers.append( tkinter.Label(self._barFrame, background = 'white').pack() )
+
+        self.restartBtn = tkinter.Button( self._barFrame, text = 'Restart' )
         self.restartBtn.config( background = 'white', padx = 10 )
         self.restartBtn.pack()
         
@@ -153,6 +157,22 @@ class TkGraphics( tickable.Tickable ):
         self.window.title( data.windowTitle.format(data.level.name, data.fps) )
         
         # Update menu bar.   
-        self._pointsLabel.config( text = "Points: " + self.__formatPoints(data) )
+        self._pointsLabel.config( text = 'Points: ' + self.__formatPoints(data) )
+        
         if data.state in [data.STATES.PLAYING, data.STATES.STARTING]: 
-            self._timeLabel.config( text = "Time: " + self.__formatTime(data) )
+            self._timeLabel.config( text = 'Time: ' + self.__formatTime(data) )
+            
+        if data.state is data.STATES.LOADING:
+            self._stateLabel.config( text = 'Loading next level...' )
+        
+        elif data.state is data.STATES.STARTING:
+            self._stateLabel.config( text = 'Starting level...' )
+            
+        elif data.state is data.STATES.PLAYING:
+            self._stateLabel.config( text = 'Playing...' )
+            
+        elif data.state is data.STATES.VICTORY:
+            self._stateLabel.config( text = 'Congratulations,\n you have won!' )
+            
+        elif data.state is data.STATES.GAMEOVER:
+            self._stateLabel.config( text = 'Game Over,\n you lost!' )
