@@ -1,5 +1,6 @@
 ﻿from common import tickable
 from graphics import gameview
+from graphics import menuview
 
 import tkinter
 
@@ -11,6 +12,7 @@ class TkGraphics( tickable.Tickable ):
     restartBtn -- The restart button (Button).
     window -- The window object (Tk).
     _gameView -- The game view (GameView).
+    _menuView -- The menu view (MenuView).
     '''
     
     def __init__( self, data ):
@@ -20,8 +22,9 @@ class TkGraphics( tickable.Tickable ):
         self.window = tkinter.Tk()
         self.window.config( background = 'white' )
         
-        # Create game view.
+        # Create views.
         self._gameView = gameview.GameView( data, self.window )
+        self._menuView = menuview.MenuView()
         
     def after( self, time, function ):
         ''' Calls function after time in milliseconds. '''
@@ -44,8 +47,9 @@ class TkGraphics( tickable.Tickable ):
 
         Draws the current state (data) on the canvas. '''
         
-        # Set window title with current frames per second.
         self.window.title( data.windowTitle.format(data.level.name, data.fps) )
         
-        # Show game view.
-        self._gameView.show( data )
+        if data.state in [data.STATES.MENU_MAIN, data.STATES.MENU_NEW]:
+            self._menuView.show( data )
+        else:
+            self._gameView.show( data )

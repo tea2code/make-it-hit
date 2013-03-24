@@ -10,6 +10,7 @@ class GameView( viewhandler.ViewHandler ):
     
     canvas -- The canvas object (Canvas).
     restartBtn -- The restart button (Button).
+    visible -- True if view is visible else false (boolean).
     _barFrame -- The frame of the menu bar (Frame).
     _canvasFrame -- The frame of the canvas object (Frame).
     _pointsLabel -- Label for points (Label).
@@ -20,10 +21,9 @@ class GameView( viewhandler.ViewHandler ):
     
     def __init__( self, data, window ):
         ''' Inject canvas frame and menu frame in given window. Using data for initial settings. '''
-        
+
         # Create canvas on one side...
         self._canvasFrame = tkinter.Frame( window )
-        self._canvasFrame.pack( side = tkinter.LEFT )
         self.canvas = tkinter.Canvas( self._canvasFrame, height = data.windowHeight,
                                       width = data.windowWidth  )
         self.canvas.config( background = 'white' )
@@ -32,7 +32,8 @@ class GameView( viewhandler.ViewHandler ):
         # ...and the menu bar on the other.
         self._barFrame = tkinter.Frame( window )
         self._barFrame.config( background = 'white' )
-        self._barFrame.pack( side = tkinter.RIGHT, anchor = tkinter.N )
+        
+        self.__showView()
         
         # Add time and point labels to menu bar.
         self.spacers = []
@@ -56,9 +57,17 @@ class GameView( viewhandler.ViewHandler ):
         self.restartBtn.config( background = 'white', padx = 10 )
         self.restartBtn.pack()
         
+    def hide( self, data ):
+        ''' Hide the game view. '''
+        self.visible = False
+        self._canvasFrame.pack_forget()
+        self._barFrame.pack_forget()
         
     def show( self, data ):
         ''' Show the given data in the in game view. '''
+        
+        if not self.visible:
+            self.__showView()
         
         if data.state is data.STATES.LOADING:
             return;
@@ -157,3 +166,9 @@ class GameView( viewhandler.ViewHandler ):
             
         elif data.state is data.STATES.GAMEOVER:
             self._stateLabel.config( text = 'Game Over,\n you lost!' )
+            
+    def __showView( self ):
+        ''' Shows canvas and menu frames. '''
+        self.visible = True
+        self._canvasFrame.pack( side = tkinter.LEFT )
+        self._barFrame.pack( side = tkinter.RIGHT, anchor = tkinter.N )
