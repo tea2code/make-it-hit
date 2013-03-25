@@ -24,7 +24,7 @@ class TkGraphics( tickable.Tickable ):
         
         # Create views.
         self._gameView = gameview.GameView( data, self.window )
-        self._menuView = menuview.MenuView()
+        self._menuView = menuview.MenuView( data, self.window )
         
     def after( self, time, function ):
         ''' Calls function after time in milliseconds. '''
@@ -47,7 +47,10 @@ class TkGraphics( tickable.Tickable ):
 
         Draws the current state (data) on the canvas. '''
         
-        self.window.title( data.windowTitle.format(data.level.name, data.fps) )
+        viewDescription = 'Menu'
+        if data.level:
+            viewDescription = data.level.name
+        self.window.title( data.windowTitle.format(viewDescription, data.fps) )
         
         if data.state in [data.STATES.MENU_MAIN, data.STATES.MENU_NEW]:
             self._menuView.show( data )

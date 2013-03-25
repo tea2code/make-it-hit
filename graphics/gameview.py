@@ -8,6 +8,7 @@ import tkinter
 class GameView( viewhandler.ViewHandler ):
     ''' The in game view. 
     
+    Member:s
     canvas -- The canvas object (Canvas).
     restartBtn -- The restart button (Button).
     visible -- True if view is visible else false (boolean).
@@ -33,8 +34,6 @@ class GameView( viewhandler.ViewHandler ):
         self._barFrame = tkinter.Frame( window )
         self._barFrame.config( background = 'white' )
         
-        self.__showView()
-        
         # Add time and point labels to menu bar.
         self.spacers = []
         self.spacers.append( tkinter.Label(self._barFrame, background = 'white').pack() )
@@ -57,17 +56,23 @@ class GameView( viewhandler.ViewHandler ):
         self.restartBtn.config( background = 'white', padx = 10 )
         self.restartBtn.pack()
         
+        self.visible = False
+        
     def hide( self, data ):
         ''' Hide the game view. '''
-        self.visible = False
-        self._canvasFrame.pack_forget()
-        self._barFrame.pack_forget()
+        
+        if self.visible:
+            self.visible = False
+            self._canvasFrame.pack_forget()
+            self._barFrame.pack_forget()
         
     def show( self, data ):
         ''' Show the given data in the in game view. '''
         
         if not self.visible:
-            self.__showView()
+            self.visible = True
+            self._canvasFrame.pack( side = tkinter.LEFT )
+            self._barFrame.pack( side = tkinter.RIGHT, anchor = tkinter.N )
         
         if data.state is data.STATES.LOADING:
             return;
@@ -166,9 +171,3 @@ class GameView( viewhandler.ViewHandler ):
             
         elif data.state is data.STATES.GAMEOVER:
             self._stateLabel.config( text = 'Game Over,\n you lost!' )
-            
-    def __showView( self ):
-        ''' Shows canvas and menu frames. '''
-        self.visible = True
-        self._canvasFrame.pack( side = tkinter.LEFT )
-        self._barFrame.pack( side = tkinter.RIGHT, anchor = tkinter.N )

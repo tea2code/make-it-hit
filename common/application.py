@@ -93,7 +93,7 @@ class Application:
         # Initialize data.
         self._data = data.Data()
         self._data.levelList = args.levels
-        self._data.state = self._data.STATES.LOADING
+        self._data.state = self._data.STATES.MENU_MAIN
         self._data.startTime = self.startTime
         self._data.windowHeight = self.windowHeight
         self._data.windowTitle = self.windowTitle
