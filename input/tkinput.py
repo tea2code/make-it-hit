@@ -8,9 +8,9 @@ class TkInput():
     forceScale -- Scaling factor for force vector.
     '''
     
-    def __init__( self, data, window, restartBtn ):
+    def __init__( self, data, window, restartBtn, newGameBtn ):
         ''' Initializes input module with the data object and binds input event callbacks 
-        to window and the restartBtn.'''
+        to window and buttons.'''
         
         self.data = data
         self.forceScale = 1
@@ -20,6 +20,7 @@ class TkInput():
         window.bind( '<ButtonRelease-1>', self.__mouseReleased )
         window.bind_all( 'r', self.__restartKeyPressed )
         
+        newGameBtn.config( command = self.__newGameBtnPressed )
         restartBtn.config( command = self.__restartBtnPressed )
     
     def __mouseMotion( self, event ):
@@ -42,6 +43,10 @@ class TkInput():
         force = self.data.mousePosition - self.data.level.map.player.position
         force = force * self.forceScale
         self.data.level.map.player.addForce( force )
+   
+    def __newGameBtnPressed( self ):
+        ''' Handles pressing the new game button. '''
+        self.data.state = self.data.STATES.LOADING
    
     def __restart( self ):
         ''' Restarts game. '''

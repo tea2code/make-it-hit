@@ -6,7 +6,7 @@ class MenuView( viewhandler.ViewHandler ):
     ''' The in menu view.
     
     Member:
-    newBtn -- The new game button (Button).
+    newGameBtn -- The new game button (Button).
     visible -- True if view is visible else false (boolean).
     _frame -- The menu frame (Frame).
     ''' 
@@ -16,12 +16,16 @@ class MenuView( viewhandler.ViewHandler ):
         
         self._frame = tkinter.Frame( window, height = data.windowHeight,
                                      width = data.windowWidth )
-        self._frame.config( background = 'white' )
+        self._frame.config( background = 'white', pady = data.windowHeight / 2 - 50 ) # TODO pady to center is hacky.
         self._frame.pack_propagate(0)
         
-        self.newBtn = tkinter.Button( self._frame, text = 'New Game' )
-        self.newBtn.config( background = 'white', padx = 10 )
-        self.newBtn.pack()
+        self._menuFrame = tkinter.Frame( self._frame )
+        self._menuFrame.config()
+        self._menuFrame.pack()
+        
+        self.newGameBtn = tkinter.Button( self._menuFrame, text = 'New Game' )
+        self.newGameBtn.config( background = 'white', padx = 10 )
+        self.newGameBtn.pack()
         
         self.visible = False
     

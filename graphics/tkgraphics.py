@@ -26,17 +26,21 @@ class TkGraphics( tickable.Tickable ):
         self._gameView = gameview.GameView( data, self.window )
         self._menuView = menuview.MenuView( data, self.window )
         
-    def after( self, time, function ):
-        ''' Calls function after time in milliseconds. '''
-        self.window.after( time, function )
-     
     @property
     def canvas( self ):
         return self._gameView.canvas
     
+    @property 
+    def newGameBtn( self ):
+        return self._menuView.newGameBtn
+    
     @property
     def restartBtn( self ):
         return self._gameView.restartBtn
+        
+    def after( self, time, function ):
+        ''' Calls function after time in milliseconds. '''
+        self.window.after( time, function )
         
     def start( self ):
         ''' Starts drawing. '''
@@ -53,6 +57,8 @@ class TkGraphics( tickable.Tickable ):
         self.window.title( data.windowTitle.format(viewDescription, data.fps) )
         
         if data.state in [data.STATES.MENU_MAIN, data.STATES.MENU_NEW]:
+            self._gameView.hide( data )
             self._menuView.show( data )
         else:
+            self._menuView.hide( data )
             self._gameView.show( data )

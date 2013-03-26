@@ -120,7 +120,7 @@ class Application:
         
         # Initialize and activate input module.
         self._input = tkinput.TkInput( self._data, self._graphics.canvas, 
-                                       self._graphics.restartBtn )
+                                       self._graphics.restartBtn, self._graphics.newGameBtn )
         self._input.forceScale = self.forceScale
         
         # Start.
