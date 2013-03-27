@@ -28,7 +28,7 @@ class Data:
     _borders -- List of rectangles representing the borders (data.rect). 
     '''
     
-    STATES = enum.createSeq( 'MENU_MAIN', 'MENU_NEW',
+    STATES = enum.createSeq( 'MENU_MAIN', 'MENU_NEW', 'QUIT',
                              'LOADING', 'STARTING', 'PLAYING', 'VICTORY', 'GAMEOVER' )
     
     def __init__( self ):

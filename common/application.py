@@ -120,7 +120,8 @@ class Application:
         
         # Initialize and activate input module.
         self._input = tkinput.TkInput( self._data, self._graphics.canvas, 
-                                       self._graphics.restartBtn, self._graphics.newGameBtn )
+                                       self._graphics.restartBtn, self._graphics.newGameBtn,
+                                       self._graphics.quitBtn )
         self._input.forceScale = self.forceScale
         
         # Start.
@@ -130,6 +131,10 @@ class Application:
         
     def calculateNextState( self, t, dt ):
         ''' Callback function for the frame ticker. Executes all modules on the data. '''
+        
+        if self._data.state is self._data.STATES.QUIT:
+            self._graphics.window.destroy()
+            return
         
         self._physics.tick( self._data )
         self._fps.tick( self._data ) 

@@ -34,6 +34,10 @@ class TkGraphics( tickable.Tickable ):
     def newGameBtn( self ):
         return self._menuView.newGameBtn
     
+    @property 
+    def quitBtn( self ):
+        return self._menuView.quitBtn
+    
     @property
     def restartBtn( self ):
         return self._gameView.restartBtn
