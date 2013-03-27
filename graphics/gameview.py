@@ -10,6 +10,7 @@ class GameView( viewhandler.ViewHandler ):
     
     Member:s
     canvas -- The canvas object (Canvas).
+    menuBtn -- The button which leads back to the main menu (Button).
     restartBtn -- The restart button (Button).
     visible -- True if view is visible else false (boolean).
     _barFrame -- The frame of the menu bar (Frame).
@@ -53,8 +54,14 @@ class GameView( viewhandler.ViewHandler ):
         self.spacers.append( tkinter.Label(self._barFrame, background = 'white').pack() )
 
         self.restartBtn = tkinter.Button( self._barFrame, text = 'Restart' )
-        self.restartBtn.config( background = 'white', padx = 10 )
+        self.restartBtn.config( background = 'white', width = 10 )
         self.restartBtn.pack()
+        
+        self.spacers.append( tkinter.Label(self._barFrame, background = 'white').pack() )
+
+        self.menuBtn = tkinter.Button( self._barFrame, text = 'Main Menu' )
+        self.menuBtn.config( background = 'white', width = 10 )
+        self.menuBtn.pack()
         
         self.visible = False
         

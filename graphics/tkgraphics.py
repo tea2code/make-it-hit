@@ -31,6 +31,10 @@ class TkGraphics( tickable.Tickable ):
         return self._gameView.canvas
     
     @property 
+    def menuBtn( self ):
+        return self._gameView.menuBtn
+    
+    @property 
     def newGameBtn( self ):
         return self._menuView.newGameBtn
     
