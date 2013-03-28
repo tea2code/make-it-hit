@@ -12,7 +12,6 @@ class GameView( viewhandler.ViewHandler ):
     canvas -- The canvas object (Canvas).
     menuBtn -- The button which leads back to the main menu (Button).
     restartBtn -- The restart button (Button).
-    visible -- True if view is visible else false (boolean).
     _barFrame -- The frame of the menu bar (Frame).
     _canvasFrame -- The frame of the canvas object (Frame).
     _pointsLabel -- Label for points (Label).
@@ -62,24 +61,18 @@ class GameView( viewhandler.ViewHandler ):
         self.menuBtn = tkinter.Button( self._barFrame, text = 'Main Menu' )
         self.menuBtn.config( background = 'white', width = 10 )
         self.menuBtn.pack()
-        
-        self.visible = False
-        
+                
     def hide( self, data ):
         ''' Hide the game view. '''
         
-        if self.visible:
-            self.visible = False
-            self._canvasFrame.pack_forget()
-            self._barFrame.pack_forget()
+        self._canvasFrame.pack_forget()
+        self._barFrame.pack_forget()
         
     def show( self, data ):
         ''' Show the given data in the in game view. '''
         
-        if not self.visible:
-            self.visible = True
-            self._canvasFrame.pack( side = tkinter.LEFT )
-            self._barFrame.pack( side = tkinter.RIGHT, anchor = tkinter.N )
+        self._canvasFrame.pack( side = tkinter.LEFT )
+        self._barFrame.pack( side = tkinter.RIGHT, anchor = tkinter.N )
         
         if data.state is data.STATES.LOADING:
             return;
