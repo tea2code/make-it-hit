@@ -12,17 +12,18 @@ class MenuView( viewhandler.ViewHandler ):
     quitBtn -- The button to quit the game (Button).
     startBtn -- The button to start the game (Button).
     _frame -- The menu frame (Frame).
-    _levelFrame -- The frame containing the level selection and controls (Frame).
+    _frames -- List of frames which are not needed later (Frame).
     _levelList -- The list box containing all levels (ListBox).
-    _levelSelectionFrame -- The frame containing the level selection (Frame).
     _mainMenuFrame -- The frame of the main menu (Frame).
     _newMenuFrame -- The frame of the new game menu (Frame).
+    _scrollbar -- The scrollbar for the level list (Scrollbar).
     _spacers -- List of empty spacer labels (Label).
     ''' 
     
     def __init__( self, data, window ):
         ''' Add menu to given window. '''
         
+        self._frames = []
         self.spacers = []
         
         self._frame = tkinter.Frame( window, height = data.windowHeight,
@@ -54,18 +55,32 @@ class MenuView( viewhandler.ViewHandler ):
         self._newMenuFrame = tkinter.Frame( self._frame )
         self._newMenuFrame.config( background = 'white' )
         
-        self._levelFrame = tkinter.Frame( self._newMenuFrame )
-        self._levelFrame.config( background = 'white' )
-        self._levelFrame.pack( fill = tkinter.BOTH, expand = 1 )
+        levelFrame = tkinter.Frame( self._newMenuFrame )
+        levelFrame.config( background = 'white' )
+        levelFrame.pack( anchor = tkinter.W, fill = tkinter.Y, expand = 1 )
+        self._frames.append( levelFrame )
         
-        self._levelSelectionFrame = tkinter.Frame( self._levelFrame )
-        self._levelSelectionFrame.config( background = 'white' )
-        self._levelSelectionFrame.pack( anchor = tkinter.N, side = tkinter.LEFT, 
-                                        fill = tkinter.BOTH, expand = 1 )
+        levelSelectionFrame = tkinter.Frame( levelFrame )
+        levelSelectionFrame.config( background = 'white' )
+        levelSelectionFrame.pack( side = tkinter.LEFT, 
+                                  fill = tkinter.Y, expand = 1 )
+        self._frames.append( levelSelectionFrame )
         
-        self._levelList = tkinter.Listbox( self._levelSelectionFrame, selectmode = tkinter.MULTIPLE, 
-                                           width = 50 )
-        self._levelList.pack( anchor = tkinter.W, fill = tkinter.Y, expand = 1 )
+        self._scrollbar = tkinter.Scrollbar( levelSelectionFrame, orient = tkinter.VERTICAL )
+        self._levelList = tkinter.Listbox( levelSelectionFrame, selectmode = tkinter.MULTIPLE, 
+                                           width = 50, yscrollcommand = self._scrollbar.set )
+        self._scrollbar.config( command = self._levelList.yview )
+        self._levelList.pack( side = tkinter.LEFT, fill = tkinter.Y, expand = 1 )
+        self._scrollbar.pack( fill = tkinter.Y, expand = 1 )
+        
+        spacerFrame = tkinter.Frame( levelFrame )
+        spacerFrame.config( background = 'white', width = 30 )
+        spacerFrame.pack( side = tkinter.LEFT )
+        self._frames.append( spacerFrame )
+        
+        self._titleLabel = tkinter.Label( levelFrame, text = '<Title>' )
+        self._titleLabel.config( background = 'white', font = (None, 16, 'bold') )
+        self._titleLabel.pack( anchor = tkinter.N, side = tkinter.LEFT )
         
         self.backBtn = tkinter.Button( self._newMenuFrame, text = 'Back' )
         self.backBtn.config( background = 'white', width = 10 )
@@ -83,13 +98,13 @@ class MenuView( viewhandler.ViewHandler ):
     def show( self, data ):
         ''' Shows the menu. '''
         
-        self._frame.pack()
+        self._frame.pack( side = tkinter.LEFT, fill = tkinter.BOTH, expand = 1 )
         
         if data.state is data.STATES.MENU_MAIN:
             self._newMenuFrame.pack_forget()
             self._mainMenuFrame.pack( side = tkinter.LEFT, fill = tkinter.X, expand = 1 )
             
-        elif data.state is data.STATES.MENU_NEW:
+        elif data.state in [data.STATES.MENU_NEW, data.STATES.MENU_NEW_DETAILS]:
             self._mainMenuFrame.pack_forget()
             self._newMenuFrame.pack( fill = tkinter.BOTH, expand = 1, padx = 10, pady = 10 )
             
