@@ -59,6 +59,8 @@ class GameRules( tickable.Tickable ):
     def __readLevels( self, data ):
         ''' Reads the level list. '''
         
+        del data.levelList[:]
+        
         if not data.levelDir.endswith('/'):
             data.levelDir += '/'
             
