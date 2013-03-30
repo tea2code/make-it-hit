@@ -17,6 +17,7 @@ class Application:
     fpsCounterMeasures -- Number of counts before the fps counter should update.
     forceScale -- Scaling factor for force input vectors (float).
     frameTime -- "Should be" time of one frame (float).
+    levelExtension -- The file extension of level files with dot (string).
     loopTime -- The overall refreshing time of the main loop int milliseconds (int). 
     startTime -- Time before level starts in milliseconds (int).
     windowHeight -- The height of the window (int).
@@ -41,6 +42,8 @@ class Application:
         1.0
         >>> a.frameTime
         0.1
+        >>> a.levelExtension
+        '.yaml'
         >>> a.loopTime
         100
         >>> a.startTime
@@ -63,6 +66,7 @@ class Application:
         self.fpsCounterMeasures = 10
         self.forceScale = 1.0
         self.frameTime = 0.1
+        self.levelExtension = '.yaml'
         self.loopTime = 100
         self.startTime = 0
         self.windowHeight = 0
@@ -81,18 +85,13 @@ class Application:
         ''' Start the application. '''
         
         # Read arguments.
-        parser = argparse.ArgumentParser( description='Provide the level pathes as an arguments.' )
-        parser.add_argument( 'levels', nargs = '+' )
+        parser = argparse.ArgumentParser( description = 'Provide the level directory as an argument.' )
+        parser.add_argument( 'levelDir')
         args = parser.parse_args()
-        
-        # Check if levels exit.
-        for level in args.levels:
-            if not os.path.exists( level ):
-                raise FileNotFoundError( 'The level "'+level+'" was not found.' )
         
         # Initialize data.
         self._data = data.Data()
-        self._data.levelList = args.levels
+        self._data.levelDir = args.levelDir
         self._data.state = self._data.STATES.MENU_MAIN
         self._data.startTime = self.startTime
         self._data.windowHeight = self.windowHeight

@@ -64,7 +64,7 @@ class TkGraphics( tickable.Tickable ):
             viewDescription = data.level.name
         self.window.title( data.windowTitle.format(viewDescription, data.fps) )
         
-        if data.state in [data.STATES.MENU_MAIN, data.STATES.MENU_NEW]:
+        if data.state in [data.STATES.MENU_MAIN, data.STATES.MENU_READ_LEVELS, data.STATES.MENU_NEW]:
             self._gameView.hide( data )
             self._menuView.show( data )
         else:

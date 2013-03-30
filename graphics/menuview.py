@@ -70,6 +70,7 @@ class MenuView( viewhandler.ViewHandler ):
         if data.state is data.STATES.MENU_MAIN:
             self._newMenuFrame.pack_forget()
             self._mainMenuFrame.pack( side = tkinter.LEFT, fill = tkinter.X, expand = 1 )
-        else:
+            
+        elif data.state is data.STATES.MENU_NEW:
             self._mainMenuFrame.pack_forget()
             self._newMenuFrame.pack( fill = tkinter.BOTH, expand = 1, padx = 10, pady = 10 )

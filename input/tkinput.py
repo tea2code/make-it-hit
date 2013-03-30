@@ -52,7 +52,7 @@ class TkInput():
    
     def __newGameBtnPressed( self ):
         ''' Handles pressing the new game button. '''
-        self.data.state = self.data.STATES.MENU_NEW
+        self.data.state = self.data.STATES.MENU_READ_LEVELS
    
     def __quitBtnPressed( self ):
         ''' Handles pressing the quit button. '''

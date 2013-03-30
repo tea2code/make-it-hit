@@ -3,6 +3,8 @@ from data import collisionevent
 from data import targetevent
 from gamerules import gamestarter
 
+import os
+
 class GameRules( tickable.Tickable ):
     ''' Controls the rules in a game.'''
     
@@ -20,6 +22,9 @@ class GameRules( tickable.Tickable ):
         elif data.state is data.STATES.LOADING:
             self.__loading( data )
             
+        elif data.state is data.STATES.MENU_READ_LEVELS:
+            self.__readLevels( data )
+            
     def __loading( self, data ):
         ''' Handles loading state of game. '''  
         # Initialize game.
@@ -27,7 +32,7 @@ class GameRules( tickable.Tickable ):
         gameStarter.load( data, data.levelList[0] )
         
     def __playing( self, data ):
-        ''' Handles playing state of game. '''
+        ''' Handles playing state of game. ''' 
         
         timeMs = data.time * 1000
         
@@ -50,6 +55,19 @@ class GameRules( tickable.Tickable ):
         # Check rest time.
         if timeMs >= data.level.timeLimit:
             data.state = data.STATES.GAMEOVER    
+    
+    def __readLevels( self, data ):
+        ''' Reads the level list. '''
+        
+        if not data.levelDir.endswith('/'):
+            data.levelDir += '/'
+            
+        for file in os.listdir(data.levelDir):
+            file = data.levelDir + file
+            if file.endswith( data.levelExtension ):
+                data.levelList.append( file )
+
+        data.state = data.STATES.MENU_NEW
             
     def __starting( self, data ):
         ''' Handles starting state of game. '''
