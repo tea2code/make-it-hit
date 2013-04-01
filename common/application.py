@@ -118,10 +118,14 @@ class Application:
         self._timestepper.time = self.frameTime
         
         # Initialize and activate input module.
-        self._input = tkinput.TkInput( self._data, self._graphics.canvas, 
-                                       self._graphics.restartBtn, self._graphics.newGameBtn,
-                                       self._graphics.quitBtn, self._graphics.menuBtn )
+        self._input = tkinput.TkInput( self._data )
         self._input.forceScale = self.forceScale
+        self._input.bindMenuBtn( self._graphics.backFromNewBtn )
+        self._input.bindMenuBtn( self._graphics.menuBtn )
+        self._input.bindNewGameBtn( self._graphics.newGameBtn )
+        self._input.bindQuitBtn( self._graphics.quitBtn )
+        self._input.bindRestartBtn( self._graphics.restartBtn )
+        self._input.bindWindow( self._graphics.canvas )
         
         # Start.
         self._timestepper.start()

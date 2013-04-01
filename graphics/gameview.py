@@ -3,7 +3,7 @@ from graphics import tkborderdrawer
 from graphics import tkdrawerfactory
 from graphics import viewhandler
 
-import tkinter
+import tkinter as tk
 
 class GameView( viewhandler.ViewHandler ):
     ''' The in game view. 
@@ -24,41 +24,41 @@ class GameView( viewhandler.ViewHandler ):
         ''' Inject canvas frame and menu frame in given window. Using data for initial settings. '''
 
         # Create canvas on one side...
-        self._canvasFrame = tkinter.Frame( window )
-        self.canvas = tkinter.Canvas( self._canvasFrame, height = data.windowHeight,
+        self._canvasFrame = tk.Frame( window )
+        self.canvas = tk.Canvas( self._canvasFrame, height = data.windowHeight,
                                       width = data.windowWidth  )
         self.canvas.config( background = 'white' )
         self.canvas.pack()
         
         # ...and the menu bar on the other.
-        self._barFrame = tkinter.Frame( window )
+        self._barFrame = tk.Frame( window )
         self._barFrame.config( background = 'white' )
         
         # Add time and point labels to menu bar.
         self.spacers = []
-        self.spacers.append( tkinter.Label(self._barFrame, background = 'white').pack() )
+        self.spacers.append( tk.Label(self._barFrame, background = 'white').pack() )
         
-        self._timeLabel = tkinter.Label( self._barFrame, text = 'Time: -' )
+        self._timeLabel = tk.Label( self._barFrame, text = 'Time: -' )
         self._timeLabel.config( background = 'white', padx = 30 )
         self._timeLabel.pack()
         
-        self._pointsLabel = tkinter.Label( self._barFrame, text = 'Points: -' )
+        self._pointsLabel = tk.Label( self._barFrame, text = 'Points: -' )
         self._pointsLabel.config( background = 'white', padx = 30 )
         self._pointsLabel.pack()
         
-        self._stateLabel = tkinter.Label( self._barFrame, text = 'Loading' )
+        self._stateLabel = tk.Label( self._barFrame, text = 'Loading' )
         self._stateLabel.config( background = 'white' )
         self._stateLabel.pack()
         
-        self.spacers.append( tkinter.Label(self._barFrame, background = 'white').pack() )
+        self.spacers.append( tk.Label(self._barFrame, background = 'white').pack() )
 
-        self.restartBtn = tkinter.Button( self._barFrame, text = 'Restart' )
+        self.restartBtn = tk.Button( self._barFrame, text = 'Restart' )
         self.restartBtn.config( background = 'white', width = 10 )
         self.restartBtn.pack()
         
-        self.spacers.append( tkinter.Label(self._barFrame, background = 'white').pack() )
+        self.spacers.append( tk.Label(self._barFrame, background = 'white').pack() )
 
-        self.menuBtn = tkinter.Button( self._barFrame, text = 'Main Menu' )
+        self.menuBtn = tk.Button( self._barFrame, text = 'Main Menu' )
         self.menuBtn.config( background = 'white', width = 10 )
         self.menuBtn.pack()
                 
@@ -71,14 +71,14 @@ class GameView( viewhandler.ViewHandler ):
     def show( self, data ):
         ''' Show the given data in the in game view. '''
         
-        self._canvasFrame.pack( side = tkinter.LEFT )
-        self._barFrame.pack( side = tkinter.RIGHT, anchor = tkinter.N )
+        self._canvasFrame.pack( side = tk.LEFT )
+        self._barFrame.pack( side = tk.RIGHT, anchor = tk.N )
         
         if data.state is data.STATES.LOADING:
             return;
         
         # Reset everything.
-        self.canvas.delete( tkinter.ALL )
+        self.canvas.delete( tk.ALL )
 
         self.__drawMap( data )
         self.__drawInput( data )

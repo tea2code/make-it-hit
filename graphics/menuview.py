@@ -1,6 +1,6 @@
 from graphics import viewhandler
 
-import tkinter
+import tkinter as tk
 
 class MenuView( viewhandler.ViewHandler ):
     ''' The in menu view.
@@ -8,16 +8,23 @@ class MenuView( viewhandler.ViewHandler ):
     Member:
     backBtn -- The button which leads back to the main menu (Button).
     configBtn -- The button which opens the configuration menu (Button).
+    helpBtn -- The button which opens the help menu (Button).
+    levelList -- The list box containing all levels (ListBox).
     newGameBtn -- The new game button (Button).
     quitBtn -- The button to quit the game (Button).
     startBtn -- The button to start the game (Button).
+    _authorLabel -- The label containing the author (Label).
+    _dateLabel -- The label containing the date (Label).
+    _descriptionLabel -- The label containing the description (Label).
     _frame -- The menu frame (Frame).
     _frames -- List of frames which are not needed later (Frame).
-    _levelList -- The list box containing all levels (ListBox).
     _mainMenuFrame -- The frame of the main menu (Frame).
     _newMenuFrame -- The frame of the new game menu (Frame).
     _scrollbar -- The scrollbar for the level list (Scrollbar).
     _spacers -- List of empty spacer labels (Label).
+    _timeLabel -- The label containing the time (Label).
+    _titleLabel -- The label containing the title (Label).
+    _versionLabel -- The label containing the version (Label).
     ''' 
     
     def __init__( self, data, window ):
@@ -26,69 +33,114 @@ class MenuView( viewhandler.ViewHandler ):
         self._frames = []
         self.spacers = []
         
-        self._frame = tkinter.Frame( window, height = data.windowHeight,
+        self._frame = tk.Frame( window, height = data.windowHeight,
                                      width = data.windowWidth )
         self._frame.config( background = 'white' )
         self._frame.pack_propagate(0)
         
-        # Main Menu
-        self._mainMenuFrame = tkinter.Frame( self._frame )
+        # Main Menu ================================
+        self._mainMenuFrame = tk.Frame( self._frame )
         self._mainMenuFrame.config( background = 'white' )
         
-        self.newGameBtn = tkinter.Button( self._mainMenuFrame, text = 'New Game' )
+        self.newGameBtn = tk.Button( self._mainMenuFrame, text = 'New Game' )
         self.newGameBtn.config( background = 'white', width = 20 )
         self.newGameBtn.pack()
         
-        self.spacers.append( tkinter.Label(self._mainMenuFrame, background = 'white').pack() )
+        self.spacers.append( tk.Label(self._mainMenuFrame, background = 'white').pack() )
         
-        self.configBtn = tkinter.Button( self._mainMenuFrame, text = 'Configuration', state = tkinter.DISABLED )
+        self.configBtn = tk.Button( self._mainMenuFrame, text = 'Configuration', state = tk.DISABLED )
         self.configBtn.config( background = 'white', width = 20 )
         self.configBtn.pack()
         
-        self.spacers.append( tkinter.Label(self._mainMenuFrame, background = 'white').pack() )
+        self.spacers.append( tk.Label(self._mainMenuFrame, background = 'white').pack() )
         
-        self.quitBtn = tkinter.Button( self._mainMenuFrame, text = 'Quit' )
+        self.helpBtn = tk.Button( self._mainMenuFrame, text = 'Help', state = tk.DISABLED )
+        self.helpBtn.config( background = 'white', width = 20 )
+        self.helpBtn.pack()
+        
+        self.spacers.append( tk.Label(self._mainMenuFrame, background = 'white').pack() )
+        
+        self.quitBtn = tk.Button( self._mainMenuFrame, text = 'Quit' )
         self.quitBtn.config( background = 'white', width = 20 )
         self.quitBtn.pack()
         
-        # New Game Menu
-        self._newMenuFrame = tkinter.Frame( self._frame )
+        # New Game Menu ================================
+        self._newMenuFrame = tk.Frame( self._frame )
         self._newMenuFrame.config( background = 'white' )
         
-        levelFrame = tkinter.Frame( self._newMenuFrame )
+        # Level Selection
+        levelFrame = tk.Frame( self._newMenuFrame )
         levelFrame.config( background = 'white' )
-        levelFrame.pack( anchor = tkinter.W, fill = tkinter.Y, expand = 1 )
+        levelFrame.pack( anchor = tk.W, fill = tk.Y, expand = 1 )
         self._frames.append( levelFrame )
         
-        levelSelectionFrame = tkinter.Frame( levelFrame )
+        levelSelectionFrame = tk.Frame( levelFrame )
         levelSelectionFrame.config( background = 'white' )
-        levelSelectionFrame.pack( side = tkinter.LEFT, 
-                                  fill = tkinter.Y, expand = 1 )
+        levelSelectionFrame.pack( side = tk.LEFT, 
+                                  fill = tk.Y, expand = 1 )
         self._frames.append( levelSelectionFrame )
         
-        self._scrollbar = tkinter.Scrollbar( levelSelectionFrame, orient = tkinter.VERTICAL )
-        self._levelList = tkinter.Listbox( levelSelectionFrame, selectmode = tkinter.MULTIPLE, 
-                                           width = 50, yscrollcommand = self._scrollbar.set )
-        self._scrollbar.config( command = self._levelList.yview )
-        self._levelList.pack( side = tkinter.LEFT, fill = tkinter.Y, expand = 1 )
-        self._scrollbar.pack( fill = tkinter.Y, expand = 1 )
+        self._scrollbar = tk.Scrollbar( levelSelectionFrame, orient = tk.VERTICAL )
+        self.levelList = tk.Listbox( levelSelectionFrame, selectmode = tk.MULTIPLE, 
+                                           width = 70, yscrollcommand = self._scrollbar.set )
+        self._scrollbar.config( command = self.levelList.yview )
+        self.levelList.pack( side = tk.LEFT, fill = tk.Y, expand = 1 )
+        self._scrollbar.pack( fill = tk.Y, expand = 1 )
         
-        spacerFrame = tkinter.Frame( levelFrame )
+        self.levelList.bind( '<<ListboxSelect>>', self.test ) # TODO: Remove
+        
+        spacerFrame = tk.Frame( levelFrame )
         spacerFrame.config( background = 'white', width = 30 )
-        spacerFrame.pack( side = tkinter.LEFT )
+        spacerFrame.pack( side = tk.LEFT )
         self._frames.append( spacerFrame )
         
-        self._titleLabel = tkinter.Label( levelFrame, text = '<Title>' )
+        # Detail Info of Level
+        self._titleLabel = tk.Label( levelFrame, text = '<Title>' )
         self._titleLabel.config( background = 'white', font = (None, 16, 'bold') )
-        self._titleLabel.pack( anchor = tkinter.N, side = tkinter.LEFT )
+        self._titleLabel.pack( anchor = tk.W )
         
-        self.backBtn = tkinter.Button( self._newMenuFrame, text = 'Back' )
+        self._authorLabel = tk.Label( levelFrame, text = '<Author>' )
+        self._authorLabel.config( background = 'white' )
+        self._authorLabel.pack( anchor = tk.W )
+        
+        self._dateLabel = tk.Label( levelFrame, text = '<Date>' )
+        self._dateLabel.config( background = 'white' )
+        self._dateLabel.pack( anchor = tk.W )
+        
+        self._versionLabel = tk.Label( levelFrame, text = '<Version>' )
+        self._versionLabel.config( background = 'white' )
+        self._versionLabel.pack( anchor = tk.W )
+        
+        self._descriptionLabel = tk.Label( levelFrame, text = '<Description>' )
+        self._descriptionLabel.config( background = 'white' )
+        self._descriptionLabel.pack( anchor = tk.W )
+        
+        self._timeLabel = tk.Label( levelFrame, text = '<Time>' )
+        self._timeLabel.config( background = 'white' )
+        self._timeLabel.pack( anchor = tk.W )
+        
+        # Bottom Row
+        self.spacers.append( tk.Label(self._newMenuFrame, background = 'white').pack() )
+        
+        self.backBtn = tk.Button( self._newMenuFrame, text = 'Back' )
         self.backBtn.config( background = 'white', width = 10 )
-        self.backBtn.pack( side = tkinter.LEFT )
+        self.backBtn.pack( side = tk.LEFT )
         
-        self.startBtn = tkinter.Button( self._newMenuFrame, text = 'Start' )
+        self.startBtn = tk.Button( self._newMenuFrame, text = 'Start' )
         self.startBtn.config( background = 'white', width = 10 )
-        self.startBtn.pack( side = tkinter.RIGHT )
+        self.startBtn.pack( side = tk.RIGHT )
+    
+    def test( self, event ):
+        # TODO: Remove test function.
+        newSelection = set( self.levelList.curselection() )
+        lastSelection = set(self._lastSelection)
+        diff = newSelection.difference( lastSelection )
+        print( newSelection )
+        print( self._lastSelection )
+        print( diff )
+        if diff:
+            print(True)
+        self._lastSelection = newSelection
     
     def hide( self, data ):
         ''' Hides the menu. '''
@@ -98,17 +150,19 @@ class MenuView( viewhandler.ViewHandler ):
     def show( self, data ):
         ''' Shows the menu. '''
         
-        self._frame.pack( side = tkinter.LEFT, fill = tkinter.BOTH, expand = 1 )
+        self._frame.pack( side = tk.LEFT, fill = tk.BOTH, expand = 1 )
         
         if data.state is data.STATES.MENU_MAIN:
             self._newMenuFrame.pack_forget()
-            self._mainMenuFrame.pack( side = tkinter.LEFT, fill = tkinter.X, expand = 1 )
+            self._mainMenuFrame.pack( side = tk.LEFT, fill = tk.X, expand = 1 )
             
         elif data.state in [data.STATES.MENU_NEW, data.STATES.MENU_NEW_DETAILS]:
             self._mainMenuFrame.pack_forget()
-            self._newMenuFrame.pack( fill = tkinter.BOTH, expand = 1, padx = 10, pady = 10 )
+            self._newMenuFrame.pack( fill = tk.BOTH, expand = 1, padx = 10, pady = 10 )
             
-            if not self._levelList.size():
+            if not self.levelList.size():
                 for level in data.levelList:
-                    self._levelList.insert( tkinter.END, level )
-                self._levelList.selection_set( 0, self._levelList.size() - 1 )
+                    self.levelList.insert( tk.END, level )
+                self.levelList.selection_set( 0, self.levelList.size() - 1 )
+                
+                self._lastSelection = self.levelList.curselection()

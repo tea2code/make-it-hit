@@ -8,22 +8,34 @@ class TkInput():
     forceScale -- Scaling factor for force vector.
     '''
     
-    def __init__( self, data, window, restartBtn, newGameBtn, quitBtn, menuBtn ):
-        ''' Initializes input module with the data object and binds input event callbacks 
-        to window and buttons.'''
+    def __init__( self, data ):
+        ''' Initializes input module with the data object. '''
         
         self.data = data
         self.forceScale = 1
-        
+    
+    def bindMenuBtn( self, btn ):
+        ''' Bind a menu button. '''
+        btn.config( command = self.__menuBtnPressed )
+    
+    def bindNewGameBtn( self, btn ):
+        ''' Bind a new game button. '''
+        btn.config( command = self.__newGameBtnPressed )
+    
+    def bindQuitBtn( self, btn ):
+        ''' Bind a quit button. '''
+        btn.config( command = self.__quitBtnPressed )
+    
+    def bindRestartBtn( self, btn ):
+        ''' Bind a restart button. '''
+        btn.config( command = self.__restartBtnPressed )
+    
+    def bindWindow( self, window ):
+        ''' Binds the window/canvas which should receive mouse input. '''
         window.bind( '<B1-Motion>', self.__mouseMotion )
         window.bind( '<ButtonPress-1>', self.__mousePressed )
         window.bind( '<ButtonRelease-1>', self.__mouseReleased )
         window.bind_all( 'r', self.__restartKeyPressed )
-        
-        menuBtn.config( command = self.__menuBtnPressed )
-        newGameBtn.config( command = self.__newGameBtnPressed )
-        quitBtn.config( command = self.__quitBtnPressed )
-        restartBtn.config( command = self.__restartBtnPressed )
     
     def __menuBtnPressed( self ):
         ''' Handles pressing the main menu button. '''

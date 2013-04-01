@@ -2,7 +2,7 @@
 from graphics import gameview
 from graphics import menuview
 
-import tkinter
+import tkinter as tk
 
 class TkGraphics( tickable.Tickable ):
     ''' This class handles the visualization of the current state. 
@@ -19,12 +19,16 @@ class TkGraphics( tickable.Tickable ):
         ''' The parameter data which contains the window settings. '''
         
         # Create window.
-        self.window = tkinter.Tk()
+        self.window = tk.Tk()
         self.window.config( background = 'white' )
         
         # Create views.
         self._gameView = gameview.GameView( data, self.window )
         self._menuView = menuview.MenuView( data, self.window )
+        
+    @property
+    def backFromNewBtn( self ):
+        return self._menuView.backBtn
         
     @property
     def canvas( self ):
