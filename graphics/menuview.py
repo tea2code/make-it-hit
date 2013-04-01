@@ -12,6 +12,7 @@ class MenuView( viewhandler.ViewHandler ):
     levelList -- The list box containing all levels (ListBox).
     newGameBtn -- The new game button (Button).
     quitBtn -- The button to quit the game (Button).
+    shuffleCheck -- A random checkbox to indicate if the level list should be shuffled (Checkbutton).
     startBtn -- The button to start the game (Button).
     _authorLabel -- The label containing the author (Label).
     _dateLabel -- The label containing the date (Label).
@@ -133,6 +134,11 @@ class MenuView( viewhandler.ViewHandler ):
         self.startBtn = tk.Button( self._newMenuFrame, text = 'Start' )
         self.startBtn.config( background = 'white', width = 10 )
         self.startBtn.pack( side = tk.RIGHT )
+        
+        self.shuffleCheck = tk.Checkbutton( self._newMenuFrame, text = 'Shuffle Levels' )
+        self.shuffleCheck.config( background = 'white', width = 20 )
+        self.shuffleCheck.select()
+        self.shuffleCheck.pack( side = tk.RIGHT )
     
     def hide( self, data ):
         ''' Hides the menu. '''
