@@ -12,7 +12,7 @@ class MenuView( viewhandler.ViewHandler ):
     levelList -- The list box containing all levels (ListBox).
     newGameBtn -- The new game button (Button).
     quitBtn -- The button to quit the game (Button).
-    shuffleCheck -- A random checkbox to indicate if the level list should be shuffled (Checkbutton).
+    shuffleCheck -- A random check box to indicate if the level list should be shuffled (Checkbutton).
     startBtn -- The button to start the game (Button).
     _authorLabel -- The label containing the author (Label).
     _dateLabel -- The label containing the date (Label).
@@ -21,7 +21,7 @@ class MenuView( viewhandler.ViewHandler ):
     _frames -- List of frames which are not needed later (Frame).
     _mainMenuFrame -- The frame of the main menu (Frame).
     _newMenuFrame -- The frame of the new game menu (Frame).
-    _scrollbar -- The scrollbar for the level list (Scrollbar).
+    _scrollbar -- The scroll bar for the level list (Scrollbar).
     _spacers -- List of empty spacer labels (Label).
     _timeLabel -- The label containing the time (Label).
     _titleLabel -- The label containing the title (Label).

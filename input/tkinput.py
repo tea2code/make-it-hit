@@ -1,5 +1,8 @@
 ﻿from formulary import screenconvert
 
+import random
+import tkinter as tk
+
 class TkInput():
     ''' This class handles input events from tkinter. 
     
@@ -8,6 +11,7 @@ class TkInput():
     forceScale -- Scaling factor for force vector (float).
     _lastLevelSelection -- Set with last selection in level list (set).
     _levelList -- The level list (ListBox).
+    _shuffleCheckVar -- Result variable for shuffle check box (IntVar).
     '''
     
     def __init__( self, data ):
@@ -17,6 +21,7 @@ class TkInput():
         self.forceScale = 1
         self._levelList = None
         self._lastLevelSelection = {}
+        self._shuffleCheckVar = None
     
     def bindLevelList( self, levelList ):
         ''' Bind the level list. '''
@@ -24,21 +29,31 @@ class TkInput():
         self._levelList.bind( '<<ListboxSelect>>', self.__levelListChanged )
         self._lastLevelSelection = set( self._levelList.curselection() )
     
-    def bindMenuBtn( self, btn ):
+    def bindMenuBtn( self, button ):
         ''' Bind a menu button. '''
-        btn.config( command = self.__menuBtnPressed )
+        button.config( command = self.__menuBtnPressed )
     
-    def bindNewGameBtn( self, btn ):
+    def bindNewGameBtn( self, button ):
         ''' Bind a new game button. '''
-        btn.config( command = self.__newGameBtnPressed )
+        button.config( command = self.__newGameBtnPressed )
     
-    def bindQuitBtn( self, btn ):
+    def bindQuitBtn( self, button ):
         ''' Bind a quit button. '''
-        btn.config( command = self.__quitBtnPressed )
+        button.config( command = self.__quitBtnPressed )
     
-    def bindRestartBtn( self, btn ):
+    def bindRestartBtn( self, button ):
         ''' Bind a restart button. '''
-        btn.config( command = self.__restartBtnPressed )
+        button.config( command = self.__restartBtnPressed )
+    
+    def bindShuffleCheck( self, checkBox ):
+        ''' Bind check box for shuffling. '''
+        self._shuffleCheckVar = tk.IntVar()
+        self._shuffleCheckVar.set( 1 )
+        checkBox.config( variable = self._shuffleCheckVar )
+    
+    def bindStartBtn( self, button ):
+        ''' Bind the start button. '''
+        button.config( command = self.__startBtnPressed )
     
     def bindWindow( self, window ):
         ''' Binds the window/canvas which should receive mouse input. '''
@@ -52,7 +67,7 @@ class TkInput():
         newSelection = set( self._levelList.curselection() )
         diff = newSelection.symmetric_difference( self._lastLevelSelection )
         if diff:
-            # Use int() cause ListBox returns int or string as return value.
+            # Use int() cause ListBox returns integer or string as return value.
             self.data.levelDetails = self._levelList.get( int(diff.pop()) )
             self.data.state = self.data.STATES.MENU_NEW_DETAILS
         self._lastLevelSelection = newSelection
@@ -102,6 +117,19 @@ class TkInput():
     def __restartKeyPressed( self, event ):
         ''' Handles pressing the restart key. '''
         self.__restart()
+       
+    def __startBtnPressed( self ):
+        ''' Handles pressing the start button. '''
+        
+        levels = []
+        for index in map( int, self._levelList.curselection() ):
+            levels.append( self._levelList.get(index) )
+        self.data.levelList = levels
+        
+        if self._shuffleCheckVar and self._shuffleCheckVar.get():
+            random.shuffle( self.data.levelList )
+            
+        self.data.state = self.data.STATES.LOADING
         
     def __storeMousePos( self, event ):
         ''' Stores the mouse position of an event in data. '''

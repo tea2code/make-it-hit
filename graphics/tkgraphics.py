@@ -8,8 +8,15 @@ class TkGraphics( tickable.Tickable ):
     ''' This class handles the visualization of the current state. 
     
     Member:
+    backFromNewBtn -- The button which leads back to the main menu (Button).
     canvas -- The canvas object (Canvas).
+    levelList -- The list box containing all levels (ListBox).
+    menuBtn -- The button which leads back to the main menu (Button).
+    newGameBtn -- The new game button (Button).
+    quitBtn -- The button to quit the game (Button).
     restartBtn -- The restart button (Button).
+    shuffleCheck -- A random check box to indicate if the level list should be shuffled (Checkbutton).
+    startBtn -- The button to start the game (Button).
     window -- The window object (Tk).
     _gameView -- The game view (GameView).
     _menuView -- The menu view (MenuView).
@@ -53,6 +60,14 @@ class TkGraphics( tickable.Tickable ):
     @property
     def restartBtn( self ):
         return self._gameView.restartBtn
+        
+    @property
+    def shuffleCheck( self ):
+        return self._menuView.shuffleCheck
+    
+    @property
+    def startBtn( self ):
+        return self._menuView.startBtn
         
     def after( self, time, function ):
         ''' Calls function after time in milliseconds. '''

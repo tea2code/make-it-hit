@@ -125,6 +125,8 @@ class Application:
         self._input.bindNewGameBtn( self._graphics.newGameBtn )
         self._input.bindQuitBtn( self._graphics.quitBtn )
         self._input.bindRestartBtn( self._graphics.restartBtn )
+        self._input.bindShuffleCheck( self._graphics.shuffleCheck )
+        self._input.bindStartBtn( self._graphics.startBtn )
         self._input.bindWindow( self._graphics.canvas )
         
         # Start.
