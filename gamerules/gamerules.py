@@ -2,11 +2,15 @@
 from data import collisionevent
 from data import targetevent
 from gamerules import gamestarter
+from level import levelloader
 
 import os
 
 class GameRules( tickable.Tickable ):
     ''' Controls the rules in a game.'''
+    
+    def __init__( self, data ):
+        self.__readLevels( data )
     
     def tick( self, data ):
         ''' Implementation of Tickable.tick().
@@ -22,8 +26,8 @@ class GameRules( tickable.Tickable ):
         elif data.state is data.STATES.LOADING:
             self.__loading( data )
             
-        elif data.state is data.STATES.MENU_READ_LEVELS:
-            self.__readLevels( data )
+        elif data.state is data.STATES.MENU_NEW_DETAILS:
+            self.__readLevelDetails( data )
             
     def __loading( self, data ):
         ''' Handles loading state of game. '''  
@@ -68,7 +72,12 @@ class GameRules( tickable.Tickable ):
             file = data.levelDir + file
             if file.endswith( data.levelExtension ):
                 data.levelList.append( file )
-
+        
+    def __readLevelDetails( self, data ):
+        ''' Reads the details of a level. '''
+        levelLoader = levelloader.LevelLoader()
+        data.level = levelLoader.load( data.levelDetails )
+        
         data.state = data.STATES.MENU_NEW
             
     def __starting( self, data ):

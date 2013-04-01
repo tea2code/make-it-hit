@@ -4,8 +4,10 @@ class TkInput():
     ''' This class handles input events from tkinter. 
     
     Member:
-    data -- The data object.
-    forceScale -- Scaling factor for force vector.
+    data -- The data object (data.data).
+    forceScale -- Scaling factor for force vector (float).
+    _lastLevelSelection -- Set with last selection in level list (set).
+    _levelList -- The level list (ListBox).
     '''
     
     def __init__( self, data ):
@@ -13,6 +15,14 @@ class TkInput():
         
         self.data = data
         self.forceScale = 1
+        self._levelList = None
+        self._lastLevelSelection = {}
+    
+    def bindLevelList( self, levelList ):
+        ''' Bind the level list. '''
+        self._levelList = levelList
+        self._levelList.bind( '<<ListboxSelect>>', self.__levelListChanged )
+        self._lastLevelSelection = set( self._levelList.curselection() )
     
     def bindMenuBtn( self, btn ):
         ''' Bind a menu button. '''
@@ -36,6 +46,16 @@ class TkInput():
         window.bind( '<ButtonPress-1>', self.__mousePressed )
         window.bind( '<ButtonRelease-1>', self.__mouseReleased )
         window.bind_all( 'r', self.__restartKeyPressed )
+    
+    def __levelListChanged( self, event ):
+        ''' Handles changes in level list. '''
+        newSelection = set( self._levelList.curselection() )
+        diff = newSelection.symmetric_difference( self._lastLevelSelection )
+        if diff:
+            # Use int() cause ListBox returns int or string as return value.
+            self.data.levelDetails = self._levelList.get( int(diff.pop()) )
+            self.data.state = self.data.STATES.MENU_NEW_DETAILS
+        self._lastLevelSelection = newSelection
     
     def __menuBtnPressed( self ):
         ''' Handles pressing the main menu button. '''
@@ -64,7 +84,7 @@ class TkInput():
    
     def __newGameBtnPressed( self ):
         ''' Handles pressing the new game button. '''
-        self.data.state = self.data.STATES.MENU_READ_LEVELS
+        self.data.state = self.data.STATES.MENU_NEW
    
     def __quitBtnPressed( self ):
         ''' Handles pressing the quit button. '''

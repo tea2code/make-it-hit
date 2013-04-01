@@ -13,6 +13,7 @@ class Data:
     events -- List of events in this frame (data.event).
     fps -- The current frame rate (int).
     level -- The level to play (data.level).
+    levelDetails -- Name of the level to show details of (string).
     levelDir -- The level directory (string).
     levelExtension -- The file extension of level files with dot (string).
     levelList -- List of level paths to load next. Current is the first entry (string).
@@ -30,7 +31,7 @@ class Data:
     _borders -- List of rectangles representing the borders (data.rect). 
     '''
     
-    STATES = enum.createSeq( 'MENU_MAIN', 'MENU_READ_LEVELS', 'MENU_NEW', 'MENU_NEW_DETAILS', 
+    STATES = enum.createSeq( 'MENU_MAIN', 'MENU_NEW', 'MENU_NEW_DETAILS', 
                              'LOADING', 'STARTING', 'PLAYING', 'VICTORY', 'GAMEOVER',
                              'QUIT', )
     
@@ -44,6 +45,8 @@ class Data:
         >>> d.fps
         0
         >>> d.level
+        >>> d.levelDetails
+        ''
         >>> d.levelDir
         ''
         >>> d.levelExtension
@@ -78,6 +81,7 @@ class Data:
         self.events = []
         self.fps = 0
         self.level = None
+        self.levelDetails = ''
         self.levelDir = ''
         self.levelExtension = ''
         self.levelList = []

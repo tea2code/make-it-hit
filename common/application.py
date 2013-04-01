@@ -8,7 +8,6 @@ from physics import physics
 from postframe import postframe
 
 import argparse
-import os
 
 class Application:
     ''' Application/Main class.
@@ -102,7 +101,7 @@ class Application:
         self._fps = fps.Fps( self.fpsCounterMeasures, 2 * self.fpsCounterMeasures )
         
         # Initialize game rules.
-        self._gamerules = gamerules.GameRules()
+        self._gamerules = gamerules.GameRules( self._data )
         
         # Initialize graphics.
         self._graphics = tkgraphics.TkGraphics( self._data )
@@ -120,6 +119,7 @@ class Application:
         # Initialize and activate input module.
         self._input = tkinput.TkInput( self._data )
         self._input.forceScale = self.forceScale
+        self._input.bindLevelList( self._graphics.levelList )
         self._input.bindMenuBtn( self._graphics.backFromNewBtn )
         self._input.bindMenuBtn( self._graphics.menuBtn )
         self._input.bindNewGameBtn( self._graphics.newGameBtn )

@@ -86,8 +86,10 @@ class MenuView( viewhandler.ViewHandler ):
         self._scrollbar.config( command = self.levelList.yview )
         self.levelList.pack( side = tk.LEFT, fill = tk.Y, expand = 1 )
         self._scrollbar.pack( fill = tk.Y, expand = 1 )
-        
-        self.levelList.bind( '<<ListboxSelect>>', self.test ) # TODO: Remove
+
+        for level in data.levelList:
+            self.levelList.insert( tk.END, level )
+        self.levelList.selection_set( 0, self.levelList.size() - 1 )
         
         spacerFrame = tk.Frame( levelFrame )
         spacerFrame.config( background = 'white', width = 30 )
@@ -95,27 +97,29 @@ class MenuView( viewhandler.ViewHandler ):
         self._frames.append( spacerFrame )
         
         # Detail Info of Level
-        self._titleLabel = tk.Label( levelFrame, text = '<Title>' )
+        self._titleLabel = tk.Label( levelFrame )
         self._titleLabel.config( background = 'white', font = (None, 16, 'bold') )
         self._titleLabel.pack( anchor = tk.W )
         
-        self._authorLabel = tk.Label( levelFrame, text = '<Author>' )
-        self._authorLabel.config( background = 'white' )
-        self._authorLabel.pack( anchor = tk.W )
-        
-        self._dateLabel = tk.Label( levelFrame, text = '<Date>' )
-        self._dateLabel.config( background = 'white' )
-        self._dateLabel.pack( anchor = tk.W )
-        
-        self._versionLabel = tk.Label( levelFrame, text = '<Version>' )
-        self._versionLabel.config( background = 'white' )
-        self._versionLabel.pack( anchor = tk.W )
-        
-        self._descriptionLabel = tk.Label( levelFrame, text = '<Description>' )
+        self._descriptionLabel = tk.Label( levelFrame )
         self._descriptionLabel.config( background = 'white' )
         self._descriptionLabel.pack( anchor = tk.W )
         
-        self._timeLabel = tk.Label( levelFrame, text = '<Time>' )
+        self.spacers.append( tk.Label(levelFrame, background = 'white').pack() )
+        
+        self._authorLabel = tk.Label( levelFrame )
+        self._authorLabel.config( background = 'white' )
+        self._authorLabel.pack( anchor = tk.W )
+        
+        self._dateLabel = tk.Label( levelFrame )
+        self._dateLabel.config( background = 'white' )
+        self._dateLabel.pack( anchor = tk.W )
+        
+        self._versionLabel = tk.Label( levelFrame )
+        self._versionLabel.config( background = 'white' )
+        self._versionLabel.pack( anchor = tk.W )
+        
+        self._timeLabel = tk.Label( levelFrame )
         self._timeLabel.config( background = 'white' )
         self._timeLabel.pack( anchor = tk.W )
         
@@ -130,21 +134,9 @@ class MenuView( viewhandler.ViewHandler ):
         self.startBtn.config( background = 'white', width = 10 )
         self.startBtn.pack( side = tk.RIGHT )
     
-    def test( self, event ):
-        # TODO: Remove test function.
-        newSelection = set( self.levelList.curselection() )
-        lastSelection = set(self._lastSelection)
-        diff = newSelection.difference( lastSelection )
-        print( newSelection )
-        print( self._lastSelection )
-        print( diff )
-        if diff:
-            print(True)
-        self._lastSelection = newSelection
-    
     def hide( self, data ):
         ''' Hides the menu. '''
-
+        
         self._frame.pack_forget()
     
     def show( self, data ):
@@ -159,10 +151,11 @@ class MenuView( viewhandler.ViewHandler ):
         elif data.state in [data.STATES.MENU_NEW, data.STATES.MENU_NEW_DETAILS]:
             self._mainMenuFrame.pack_forget()
             self._newMenuFrame.pack( fill = tk.BOTH, expand = 1, padx = 10, pady = 10 )
-            
-            if not self.levelList.size():
-                for level in data.levelList:
-                    self.levelList.insert( tk.END, level )
-                self.levelList.selection_set( 0, self.levelList.size() - 1 )
                 
-                self._lastSelection = self.levelList.curselection()
+            if data.level:
+                self._authorLabel.config( text = 'Author: {}'.format(data.level.author) )
+                self._dateLabel.config( text = 'Last Update: {}'.format(data.level.date) )
+                self._descriptionLabel.config( text = '{}'.format(data.level.description) )
+                self._timeLabel.config( text = 'Time Limit: {:.2f}s'.format(data.level.timeLimit / 1000) )
+                self._titleLabel.config( text = '{}'.format(data.level.name) )
+                self._versionLabel.config( text = 'Version: {}'.format(data.level.version) )
