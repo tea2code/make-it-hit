@@ -151,12 +151,14 @@ class TkGameView( viewhandler.ViewHandler ):
     def __showControls( self, data ):
         ''' Show window elements and controls. '''
         
-        # Update menu bar.   
+        # Update points.   
         self._pointsLabel.config( text = 'Points: ' + self.__formatPoints(data) )
         
+        # Update time.
         if data.state in [data.STATES.PLAYING, data.STATES.STARTING]: 
             self._timeLabel.config( text = 'Time: ' + self.__formatTime(data) )
             
+        # Update state label.
         if data.state is data.STATES.LOADING:
             self._stateLabel.config( text = 'Loading next level...' )
         
@@ -171,3 +173,9 @@ class TkGameView( viewhandler.ViewHandler ):
             
         elif data.state is data.STATES.GAMEOVER:
             self._stateLabel.config( text = 'Game Over,\n you lost!' )
+            
+        # Deactivate restart button if victory.
+        if data.state is data.STATES.VICTORY:
+            self.restartBtn.config( state = tk.DISABLED )
+        else:
+            self.restartBtn.config( state = tk.NORMAL )

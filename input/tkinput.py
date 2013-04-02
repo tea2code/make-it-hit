@@ -12,6 +12,7 @@ class TkInput():
     _lastLevelSelection -- Set with last selection in level list (set).
     _levelList -- The level list (ListBox).
     _shuffleCheckVar -- Result variable for shuffle check box (IntVar).
+    _startBtn -- The button to start the game (Button).
     '''
     
     def __init__( self, data ):
@@ -22,6 +23,7 @@ class TkInput():
         self._levelList = None
         self._lastLevelSelection = {}
         self._shuffleCheckVar = None
+        self._startBtn = None
     
     def bindLevelList( self, levelList ):
         ''' Bind the level list. '''
@@ -53,7 +55,8 @@ class TkInput():
     
     def bindStartBtn( self, button ):
         ''' Bind the start button. '''
-        button.config( command = self.__startBtnPressed )
+        self._startBtn = button
+        self._startBtn.config( command = self.__startBtnPressed )
     
     def bindWindow( self, window ):
         ''' Binds the window/canvas which should receive mouse input. '''
@@ -71,6 +74,11 @@ class TkInput():
             self.data.levelDetails = self._levelList.get( int(diff.pop()) )
             self.data.state = self.data.STATES.MENU_NEW_DETAILS
         self._lastLevelSelection = newSelection
+        
+        if self._startBtn and not newSelection:
+            self._startBtn.config( state = tk.DISABLED )
+        elif self._startBtn and newSelection:
+            self._startBtn.config( state = tk.NORMAL )
     
     def __menuBtnPressed( self ):
         ''' Handles pressing the main menu button. '''
@@ -121,8 +129,12 @@ class TkInput():
     def __startBtnPressed( self ):
         ''' Handles pressing the start button. '''
         
+        selection = self._levelList.curselection()
+        if not selection:
+            return
+        
         levels = []
-        for index in map( int, self._levelList.curselection() ):
+        for index in map( int, selection ):
             levels.append( self._levelList.get(index) )
         self.data.levelList = levels
         
