@@ -14,6 +14,7 @@ class TkGameView( viewhandler.ViewHandler ):
     restartBtn -- The restart button (Button).
     _barFrame -- The frame of the menu bar (Frame).
     _canvasFrame -- The frame of the canvas object (Frame).
+    _frame -- The main frame (Frame).
     _pointsLabel -- Label for points (Label).
     _spacers -- List of empty spacer labels (Label).
     _stateLabel -- Label to show the current state (Label).
@@ -23,27 +24,34 @@ class TkGameView( viewhandler.ViewHandler ):
     def __init__( self, data, window ):
         ''' Inject canvas frame and menu frame in given window. Using data for initial settings. '''
 
+        self._frame = tk.Frame( window )
+        self._frame.config( background = 'white' )
+
         # Create canvas on one side...
-        self._canvasFrame = tk.Frame( window )
+        self._canvasFrame = tk.Frame( self._frame )
+        self._canvasFrame.pack( side = tk.LEFT )
+        
         self.canvas = tk.Canvas( self._canvasFrame, height = data.windowHeight,
                                       width = data.windowWidth  )
         self.canvas.config( background = 'white' )
         self.canvas.pack()
         
         # ...and the menu bar on the other.
-        self._barFrame = tk.Frame( window )
+        self._barFrame = tk.Frame( self._frame, width = 120 )
         self._barFrame.config( background = 'white' )
+        self._barFrame.pack_propagate(0)
+        self._barFrame.pack( side = tk.RIGHT, anchor = tk.N, fill = tk.Y, expand = 1 )
         
         # Add time and point labels to menu bar.
         self.spacers = []
         self.spacers.append( tk.Label(self._barFrame, background = 'white').pack() )
         
         self._timeLabel = tk.Label( self._barFrame, text = 'Time: -' )
-        self._timeLabel.config( background = 'white', padx = 30 )
+        self._timeLabel.config( background = 'white' )
         self._timeLabel.pack()
         
         self._pointsLabel = tk.Label( self._barFrame, text = 'Points: -' )
-        self._pointsLabel.config( background = 'white', padx = 30 )
+        self._pointsLabel.config( background = 'white' )
         self._pointsLabel.pack()
         
         self._stateLabel = tk.Label( self._barFrame, text = 'Loading' )
@@ -65,14 +73,12 @@ class TkGameView( viewhandler.ViewHandler ):
     def hide( self, data ):
         ''' Hide the game view. '''
         
-        self._canvasFrame.pack_forget()
-        self._barFrame.pack_forget()
+        self._frame.pack_forget()
         
     def show( self, data ):
         ''' Show the given data in the in game view. '''
         
-        self._canvasFrame.pack( side = tk.LEFT )
-        self._barFrame.pack( side = tk.RIGHT, anchor = tk.N )
+        self._frame.pack()
         
         if data.state is data.STATES.LOADING:
             return;
