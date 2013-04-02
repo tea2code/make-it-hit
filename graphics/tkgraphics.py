@@ -1,6 +1,6 @@
 ﻿from common import tickable
-from graphics import gameview
-from graphics import menuview
+from graphics import tkgameview
+from graphics import tkmenuview
 
 import tkinter as tk
 
@@ -30,8 +30,8 @@ class TkGraphics( tickable.Tickable ):
         self.window.config( background = 'white' )
         
         # Create views.
-        self._gameView = gameview.GameView( data, self.window )
-        self._menuView = menuview.MenuView( data, self.window )
+        self._gameView = tkgameview.TkGameView( data, self.window )
+        self._menuView = tkmenuview.TkMenuView( data, self.window )
         
     @property
     def backFromNewBtn( self ):
