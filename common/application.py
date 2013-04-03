@@ -18,6 +18,7 @@ class Application:
     frameTime -- "Should be" time of one frame (float).
     levelExtension -- The file extension of level files with dot (string).
     loopTime -- The overall refreshing time of the main loop int milliseconds (int). 
+    menuBarWidth -- Width of the in game menu bar (int).
     startTime -- Time before level starts in milliseconds (int).
     windowHeight -- The height of the window (int).
     windowTitle -- Template for window title.
@@ -45,6 +46,8 @@ class Application:
         '.yaml'
         >>> a.loopTime
         100
+        >>> a.menuBarWidth
+        0
         >>> a.startTime
         0
         >>> a.windowHeight
@@ -67,6 +70,7 @@ class Application:
         self.frameTime = 0.1
         self.levelExtension = '.yaml'
         self.loopTime = 100
+        self.menuBarWidth = 0
         self.startTime = 0
         self.windowHeight = 0
         self.windowTitle = ''
@@ -104,7 +108,7 @@ class Application:
         self._gamerules = gamerules.GameRules( self._data )
         
         # Initialize graphics.
-        self._graphics = tkgraphics.TkGraphics( self._data )
+        self._graphics = tkgraphics.TkGraphics( self._data, self.menuBarWidth )
         
         # Initialize physics.
         self._physics = physics.Physics()

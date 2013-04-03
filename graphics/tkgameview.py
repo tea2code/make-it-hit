@@ -21,8 +21,9 @@ class TkGameView( viewhandler.ViewHandler ):
     _timeLabel -- Label for rest game time (Label).
     '''
     
-    def __init__( self, data, window ):
-        ''' Inject canvas frame and menu frame in given window. Using data for initial settings. '''
+    def __init__( self, data, window, menuBarWidth ):
+        ''' Inject canvas frame and menu frame in given window. Using data and menu bar width 
+        for initial settings. '''
 
         self._frame = tk.Frame( window )
         self._frame.config( background = 'white' )
@@ -32,12 +33,12 @@ class TkGameView( viewhandler.ViewHandler ):
         self._canvasFrame.pack( side = tk.LEFT )
         
         self.canvas = tk.Canvas( self._canvasFrame, height = data.windowHeight,
-                                      width = data.windowWidth  )
+                                 width = data.windowWidth - menuBarWidth )
         self.canvas.config( background = 'white' )
         self.canvas.pack()
         
         # ...and the menu bar on the other.
-        self._barFrame = tk.Frame( self._frame, width = 120 )
+        self._barFrame = tk.Frame( self._frame, width = menuBarWidth )
         self._barFrame.config( background = 'white' )
         self._barFrame.pack_propagate(0)
         self._barFrame.pack( side = tk.RIGHT, anchor = tk.N, fill = tk.Y, expand = 1 )

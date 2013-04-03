@@ -13,8 +13,9 @@ if __name__ == '__main__':
     app.forceScale = forceScale
     app.levelExtension = '.xml'
     app.loopTime = math.floor( app.frameTime * 1000 )
+    app.menuBarWidth = 120
     app.startTime = 1500
-    app.windowHeight = 1000
+    app.windowHeight = 768
     app.windowTitle = windowTitle
-    app.windowWidth = 1000
+    app.windowWidth = 1024
     app.begin()

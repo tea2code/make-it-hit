@@ -22,15 +22,16 @@ class TkGraphics( tickable.Tickable ):
     _menuView -- The menu view (MenuView).
     '''
     
-    def __init__( self, data ):
-        ''' The parameter data which contains the window settings. '''
+    def __init__( self, data, menuBarWidth ):
+        ''' Parameters contain the data object with the window settings and the width of the 
+        menu bar. '''
         
         # Create window.
         self.window = tk.Tk()
         self.window.config( background = 'white' )
         
         # Create views.
-        self._gameView = tkgameview.TkGameView( data, self.window )
+        self._gameView = tkgameview.TkGameView( data, self.window, menuBarWidth )
         self._menuView = tkmenuview.TkMenuView( data, self.window )
         
     @property
