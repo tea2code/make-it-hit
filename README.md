@@ -5,6 +5,7 @@ A little game where you must shoot objects to targets.
 ## Changelog
 
 - [2012-02-23] Version 1: Basically a improved version of the prototype. Better map/level format with improved parser.
+- [2012-04-03] Version 2: Fixed window size with scaling of level. In game menu and main menu with level selection.
 
 ## Known Bugs:
 
