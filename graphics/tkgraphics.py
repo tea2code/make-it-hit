@@ -13,6 +13,7 @@ class TkGraphics( tickable.Tickable ):
     levelList -- The list box containing all levels (ListBox).
     menuBtn -- The button which leads back to the main menu (Button).
     newGameBtn -- The new game button (Button).
+    numLevelsInput -- Input field for number of levels to use (Entry).
     quitBtn -- The button to quit the game (Button).
     restartBtn -- The restart button (Button).
     shuffleCheck -- A random check box to indicate if the level list should be shuffled (Checkbutton).
@@ -53,6 +54,10 @@ class TkGraphics( tickable.Tickable ):
     @property 
     def newGameBtn( self ):
         return self._menuView.newGameBtn
+    
+    @property
+    def numLevelsInput( self ):
+        return self._menuView.numLevelsInput
     
     @property 
     def quitBtn( self ):

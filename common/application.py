@@ -127,6 +127,7 @@ class Application:
         self._input.bindMenuBtn( self._graphics.backFromNewBtn )
         self._input.bindMenuBtn( self._graphics.menuBtn )
         self._input.bindNewGameBtn( self._graphics.newGameBtn )
+        self._input.bindNumLevelsInput( self._graphics.numLevelsInput )
         self._input.bindQuitBtn( self._graphics.quitBtn )
         self._input.bindRestartBtn( self._graphics.restartBtn )
         self._input.bindShuffleCheck( self._graphics.shuffleCheck )

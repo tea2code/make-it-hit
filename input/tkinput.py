@@ -11,6 +11,7 @@ class TkInput():
     forceScale -- Scaling factor for force vector (float).
     _lastLevelSelection -- Set with last selection in level list (set).
     _levelList -- The level list (ListBox).
+    _numLevelsInput -- Input field for number of levels to use (Entry).
     _shuffleCheckVar -- Result variable for shuffle check box (IntVar).
     _startBtn -- The button to start the game (Button).
     '''
@@ -22,6 +23,7 @@ class TkInput():
         self.forceScale = 1
         self._levelList = None
         self._lastLevelSelection = {}
+        self._numLevelsInput = None
         self._shuffleCheckVar = None
         self._startBtn = None
     
@@ -30,6 +32,7 @@ class TkInput():
         self._levelList = levelList
         self._levelList.bind( '<<ListboxSelect>>', self.__levelListChanged )
         self._lastLevelSelection = set( self._levelList.curselection() )
+        self.__setNumberOfLevels()
     
     def bindMenuBtn( self, button ):
         ''' Bind a menu button. '''
@@ -38,6 +41,11 @@ class TkInput():
     def bindNewGameBtn( self, button ):
         ''' Bind a new game button. '''
         button.config( command = self.__newGameBtnPressed )
+    
+    def bindNumLevelsInput( self, input ):
+        ''' Bind the input field for number of levels. '''
+        self._numLevelsInput = input
+        self.__setNumberOfLevels()
     
     def bindQuitBtn( self, button ):
         ''' Bind a quit button. '''
@@ -126,6 +134,18 @@ class TkInput():
         ''' Handles pressing the restart key. '''
         self.__restart()
        
+    def __setNumberOfLevels( self ):
+        ''' Sets number of levels in input field. '''
+        
+        if not self._numLevelsInput:
+            return
+        
+        if not self._levelList:
+            return
+        
+        self._numLevelsInput.delete( 0, tk.END )
+        self._numLevelsInput.insert( 0, self._levelList.size() )
+       
     def __startBtnPressed( self ):
         ''' Handles pressing the start button. '''
         
@@ -140,6 +160,12 @@ class TkInput():
         
         if self._shuffleCheckVar and self._shuffleCheckVar.get():
             random.shuffle( self.data.levelList )
+            
+            try:
+                end = int( self._numLevelsInput.get() )
+                self.data.levelList = self.data.levelList[ 0:end ]
+            except Exception as e:
+                print( e )
             
         self.data.state = self.data.STATES.LOADING
         

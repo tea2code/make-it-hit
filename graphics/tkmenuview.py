@@ -11,6 +11,7 @@ class TkMenuView( viewhandler.ViewHandler ):
     helpBtn -- The button which opens the help menu (Button).
     levelList -- The list box containing all levels (ListBox).
     newGameBtn -- The new game button (Button).
+    numLevelsInput -- Input field for number of levels to use (Entry).
     quitBtn -- The button to quit the game (Button).
     shuffleCheck -- A random check box to indicate if the level list should be shuffled (Checkbutton).
     startBtn -- The button to start the game (Button).
@@ -19,6 +20,7 @@ class TkMenuView( viewhandler.ViewHandler ):
     _descriptionLabel -- The label containing the description (Label).
     _frame -- The menu frame (Frame).
     _frames -- List of frames which are not needed later (Frame).
+    _labels -- List of labels which are not needed later (Label).
     _mainMenuFrame -- The frame of the main menu (Frame).
     _newMenuFrame -- The frame of the new game menu (Frame).
     _scrollbar -- The scroll bar for the level list (Scrollbar).
@@ -32,6 +34,7 @@ class TkMenuView( viewhandler.ViewHandler ):
         ''' Add menu to given window. '''
         
         self._frames = []
+        self._labels = []
         self.spacers = []
         
         self._frame = tk.Frame( window, height = data.windowHeight,
@@ -124,6 +127,30 @@ class TkMenuView( viewhandler.ViewHandler ):
         self._timeLabel.config( background = 'white' )
         self._timeLabel.pack( anchor = tk.W )
         
+        optionsFrame = tk.Frame( levelFrame )
+        optionsFrame.config( background = 'white' )
+        optionsFrame.pack( anchor = tk.SW, fill = tk.X, expand = 1 )
+        self._frames.append( optionsFrame )
+        
+        optionsLabel = tk.Label( optionsFrame, text = 'Options:' )
+        optionsLabel.config( background = 'white', font = (None, 16, 'bold') )
+        optionsLabel.pack( anchor = tk.W )
+        self._labels.append( optionsLabel )
+        
+        self.shuffleCheck = tk.Checkbutton( optionsFrame, text = 'Shuffle Levels' )
+        self.shuffleCheck.config( background = 'white' )
+        self.shuffleCheck.select()
+        self.shuffleCheck.pack( anchor = tk.W )
+        
+        self.numLevelsInput = tk.Entry( optionsFrame )
+        self.numLevelsInput.config( background = 'white', width = 3 )
+        self.numLevelsInput.pack( anchor = tk.W, side = tk.LEFT )
+        
+        numLevelsLabel = tk.Label( optionsFrame, text = 'Number of Levels (Used if shuffling is checked)' )
+        numLevelsLabel.config( background = 'white' )
+        numLevelsLabel.pack( anchor = tk.W, side = tk.LEFT )
+        self._labels.append( numLevelsLabel )
+        
         # Bottom Row
         self.spacers.append( tk.Label(self._newMenuFrame, background = 'white').pack() )
         
@@ -134,11 +161,6 @@ class TkMenuView( viewhandler.ViewHandler ):
         self.startBtn = tk.Button( self._newMenuFrame, text = 'Start' )
         self.startBtn.config( background = 'white', width = 10 )
         self.startBtn.pack( side = tk.RIGHT )
-        
-        self.shuffleCheck = tk.Checkbutton( self._newMenuFrame, text = 'Shuffle Levels' )
-        self.shuffleCheck.config( background = 'white', width = 20 )
-        self.shuffleCheck.select()
-        self.shuffleCheck.pack( side = tk.RIGHT )
     
     def hide( self, data ):
         ''' Hides the menu. '''
