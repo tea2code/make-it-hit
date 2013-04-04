@@ -1,0 +1,44 @@
+level:
+    parser: 2
+    
+    author: tea2code
+    date: 2013-04-04
+    description: First example of a game map aka level.
+    name: First Example
+    timelimit: 5000
+    version: 2
+    
+    map:
+        border: 10
+        height: 600
+        width: 650
+        
+        objects:
+            - rect:
+                angle: -30
+                height: 100
+                width: 100
+                x: 310
+                y: 310
+              
+            - rect:
+                angle: 0
+                height: 50
+                width: 50
+                x: 500
+                y: 200
+              
+        player:
+            circle:
+                radius: 10
+                x: 50
+                y: 50
+            
+        targets:
+            - target:
+                circle:
+                    radius: 20
+                    type: circle
+                    x: 600
+                    y: 600
+                points: 100
