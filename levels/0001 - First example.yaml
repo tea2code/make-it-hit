@@ -10,14 +10,14 @@ level:
     
     map:
         border: 10
-        height: 600
+        height: 650
         width: 650
         
         objects:
             - rect:
                 angle: -30
                 height: 100
-                width: 100
+                width: 200
                 x: 310
                 y: 310
               

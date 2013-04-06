@@ -1,3 +1,9 @@
+from data import vector2d
+from data import circle
+from data import level
+from data import map
+from data import rect
+from data import target
 from level import levelparser
 
 import yaml  
@@ -67,7 +73,7 @@ class YamlParser(levelparser.LevelParser):
         >>> l.level
         '''
         self.level = None
-        self.supportedParser = ['2']
+        self.supportedParser = [2]
         self._errorInteger = 'Element "{0}" must be an integer.'
         self._errorMissing = 'Missing element "{0}".'
         
@@ -75,7 +81,152 @@ class YamlParser(levelparser.LevelParser):
         ''' Parses a level file. Throws YAMLError or level.levelparsererror. Returns the resulting level object. '''
         
         file = open( fileName, 'r' )
-        raw = yaml.safe_load( file )
-        print( raw )
+        root = yaml.safe_load( file )
         
+        # Validate root element.
+        if self.TAG_LEVEL not in root:
+            raise levelparser.LevelParserError( 'Root element must be of type "level".' )
+        
+        levelRoot = root[self.TAG_LEVEL]
+        
+        # Validate parser version.
+        if levelRoot[self.TAG_PARSER] not in self.supportedParser:
+            raise levelparser.LevelParserError( 'Unsupported level parser version "{0}".'.format(levelRoot[self.TAG_PARSER]) )
+        
+        self.__parseLevel( levelRoot )
         return self.level
+    
+    def __parseCircle( self, circleRoot ):
+        ''' Parses circle and returns it. '''
+        c = circle.Circle()
+        c.position = self.__parseVector2d( circleRoot )
+        c.radius = self.__readReqInteger( circleRoot, self.TAG_RADIUS )
+        return c
+    
+    def __parseLevel( self, levelRoot ):
+        ''' Parses the level. '''
+        
+        self.level = level.Level()
+        
+        # Author.
+        self.level.author = self.__readString( levelRoot, self.TAG_AUTHOR, self.level.author )
+        
+        # Date.
+        self.level.date = self.__readString( levelRoot, self.TAG_DATE, self.level.date )
+        
+        # Description.
+        self.level.description = self.__readString( levelRoot, self.TAG_DESCRIPTION, self.level.description )
+        
+        # Name.
+        self.level.name = self.__readReqString( levelRoot, self.TAG_NAME )
+        
+        # Time limit.
+        self.level.timeLimit = self.__readReqInteger( levelRoot, self.TAG_TIMELIMIT )
+        
+        # Version.
+        self.level.version = self.__readString( levelRoot, self.TAG_VERSION, self.level.version )
+        
+        # Map.
+        self.__parseMap( self.__readReqObject(levelRoot, self.TAG_MAP) )
+    
+    def __parseMap( self, mapRoot ):
+        ''' Parses the map. '''
+        
+        self.level.map = map.Map()
+        
+        # Border.
+        self.level.map.border = self.__readReqInteger( mapRoot, self.TAG_BORDER )
+        
+        # Height.
+        self.level.map.height = self.__readReqInteger( mapRoot, self.TAG_HEIGHT )
+        
+        # Width.
+        self.level.map.width = self.__readReqInteger( mapRoot, self.TAG_WIDTH )
+        
+        # Objects.
+        objects = []
+        if self.TAG_OBJECTS in mapRoot:
+            objects.extend( mapRoot[self.TAG_OBJECTS] )
+        else:
+            raise levelparser.LevelParserError( self._errorMissing.format(self.TAG_OBJECTS) )
+        if objects:
+            for o in objects:
+                if self.TAG_CIRCLE in o:
+                    self.level.map.objects.append( self.__parseCircle(o[self.TAG_CIRCLE]) )
+                elif self.TAG_RECT in o:
+                    self.level.map.objects.append( self.__parseRect(o[self.TAG_RECT]) )
+        
+        # Players.
+        player = self.__readReqObject( mapRoot, self.TAG_PLAYER )
+        playerObject = self.__readReqObject( player, self.TAG_CIRCLE )
+        self.level.map.player = self.__parseCircle( playerObject )
+        
+        # Targets.
+        targets = []
+        if self.TAG_TARGETS in mapRoot:
+            targets.extend( mapRoot[self.TAG_TARGETS] )
+        else:
+            raise levelparser.LevelParserError( self._errorMissing.format(self.TAG_TARGETS) )
+        if targets:
+            for t in targets:
+                self.level.map.targets.append( self.__parseTarget(t[self.TAG_TARGET]) )
+        else:
+            raise levelparser.LevelParserError( self._errorMissing.format(self.TAG_TARGET) )
+    
+    def __parseTarget( self, targetRoot ):
+        ''' Parses a target and returns it. '''
+        t = target.Target()
+        t.points = self.__readReqInteger( targetRoot, self.TAG_POINTS )
+        if self.TAG_CIRCLE in targetRoot:
+            t.object = self.__parseCircle( targetRoot[self.TAG_CIRCLE] )
+        if self.TAG_RECT in targetRoot:
+            t.object = self.__parseRect( targetRoot[self.TAG_RECT] )
+        return t
+        
+    def __parseRect( self, rectRoot ):
+        ''' Parses a rectangle and returns it. '''
+        r = rect.Rect()
+        r.angle = self.__readReqInteger( rectRoot, self.TAG_ANGLE )
+        r.height = self.__readReqInteger( rectRoot, self.TAG_HEIGHT )
+        r.width = self.__readReqInteger( rectRoot, self.TAG_WIDTH )
+        r.position = self.__parseVector2d( rectRoot )
+        return r
+    
+    def __parseVector2d( self, vectorRoot ):
+        ''' Parses a vector and returns it. '''
+        x = self.__readReqInteger( vectorRoot, self.TAG_X )
+        y = self.__readReqInteger( vectorRoot, self.TAG_Y )
+        return vector2d.Vector2d( x, y )
+    
+    def __readReqInteger( self, root, tag ):
+        ''' Tries to read a required integer tag. Returns integer or raises error. '''
+        if tag in root and isinstance( root[tag], int ):
+            return root[tag]
+        elif tag in root and not isinstance( root[tag], int ):
+            raise levelparser.LevelParserError( self._errorInteger.format(tag) )
+        else:
+            raise levelparser.LevelParserError( self._errorMissing.format(tag) )
+    
+    def __readReqObject( self, root, tag ):
+        ''' Tries to read a required object tag. Returns object or raises error. '''
+        if tag in root:
+            return root[tag]
+        else:
+            raise levelparser.LevelParserError( self._errorMissing.format(tag) )
+    
+    def __readReqString( self, root, tag ):
+        ''' Tries to read a required string tag. Returns text or raises error. '''
+        return self.__readReqObject( root, tag )
+        
+    def __readString( self, root, tag, default ):
+        ''' Tries to read a not required string tag. Returns the text or the default value if not 
+        found. '''
+        if tag in root:
+            return root[tag]
+        else:
+            return default
+        
+if __name__ == '__main__':
+    print( 'Executing doctest.' )
+    import doctest
+    doctest.testmod()

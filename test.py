@@ -24,7 +24,8 @@ import graphics.tkborderdrawer
 import graphics.tkcircledrawer
 import graphics.tkcollisiondrawer
 import graphics.tkrectdrawer
-import level.levelparser
+import level.xmlparser
+import level.yamlparser
 import physics.circlecirclecollider
 import physics.circlerectreflector
 import physics.circlerectcollider
@@ -63,7 +64,8 @@ if __name__ == '__main__':
     doctest.testmod( graphics.tkcircledrawer )
     doctest.testmod( graphics.tkcollisiondrawer )
     doctest.testmod( graphics.tkrectdrawer )
-    doctest.testmod( level.levelparser )
+    doctest.testmod( level.xmlparser )
+    doctest.testmod( level.yamlparser )
     doctest.testmod( physics.circlecirclecollider )
     doctest.testmod( physics.circlecirclereflector )
     doctest.testmod( physics.circlerectcollider )

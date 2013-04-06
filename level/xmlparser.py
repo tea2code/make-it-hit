@@ -88,11 +88,11 @@ class XmlParser(levelparser.LevelParser):
         
         # Validate root element.
         if root.tag != self.TAG_LEVEL:
-            raise error.LevelParserError( 'Root element must be of type "level". Got "{0}".'.format(root.tag) )
+            raise levelparser.LevelParserError( 'Root element must be of type "level". Got "{0}".'.format(root.tag) )
         
         # Validate parser version.
         if root.get(self.ATTR_PARSER) not in self.supportedParser:
-            raise error.LevelParserError( 'Unsupported level parser version "{0}".'.format(root.get(self.ATTR_PARSER)) )
+            raise levelparser.LevelParserError( 'Unsupported level parser version "{0}".'.format(root.get(self.ATTR_PARSER)) )
             
         self.__parseLevel( root )
         return self.level
@@ -151,7 +151,7 @@ class XmlParser(levelparser.LevelParser):
             objects.extend( objectsElement.findall(self.TAG_CIRCLE) )
             objects.extend( objectsElement.findall(self.TAG_RECT) )
         else:
-            raise error.LevelParserError( self._errorMissing.format(self.TAG_OBJECTS) )
+            raise levelparser.LevelParserError( self._errorMissing.format(self.TAG_OBJECTS) )
         if objects:
             for o in objects:
                 if o.tag == self.TAG_CIRCLE:
@@ -170,22 +170,22 @@ class XmlParser(levelparser.LevelParser):
         if targetsElement is not None:
             targets.extend( targetsElement.findall(self.TAG_TARGET) )
         else:
-            raise error.LevelParserError( self._errorMissing.format(self.TAG_TARGETS) )
+            raise levelparser.LevelParserError( self._errorMissing.format(self.TAG_TARGETS) )
         if targets:
             for t in targets:
                 self.level.map.targets.append( self.__parseTarget(t) )
         else:
-            raise error.LevelParserError( self._errorMissing.format(self.TAG_TARGET) )
+            raise levelparser.LevelParserError( self._errorMissing.format(self.TAG_TARGET) )
 
     def __parseTarget( self, targetRoot ):
         ''' Parses a target and returns it. '''
         t = target.Target()
         t.points = self.__readReqInteger( targetRoot, self.TAG_POINTS )
-        object = targetRoot.find( self.TAG_CIRCLE )
-        if object is not None:
+        obj = targetRoot.find( self.TAG_CIRCLE )
+        if obj is not None:
             t.object = self.__parseCircle( object )
-        object = targetRoot.find( self.TAG_RECT )
-        if object is not None:
+        obj = targetRoot.find( self.TAG_RECT )
+        if obj is not None:
             t.object = self.__parseRect( object )
         return t
         
@@ -210,9 +210,9 @@ class XmlParser(levelparser.LevelParser):
         if element is not None and comparison.stringIsInt( element.text ):
             return int( element.text )
         elif element is not None and not comparison.stringIsInt( element.text ):
-            raise error.LevelParserError( self._errorInteger.format(tag) )
+            raise levelparser.LevelParserError( self._errorInteger.format(tag) )
         else:
-            raise error.LevelParserError( self._errorMissing.format(tag) )
+            raise levelparser.LevelParserError( self._errorMissing.format(tag) )
     
     def __readReqObject( self, root, tag ):
         ''' Tries to read a required object tag. Returns object or raises error. '''
@@ -220,7 +220,7 @@ class XmlParser(levelparser.LevelParser):
         if element is not None:
             return element
         else:
-            raise error.LevelParserError( self._errorMissing.format(tag) )
+            raise levelparser.LevelParserError( self._errorMissing.format(tag) )
     
     def __readReqString( self, root, tag ):
         ''' Tries to read a required string tag. Returns text or raises error. '''
@@ -228,7 +228,7 @@ class XmlParser(levelparser.LevelParser):
         if element is not None:
             return element.text
         else:
-            raise error.LevelParserError( self._errorMissing.format(tag) )
+            raise levelparser.LevelParserError( self._errorMissing.format(tag) )
     
     def __readString( self, root, tag, default ):
         ''' Tries to read a not required string tag. Returns the text or the default value if not 

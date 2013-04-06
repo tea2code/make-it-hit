@@ -23,7 +23,7 @@ level:
                 
             - rect: 
                 angle: 90
-                heigth: 50
+                height: 50
                 width: 280
                 x: 300
                 y: 350
