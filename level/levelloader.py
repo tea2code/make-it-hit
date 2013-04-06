@@ -1,11 +1,13 @@
-﻿from level import xmlparser
+﻿from level import levelparserfactory
 
 class LevelLoader():
     ''' Loads levels from files. '''
     
-    def load( self, mapFile ):
+    def load( self, mapFileName ):
         ''' Loads the given level file. Throws xml.etree.ElementTree.ParseError or level.levelparsererror
         in case of an error. Returns the level object. '''
-        parser = xmlparser.XmlParser()
-        return parser.parse( mapFile )
         
+        extension = mapFileName[ mapFileName.rindex('.'): ]
+        factory = levelparserfactory.LevelParserFactory()
+        parser = factory.createFor( extension )
+        return parser.parse( mapFileName )

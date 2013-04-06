@@ -11,7 +11,7 @@ if __name__ == '__main__':
     app.fpsCounterMeasures = framesPerSecond
     app.frameTime = 1 / framesPerSecond
     app.forceScale = forceScale
-    app.levelExtension = '.xml'
+    app.levelExtension = '.yaml'
     app.loopTime = math.floor( app.frameTime * 1000 )
     app.menuBarWidth = 120
     app.startTime = 1500

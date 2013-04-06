@@ -5,11 +5,11 @@ from data import map
 from data import rect
 from data import target
 from formulary import comparison
-from level import levelparsererror as error
+from level import levelparser
 
-import xml.etree.ElementTree as Et
+import xml.etree.ElementTree as et
 
-class XmlParser():
+class XmlParser(levelparser.LevelParser):
     ''' This parser creates a representation of a xml map. 
     
     Constants:
@@ -78,12 +78,12 @@ class XmlParser():
         self._errorInteger = 'Element "{0}" must be an integer.'
         self._errorMissing = 'Missing element "{0}".'
     
-    def parse( self, file ):
+    def parse( self, fileName ):
         ''' Parses a level file. Throws xml.etree.ElementTree.ParseError or level.levelparsererror.
         Returns the resulting level object. '''
         
         # Read file and try to parse.
-        tree = Et.parse( file )
+        tree = et.parse( fileName )
         root = tree.getroot()
         
         # Validate root element.
