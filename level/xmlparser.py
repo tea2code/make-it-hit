@@ -9,7 +9,7 @@ from level import levelparsererror as error
 
 import xml.etree.ElementTree as Et
 
-class LevelParser():
+class XmlParser():
     ''' This parser creates a representation of a xml map. 
     
     Constants:
