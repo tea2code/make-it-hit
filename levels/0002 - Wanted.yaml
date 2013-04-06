@@ -1,0 +1,50 @@
+level:
+    parser: 2
+    
+    author: tea2code
+    date: 2013-04-06
+    description: Like in Wanted (a stupid movie) you must twist your bullet.
+    name: Wanted
+    timelimit: 2000
+    version: 1
+    
+    map:
+        border: 10
+        height: 500
+        width: 500
+        
+        objects:
+            - rect:
+                angle: 0
+                height: 300
+                width: 300
+                x: 160
+                y: 340
+                
+            - rect:
+                angle: 0
+                height: 10
+                width: 100
+                x: 440
+                y: 170
+                
+            - rect:
+                angle: -80
+                height: 10
+                width: 80
+                x: 440
+                y: 220
+
+        player: 
+            circle: 
+                radius: 10
+                x: 50
+                y: 100
+                
+        targets:
+            - target:
+                circle:
+                    radius: 20
+                    x: 400
+                    y: 450
+                points: 100
