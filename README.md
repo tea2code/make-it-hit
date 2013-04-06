@@ -31,16 +31,15 @@ A little game where you must shoot objects to targets.
 
 ## Level Format
  
+The level format uses YAML files. Please read on [wikipeda.org](http://en.wikipedia.org/wiki/Yaml) and [yaml.org](http://yaml.org/) for further information.
+
 If not mentioned otherwise all values are strings. Integer, floating-point or boolean values are marked. A level without all required values might not work at all.
 
 As this game is developed the map parser will evolve. Changes (added and removed features) will be marked. You should always stay compatible with the current version.
 
-Current Version: __1__
+Current Version: __2__
  
 ### Level
-
-#### Attributes:
-- parser -- The parser version for this map. You should always use the newest (see above). Integer. Required.
 
 #### Elements:
 - author -- The author. Default empty.
@@ -48,6 +47,7 @@ Current Version: __1__
 - description -- A brief description. Default empty.
 - map -- The map. See below. Required.
 - name -- The name. Required.
+- parser -- The parser version for this map. You should always use the newest (see above). Integer. Required.
 - timelimit -- The time limit to solve the level in milliseconds. Integer. Required.
 - version -- The version. Default empty.
  
