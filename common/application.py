@@ -89,7 +89,7 @@ class Application:
         
         # Read arguments.
         parser = argparse.ArgumentParser( description = 'Provide the level directory as an argument.' )
-        parser.add_argument( 'levelDir')
+        parser.add_argument( '--levelDir', default = 'levels' )
         args = parser.parse_args()
         
         # Initialize data.
