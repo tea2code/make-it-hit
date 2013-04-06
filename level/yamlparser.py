@@ -69,7 +69,7 @@ class YamlParser(levelparser.LevelParser):
 
     def __init__( self ):
         ''' Test:
-        >>> l = LevelParser()
+        >>> l = YamlParser()
         >>> l.level
         '''
         self.level = None

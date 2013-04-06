@@ -3,6 +3,7 @@ import common.enum
 import common.timestepper
 import data.circle
 import data.collisionevent
+import data.configuration
 import data.data
 import data.event
 import data.level
@@ -43,6 +44,7 @@ if __name__ == '__main__':
     doctest.testmod( common.timestepper )
     doctest.testmod( data.circle )
     doctest.testmod( data.collisionevent )
+    doctest.testmod( data.configuration )
     doctest.testmod( data.data )
     doctest.testmod( data.event )
     doctest.testmod( data.level )

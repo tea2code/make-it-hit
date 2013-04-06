@@ -70,7 +70,7 @@ class XmlParser(levelparser.LevelParser):
 
     def __init__( self ):
         ''' Test:
-        >>> l = LevelParser()
+        >>> l = XmlParser()
         >>> l.level
         '''
         self.level = None
