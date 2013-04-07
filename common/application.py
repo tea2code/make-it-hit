@@ -1,4 +1,5 @@
 ﻿from common import timestepper
+from configuration import configstorage
 from data import configuration
 from data import data
 from fps import fps
@@ -14,6 +15,8 @@ class Application:
     ''' Application/Main class.
 
     Member:
+    configPath -- Path to user specifig configuration file (string).
+    defaultConfigPath -- Path to default configuration file (string).
     _data -- The "global" data object (data.data).
     _fps -- The module responsible to count frames per second (fps).
     _gamerules -- The module responsible for implementing game rules (gamerules.gamerules).
@@ -28,6 +31,10 @@ class Application:
     def __init__( self ):
         ''' Test:
         >>> a = Application()
+        >>> a.configPath
+        ''
+        >>> a.defaultConfigPath
+        ''
         >>> a._data
         >>> a._fps
         >>> a._gamerules
@@ -39,6 +46,8 @@ class Application:
         >>> a._postFrame
         >>> a._timestepper
         '''
+        self.configPath = ''
+        self.defaultConfigPath = ''
         self._data = None
         self._fps = None
         self._gamerules = None
@@ -53,11 +62,12 @@ class Application:
         ''' Start the application. '''
 
         # Read configuration.
-        # TODO Read configuration.
+        configStorage = configstorage.ConfigStorage( self.defaultConfigPath, self.configPath )
+        config = configStorage.load()
 
         # Initialize data.
         self._data = data.Data()
-        self._data.configuration = configuration.Configuration()
+        self._data.configuration = config
         self._data.state = self._data.STATES.MENU_MAIN
         
         frameTime = 1 / self._data.configuration.framesPerSecond

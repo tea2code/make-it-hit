@@ -2,8 +2,8 @@ class Configuration:
     ''' This class represents the configuration. 
     
     Member:
-    framesPerSecond -- The rate of frames per second which should be (int).
     forceScale -- Scaling factor for forces (float).
+    framesPerSecond -- The rate of frames per second which should be (int).
     levelDir -- Directory where levels can be found (string).
     levelExtension -- Extension of level files (string).
     menubarWidth -- Width of the in game menu bar (int).
@@ -16,10 +16,10 @@ class Configuration:
     def __init__( self ):
         ''' Test:
         >>> c = Configuration()
-        >>> c.framesPerSecond
-        60
         >>> c.forceScale
         100
+        >>> c.framesPerSecond
+        60
         >>> c.levelDir
         'levels'
         >>> c.levelExtension
@@ -35,8 +35,8 @@ class Configuration:
         >>> c.windowWidth
         1024
         '''
-        self.framesPerSecond = 60
         self.forceScale = 100
+        self.framesPerSecond = 60
         self.levelDir = 'levels'
         self.levelExtension = '.yaml'
         self.menuBarWidth = 120
