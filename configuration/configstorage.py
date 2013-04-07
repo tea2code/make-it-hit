@@ -1,5 +1,6 @@
 from data import configuration
 
+import os
 import yaml
 
 class ConfigStorage():
@@ -39,7 +40,45 @@ class ConfigStorage():
     
     def load( self ):
         ''' Loads and returns the configuration. '''
-        return self.__loadDefault()
+        # Load default config file.
+        config = self.__loadDefault()
+        
+        # Check if user config file exists.
+        if not os.path.isfile( self._filePath ):
+            return config
+        
+        # Load user config file.
+        with open( self._filePath, 'r' ) as file:
+            root = yaml.safe_load( file )
+        
+        if self.TAG_FORCE_SCALE in root:
+            config.forceScale = root[self.TAG_FORCE_SCALE]
+            
+        if self.TAG_FRAMES_PER_SECOND in root:
+            config.framesPerSecond = root[self.TAG_FRAMES_PER_SECOND]
+        
+        if self.TAG_LEVEL_DIR in root:
+            config.levelDir = root[self.TAG_LEVEL_DIR]
+        
+        if self.TAG_LEVEL_EXTENSION in root:
+            config.levelExtension = root[self.TAG_LEVEL_EXTENSION]
+        
+        if self.TAG_MENU_BAR_WIDTH in root:
+            config.menuBarWidth = root[self.TAG_MENU_BAR_WIDTH]
+        
+        if self.TAG_START_TIME in root:
+            config.startTime = root[self.TAG_START_TIME]
+        
+        if self.TAG_WINDOW_HEIGHT in root:
+            config.windowHeight = root[self.TAG_WINDOW_HEIGHT]
+        
+        if self.TAG_WINDOW_TITLE in root:
+            config.windowTitle = root[self.TAG_WINDOW_TITLE]
+        
+        if self.TAG_WINDOW_WIDTH in root:
+            config.windowWidth = root[self.TAG_WINDOW_WIDTH]
+            
+        return config
         
     def save( self, configuration ):
         ''' Saves/Stores configuration. '''
@@ -47,8 +86,8 @@ class ConfigStorage():
         
     def __loadDefault( self ):
         ''' Loads and returns default configuration. '''
-        file = open( self._defaultFilePath, 'r' )
-        root = yaml.safe_load( file )
+        with open( self._defaultFilePath, 'r' ) as file:
+            root = yaml.safe_load( file )
         
         config = configuration.Configuration()
         config.forceScale = root[self.TAG_FORCE_SCALE]

@@ -80,8 +80,8 @@ class YamlParser(levelparser.LevelParser):
     def parse( self, fileName ):
         ''' Parses a level file. Throws YAMLError or level.levelparsererror. Returns the resulting level object. '''
         
-        file = open( fileName, 'r' )
-        root = yaml.safe_load( file )
+        with open( fileName, 'r' ) as file:
+            root = yaml.safe_load( file )
         
         # Validate root element.
         if self.TAG_LEVEL not in root:
