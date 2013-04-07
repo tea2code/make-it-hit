@@ -1,6 +1,5 @@
 ﻿from common import timestepper
 from configuration import configstorage
-from data import configuration
 from data import data
 from fps import fps
 from gamerules import gamerules
@@ -18,6 +17,7 @@ class Application:
     configPath -- Path to user specifig configuration file (string).
     defaultConfigPath -- Path to default configuration file (string).
     _data -- The "global" data object (data.data).
+    _destroyed -- Flag indicating if the application is already quitting (boolean).
     _fps -- The module responsible to count frames per second (fps).
     _gamerules -- The module responsible for implementing game rules (gamerules.gamerules).
     _graphics -- The module responsible for visualizing the data (graphics.tkgraphics).
@@ -36,6 +36,8 @@ class Application:
         >>> a.defaultConfigPath
         ''
         >>> a._data
+        >>> a._destroyed
+        False
         >>> a._fps
         >>> a._gamerules
         >>> a._graphics
@@ -49,6 +51,7 @@ class Application:
         self.configPath = ''
         self.defaultConfigPath = ''
         self._data = None
+        self._destroyed = False
         self._fps = None
         self._gamerules = None
         self._graphics = None
@@ -114,7 +117,8 @@ class Application:
     def calculateNextState( self, t, dt ):
         ''' Callback function for the frame ticker. Executes all modules on the data. '''
         
-        if self._data.state is self._data.STATES.QUIT:
+        if self._data.state is self._data.STATES.QUIT and not self._destroyed:
+            self._destroyed = True
             self._graphics.window.destroy()
             return
         

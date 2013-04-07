@@ -42,7 +42,37 @@ class TkMenuView( viewhandler.ViewHandler ):
         self._frame.config( background = 'white' )
         self._frame.pack_propagate(0)
         
-        # Main Menu ================================
+        self.__initMainMenu( data )
+        self.__initNewGameMenu( data )
+    
+    def hide( self, data ):
+        ''' Hides the menu. '''
+        
+        self._frame.pack_forget()
+    
+    def show( self, data ):
+        ''' Shows the menu. '''
+        
+        self._frame.pack( side = tk.LEFT, fill = tk.BOTH, expand = 1 )
+        
+        if data.state is data.STATES.MENU_MAIN:
+            self._newMenuFrame.pack_forget()
+            self._mainMenuFrame.pack( side = tk.LEFT, fill = tk.X, expand = 1 )
+            
+        elif data.state in [data.STATES.MENU_NEW, data.STATES.MENU_NEW_DETAILS]:
+            self._mainMenuFrame.pack_forget()
+            self._newMenuFrame.pack( fill = tk.BOTH, expand = 1, padx = 10, pady = 10 )
+                
+            if data.level:
+                self._authorLabel.config( text = 'Author: {}'.format(data.level.author) )
+                self._dateLabel.config( text = 'Last Update: {}'.format(data.level.date) )
+                self._descriptionLabel.config( text = '{}'.format(data.level.description) )
+                self._timeLabel.config( text = 'Time Limit: {:.2f}s'.format(data.level.timeLimit / 1000) )
+                self._titleLabel.config( text = '{}'.format(data.level.name) )
+                self._versionLabel.config( text = 'Version: {}'.format(data.level.version) )
+                
+    def __initMainMenu( self, data ):
+        ''' Initialize main menu. '''
         self._mainMenuFrame = tk.Frame( self._frame )
         self._mainMenuFrame.config( background = 'white' )
         
@@ -68,7 +98,8 @@ class TkMenuView( viewhandler.ViewHandler ):
         self.quitBtn.config( background = 'white', width = 20 )
         self.quitBtn.pack()
         
-        # New Game Menu ================================
+    def __initNewGameMenu( self, data ):
+        ''' Initialize new game menu. '''
         self._newMenuFrame = tk.Frame( self._frame )
         self._newMenuFrame.config( background = 'white' )
         
@@ -161,29 +192,3 @@ class TkMenuView( viewhandler.ViewHandler ):
         self.startBtn = tk.Button( self._newMenuFrame, text = 'Start' )
         self.startBtn.config( background = 'white', width = 10 )
         self.startBtn.pack( side = tk.RIGHT )
-    
-    def hide( self, data ):
-        ''' Hides the menu. '''
-        
-        self._frame.pack_forget()
-    
-    def show( self, data ):
-        ''' Shows the menu. '''
-        
-        self._frame.pack( side = tk.LEFT, fill = tk.BOTH, expand = 1 )
-        
-        if data.state is data.STATES.MENU_MAIN:
-            self._newMenuFrame.pack_forget()
-            self._mainMenuFrame.pack( side = tk.LEFT, fill = tk.X, expand = 1 )
-            
-        elif data.state in [data.STATES.MENU_NEW, data.STATES.MENU_NEW_DETAILS]:
-            self._mainMenuFrame.pack_forget()
-            self._newMenuFrame.pack( fill = tk.BOTH, expand = 1, padx = 10, pady = 10 )
-                
-            if data.level:
-                self._authorLabel.config( text = 'Author: {}'.format(data.level.author) )
-                self._dateLabel.config( text = 'Last Update: {}'.format(data.level.date) )
-                self._descriptionLabel.config( text = '{}'.format(data.level.description) )
-                self._timeLabel.config( text = 'Time Limit: {:.2f}s'.format(data.level.timeLimit / 1000) )
-                self._titleLabel.config( text = '{}'.format(data.level.name) )
-                self._versionLabel.config( text = 'Version: {}'.format(data.level.version) )
