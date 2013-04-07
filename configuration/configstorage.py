@@ -80,9 +80,43 @@ class ConfigStorage():
             
         return config
         
-    def save( self, configuration ):
+    def save( self, config ):
         ''' Saves/Stores configuration. '''
-        pass
+        # Load default config to compare with current and save only changed values.
+        defaultConfig = self.__loadDefault()
+        
+        root = {}
+        
+        if config.forceScale != defaultConfig.forceScale:
+            root[self.TAG_FORCE_SCALE] = config.forceScale
+            
+        if config.framesPerSecond != defaultConfig.framesPerSecond:
+            root[self.TAG_FRAMES_PER_SECOND] = config.framesPerSecond
+            
+        if config.levelDir != defaultConfig.levelDir:
+            root[self.TAG_LEVEL_DIR] = config.levelDir
+            
+        if config.levelExtension != defaultConfig.levelExtension:
+            root[self.TAG_LEVEL_EXTENSION] = config.levelExtension
+            
+        if config.menuBarWidth != defaultConfig.menuBarWidth:
+            root[self.TAG_MENU_BAR_WIDTH] = config.menuBarWidth
+            
+        if config.startTime != defaultConfig.startTime:
+            root[self.TAG_START_TIME] = config.startTime
+            
+        if config.windowHeight != defaultConfig.windowHeight:
+            root[self.TAG_WINDOW_HEIGHT] = config.windowHeight
+            
+        if config.windowTitle != defaultConfig.windowTitle:
+            root[self.TAG_WINDOW_TITLE] = config.windowTitle
+            
+        if config.windowWidth != defaultConfig.windowWidth:
+            root[self.TAG_WINDOW_WIDTH] = config.windowWidth
+            
+        if root:
+            with open( self._filePath, 'w' ) as file:
+                yaml.dump( root, file, default_flow_style = False )
         
     def __loadDefault( self ):
         ''' Loads and returns default configuration. '''
