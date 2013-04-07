@@ -19,7 +19,7 @@ class Configuration:
         >>> c.framesPerSecond
         60
         >>> c.forceScale
-        1
+        100
         >>> c.levelDir
         'levels'
         >>> c.levelExtension
@@ -31,18 +31,18 @@ class Configuration:
         >>> c.windowHeight
         768
         >>> c.windowTitle
-        ''
+        'Make It Hit - {0} (FPS: {1})'
         >>> c.windowWidth
         1024
         '''
         self.framesPerSecond = 60
-        self.forceScale = 1
+        self.forceScale = 100
         self.levelDir = 'levels'
         self.levelExtension = '.yaml'
         self.menuBarWidth = 120
         self.startTime = 1500
         self.windowHeight = 768
-        self.windowTitle = ''
+        self.windowTitle = 'Make It Hit - {0} (FPS: {1})'
         self.windowWidth = 1024
         
 if __name__ == '__main__':

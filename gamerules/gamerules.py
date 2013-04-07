@@ -65,12 +65,12 @@ class GameRules( tickable.Tickable ):
         
         del data.levelList[:]
         
-        if not data.levelDir.endswith('/'):
-            data.levelDir += '/'
+        if not data.configuration.levelDir.endswith('/'):
+            data.configuration.levelDir += '/'
             
-        for file in os.listdir(data.levelDir):
-            file = data.levelDir + file
-            if file.endswith( data.levelExtension ):
+        for file in os.listdir(data.configuration.levelDir):
+            file = data.configuration.levelDir + file
+            if file.endswith( data.configuration.levelExtension ):
                 data.levelList.append( file )
         
     def __readLevelDetails( self, data ):
@@ -83,6 +83,6 @@ class GameRules( tickable.Tickable ):
     def __starting( self, data ):
         ''' Handles starting state of game. '''
         
-        if data.time * 1000 >= data.startTime:
+        if data.time * 1000 >= data.configuration.startTime:
             data.time = 0
             data.state = data.STATES.PLAYING

@@ -37,8 +37,8 @@ class TkMenuView( viewhandler.ViewHandler ):
         self._labels = []
         self.spacers = []
         
-        self._frame = tk.Frame( window, height = data.windowHeight,
-                                     width = data.windowWidth )
+        self._frame = tk.Frame( window, height = data.configuration.windowHeight,
+                                     width = data.configuration.windowWidth )
         self._frame.config( background = 'white' )
         self._frame.pack_propagate(0)
         

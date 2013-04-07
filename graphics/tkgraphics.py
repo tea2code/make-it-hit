@@ -23,7 +23,7 @@ class TkGraphics( tickable.Tickable ):
     _menuView -- The menu view (MenuView).
     '''
     
-    def __init__( self, data, menuBarWidth ):
+    def __init__( self, data ):
         ''' Parameters contain the data object with the window settings and the width of the 
         menu bar. '''
         
@@ -32,7 +32,7 @@ class TkGraphics( tickable.Tickable ):
         self.window.config( background = 'white' )
         
         # Create views.
-        self._gameView = tkgameview.TkGameView( data, self.window, menuBarWidth )
+        self._gameView = tkgameview.TkGameView( data, self.window )
         self._menuView = tkmenuview.TkMenuView( data, self.window )
         
     @property
@@ -91,7 +91,7 @@ class TkGraphics( tickable.Tickable ):
         viewDescription = 'Menu'
         if data.level:
             viewDescription = data.level.name
-        self.window.title( data.windowTitle.format(viewDescription, data.fps) )
+        self.window.title( data.configuration.windowTitle.format(viewDescription, data.fps) )
         
         if data.state in [data.STATES.MENU_MAIN, data.STATES.MENU_NEW]:
             self._gameView.hide( data )

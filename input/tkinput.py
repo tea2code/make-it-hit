@@ -110,7 +110,7 @@ class TkInput():
         
         # Calculate force vector.
         force = self.data.mousePosition - self.data.level.map.player.position
-        force = force * self.forceScale
+        force = force * self.data.configuration.forceScale
         self.data.level.map.player.addForce( force )
    
     def __newGameBtnPressed( self ):
