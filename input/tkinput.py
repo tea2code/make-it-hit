@@ -2,6 +2,7 @@
 
 import random
 import tkinter as tk
+import webbrowser
 
 class TkInput():
     ''' This class handles input events from tkinter. 
@@ -28,8 +29,12 @@ class TkInput():
         self._startBtn = None
     
     def bindConfigBtn( self, button ):
-        ''' Bind a menu button. '''
+        ''' Bind config button. '''
         button.config( command = lambda: self.__setState(self.data.STATES.MENU_CONFIG) )
+    
+    def bindHelpBtn( self, button ):
+        ''' Bind help button. '''
+        button.config( command = lambda: webbrowser.open(self.data.configuration.homepage) )
     
     def bindLevelList( self, levelList ):
         ''' Bind the level list. '''

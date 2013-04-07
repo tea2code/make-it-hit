@@ -102,7 +102,7 @@ class TkMenuView( viewhandler.ViewHandler ):
         
         self.spacers.append( tk.Label(self._mainMenuFrame, background = 'white').pack() )
         
-        self.helpBtn = tk.Button( self._mainMenuFrame, text = 'Help', state = tk.DISABLED )
+        self.helpBtn = tk.Button( self._mainMenuFrame, text = 'Help' )
         self.helpBtn.config( background = 'white', width = 20 )
         self.helpBtn.pack()
         

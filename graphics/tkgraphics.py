@@ -48,6 +48,10 @@ class TkGraphics( tickable.Tickable ):
         return self._menuView.configBtn
     
     @property
+    def helpBtn( self ):
+        return self._menuView.helpBtn
+    
+    @property
     def levelList( self ):
         return self._menuView.levelList
     
@@ -91,6 +95,9 @@ class TkGraphics( tickable.Tickable ):
         ''' Implementation of Tickable.tick().
 
         Draws the current state (data) on the canvas. '''
+        
+        if data.state is data.STATES.QUIT:
+            return
         
         viewDescription = 'Menu'
         if data.level:

@@ -4,6 +4,7 @@ class Configuration:
     Member:
     forceScale -- Scaling factor for forces (float).
     framesPerSecond -- The rate of frames per second which should be (int).
+    homepage -- Url of the homepage (string).
     levelDir -- Directory where levels can be found (string).
     levelExtension -- Extension of level files (string).
     menubarWidth -- Width of the in game menu bar (int).
@@ -20,6 +21,8 @@ class Configuration:
         100
         >>> c.framesPerSecond
         60
+        >>> c.homepage
+        ''
         >>> c.levelDir
         'levels'
         >>> c.levelExtension
@@ -37,6 +40,7 @@ class Configuration:
         '''
         self.forceScale = 100
         self.framesPerSecond = 60
+        self.homepage = ''
         self.levelDir = 'levels'
         self.levelExtension = '.yaml'
         self.menuBarWidth = 120

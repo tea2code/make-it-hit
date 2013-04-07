@@ -10,6 +10,7 @@ class ConfigStorage():
     Constants:
     TAG_FORCE_SCALE -- Force scale element.
     TAG_FRAMES_PER_SECOND -- Frames per second element.
+    TAG_HOMEPAGE -- Homepage element.
     TAG_LEVEL_DIR -- Level directory element.
     TAG_LEVEL_EXTENSION -- Level extension element.
     TAG_MENU_BAR_WIDTH -- Menu bar width element.
@@ -25,6 +26,7 @@ class ConfigStorage():
     
     TAG_FORCE_SCALE = 'forceScale'
     TAG_FRAMES_PER_SECOND = 'framesPerSecond'
+    TAG_HOMEPAGE = 'homepage'
     TAG_LEVEL_DIR = 'levelDir'
     TAG_LEVEL_EXTENSION = 'levelExtension'
     TAG_MENU_BAR_WIDTH = 'menuBarWidth'
@@ -56,6 +58,9 @@ class ConfigStorage():
             
         if self.TAG_FRAMES_PER_SECOND in root:
             config.framesPerSecond = root[self.TAG_FRAMES_PER_SECOND]
+        
+        if self.TAG_HOMEPAGE in root:
+            config.homepage = root[self.TAG_HOMEPAGE]
         
         if self.TAG_LEVEL_DIR in root:
             config.levelDir = root[self.TAG_LEVEL_DIR]
@@ -93,6 +98,9 @@ class ConfigStorage():
         if config.framesPerSecond != defaultConfig.framesPerSecond:
             root[self.TAG_FRAMES_PER_SECOND] = config.framesPerSecond
             
+        if config.homepage != defaultConfig.homepage:
+            root[self.TAG_HOMEPAGE] = config.homepage
+            
         if config.levelDir != defaultConfig.levelDir:
             root[self.TAG_LEVEL_DIR] = config.levelDir
             
@@ -126,6 +134,7 @@ class ConfigStorage():
         config = configuration.Configuration()
         config.forceScale = root[self.TAG_FORCE_SCALE]
         config.framesPerSecond = root[self.TAG_FRAMES_PER_SECOND]
+        config.homepage = root[self.TAG_HOMEPAGE]
         config.levelDir = root[self.TAG_LEVEL_DIR]
         config.levelExtension = root[self.TAG_LEVEL_EXTENSION]
         config.menuBarWidth = root[self.TAG_MENU_BAR_WIDTH]
