@@ -98,6 +98,7 @@ class Application:
         
         # Initialize and activate input module.
         self._input = tkinput.TkInput( self._data )
+        self._input.bindConfigBtn( self._graphics.configBtn )
         self._input.bindLevelList( self._graphics.levelList )
         self._input.bindMenuBtn( self._graphics.backFromNewBtn )
         self._input.bindMenuBtn( self._graphics.menuBtn )

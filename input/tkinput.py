@@ -27,6 +27,10 @@ class TkInput():
         self._shuffleCheckVar = None
         self._startBtn = None
     
+    def bindConfigBtn( self, button ):
+        ''' Bind a menu button. '''
+        button.config( command = lambda: self.__setState(self.data.STATES.MENU_CONFIG) )
+    
     def bindLevelList( self, levelList ):
         ''' Bind the level list. '''
         self._levelList = levelList
@@ -36,24 +40,24 @@ class TkInput():
     
     def bindMenuBtn( self, button ):
         ''' Bind a menu button. '''
-        button.config( command = self.__menuBtnPressed )
+        button.config( command = lambda: self.__setState(self.data.STATES.MENU_MAIN) )
     
     def bindNewGameBtn( self, button ):
         ''' Bind a new game button. '''
-        button.config( command = self.__newGameBtnPressed )
+        button.config( command = lambda: self.__setState(self.data.STATES.MENU_NEW) )
     
-    def bindNumLevelsInput( self, input ):
+    def bindNumLevelsInput( self, entry ):
         ''' Bind the input field for number of levels. '''
-        self._numLevelsInput = input
+        self._numLevelsInput = entry
         self.__setNumberOfLevels()
     
     def bindQuitBtn( self, button ):
         ''' Bind a quit button. '''
-        button.config( command = self.__quitBtnPressed )
+        button.config( command = lambda: self.__setState(self.data.STATES.QUIT) )
     
     def bindRestartBtn( self, button ):
         ''' Bind a restart button. '''
-        button.config( command = self.__restartBtnPressed )
+        button.config( command = self.__restart )
     
     def bindShuffleCheck( self, checkBox ):
         ''' Bind check box for shuffling. '''
@@ -68,10 +72,10 @@ class TkInput():
     
     def bindWindow( self, window ):
         ''' Binds the window/canvas which should receive mouse input. '''
-        window.bind( '<B1-Motion>', self.__mouseMotion )
+        window.bind( '<B1-Motion>', self.__storeMousePos )
         window.bind( '<ButtonPress-1>', self.__mousePressed )
         window.bind( '<ButtonRelease-1>', self.__mouseReleased )
-        window.bind_all( 'r', self.__restartKeyPressed )
+        window.bind_all( 'r', self.__restart )
     
     def __levelListChanged( self, event ):
         ''' Handles changes in level list. '''
@@ -87,14 +91,6 @@ class TkInput():
             self._startBtn.config( state = tk.DISABLED )
         elif self._startBtn and newSelection:
             self._startBtn.config( state = tk.NORMAL )
-    
-    def __menuBtnPressed( self ):
-        ''' Handles pressing the main menu button. '''
-        self.data.state = self.data.STATES.MENU_MAIN
-    
-    def __mouseMotion( self, event ):
-        ''' Handles mouse motion while button is pressed. '''
-        self.__storeMousePos( event )
     
     def __mousePressed( self, event ):
         ''' Handles mouse button pressed event. '''
@@ -113,27 +109,11 @@ class TkInput():
         force = force * self.data.configuration.forceScale
         self.data.level.map.player.addForce( force )
    
-    def __newGameBtnPressed( self ):
-        ''' Handles pressing the new game button. '''
-        self.data.state = self.data.STATES.MENU_NEW
-   
-    def __quitBtnPressed( self ):
-        ''' Handles pressing the quit button. '''
-        self.data.state = self.data.STATES.QUIT
-   
-    def __restart( self ):
+    def __restart( self, event = None ):
         ''' Restarts game. '''
         if self.data.state is not self.data.STATES.VICTORY:
             self.data.state = self.data.STATES.LOADING
-   
-    def __restartBtnPressed( self ):
-        ''' Handles pressing the restart button. '''
-        self.__restart()
-        
-    def __restartKeyPressed( self, event ):
-        ''' Handles pressing the restart key. '''
-        self.__restart()
-       
+
     def __setNumberOfLevels( self ):
         ''' Sets number of levels in input field. '''
         
@@ -145,6 +125,10 @@ class TkInput():
         
         self._numLevelsInput.delete( 0, tk.END )
         self._numLevelsInput.insert( 0, self._levelList.size() )
+       
+    def __setState( self, state ):
+        ''' Helper function to set state in lambda functions. '''
+        self.data.state = state
        
     def __startBtnPressed( self ):
         ''' Handles pressing the start button. '''

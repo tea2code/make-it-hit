@@ -16,6 +16,7 @@ class TkMenuView( viewhandler.ViewHandler ):
     shuffleCheck -- A random check box to indicate if the level list should be shuffled (Checkbutton).
     startBtn -- The button to start the game (Button).
     _authorLabel -- The label containing the author (Label).
+    _configMenuFrame -- The frame of the config menu (Frame).
     _dateLabel -- The label containing the date (Label).
     _descriptionLabel -- The label containing the description (Label).
     _frame -- The menu frame (Frame).
@@ -38,10 +39,11 @@ class TkMenuView( viewhandler.ViewHandler ):
         self.spacers = []
         
         self._frame = tk.Frame( window, height = data.configuration.windowHeight,
-                                     width = data.configuration.windowWidth )
+                                width = data.configuration.windowWidth )
         self._frame.config( background = 'white' )
-        self._frame.pack_propagate(0)
+        self._frame.pack_propagate( 0 )
         
+        self.__initConfigMenu( data )
         self.__initMainMenu( data )
         self.__initNewGameMenu( data )
     
@@ -56,10 +58,12 @@ class TkMenuView( viewhandler.ViewHandler ):
         self._frame.pack( side = tk.LEFT, fill = tk.BOTH, expand = 1 )
         
         if data.state is data.STATES.MENU_MAIN:
+            self._configMenuFrame.pack_forget()
             self._newMenuFrame.pack_forget()
             self._mainMenuFrame.pack( side = tk.LEFT, fill = tk.X, expand = 1 )
             
-        elif data.state in [data.STATES.MENU_NEW, data.STATES.MENU_NEW_DETAILS]:
+        elif data.state is data.STATES.MENU_NEW:
+            self._configMenuFrame.pack_forget()
             self._mainMenuFrame.pack_forget()
             self._newMenuFrame.pack( fill = tk.BOTH, expand = 1, padx = 10, pady = 10 )
                 
@@ -70,6 +74,16 @@ class TkMenuView( viewhandler.ViewHandler ):
                 self._timeLabel.config( text = 'Time Limit: {:.2f}s'.format(data.level.timeLimit / 1000) )
                 self._titleLabel.config( text = '{}'.format(data.level.name) )
                 self._versionLabel.config( text = 'Version: {}'.format(data.level.version) )
+                
+        elif data.state is data.STATES.MENU_CONFIG:
+            self._configMenuFrame.pack( fill = tk.BOTH, expand = 1, padx = 10, pady = 10 )
+            self._newMenuFrame.pack_forget()
+            self._mainMenuFrame.pack_forget()
+    
+    def __initConfigMenu( self, data ):
+        ''' Initialize config menu. '''
+        self._configMenuFrame = tk.Frame( self._frame )
+        self._configMenuFrame.config( background = 'white' )
                 
     def __initMainMenu( self, data ):
         ''' Initialize main menu. '''
@@ -82,7 +96,7 @@ class TkMenuView( viewhandler.ViewHandler ):
         
         self.spacers.append( tk.Label(self._mainMenuFrame, background = 'white').pack() )
         
-        self.configBtn = tk.Button( self._mainMenuFrame, text = 'Configuration', state = tk.DISABLED )
+        self.configBtn = tk.Button( self._mainMenuFrame, text = 'Configuration' )
         self.configBtn.config( background = 'white', width = 20 )
         self.configBtn.pack()
         

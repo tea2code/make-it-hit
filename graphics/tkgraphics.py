@@ -44,6 +44,10 @@ class TkGraphics( tickable.Tickable ):
         return self._gameView.canvas
     
     @property
+    def configBtn( self ):
+        return self._menuView.configBtn
+    
+    @property
     def levelList( self ):
         return self._menuView.levelList
     
@@ -93,7 +97,7 @@ class TkGraphics( tickable.Tickable ):
             viewDescription = data.level.name
         self.window.title( data.configuration.windowTitle.format(viewDescription, data.fps) )
         
-        if data.state in [data.STATES.MENU_MAIN, data.STATES.MENU_NEW]:
+        if data.state in [data.STATES.MENU_MAIN, data.STATES.MENU_NEW, data.STATES.MENU_CONFIG]:
             self._gameView.hide( data )
             self._menuView.show( data )
         else:
