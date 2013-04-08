@@ -9,31 +9,41 @@ class TkInput():
     
     Member:
     data -- The data object (data.data).
-    forceScale -- Scaling factor for force vector (float).
     _lastLevelSelection -- Set with last selection in level list (set).
     _levelList -- The level list (ListBox).
     _numLevelsInput -- Input field for number of levels to use (Entry).
     _shuffleCheckVar -- Result variable for shuffle check box (IntVar).
     _startBtn -- The button to start the game (Button).
+    _startDelayEntry -- Input field for start delay (Entry).
+    _windowHeightEntry -- Input field for window height (Entry).
+    _windowWidthEntry -- Input field for window width (Entry).
     '''
     
     def __init__( self, data ):
         ''' Initializes input module with the data object. '''
         
         self.data = data
-        self.forceScale = 1
         self._levelList = None
         self._lastLevelSelection = {}
         self._numLevelsInput = None
         self._shuffleCheckVar = None
         self._startBtn = None
+        self._startDelayEntry = None
+        self._windowHeightEntry = None
+        self._windowWidthEntry = None
     
     def bindConfigBtn( self, button ):
-        ''' Bind config button. '''
+        ''' Bind the configuration button. '''
         button.config( command = lambda: self.__setState(self.data.STATES.MENU_CONFIG) )
     
+    def bindConfigInputs( self, startDelayEntry, windowHeightEntry, windowWidthEntry ):
+        ''' Bind input fields of configuration view. '''
+        self._startDelayEntry = startDelayEntry
+        self._windowHeightEntry = windowHeightEntry
+        self._windowWidthEntry = windowWidthEntry
+    
     def bindHelpBtn( self, button ):
-        ''' Bind help button. '''
+        ''' Bind the help button. '''
         button.config( command = lambda: webbrowser.open(self.data.configuration.homepage) )
     
     def bindLevelList( self, levelList ):
@@ -64,6 +74,17 @@ class TkInput():
         ''' Bind a restart button. '''
         button.config( command = self.__restart )
     
+    def bindSaveConfigBtn( self, button ):
+        ''' Bind the save configuration button. '''
+        if self._startDelayEntry:
+            self.data.configuration.startTime = int( self._startDelayEntry.get() )
+        if self._windowHeightEntry:
+            self.data.configuration.windowHeight = int( self._windowHeightEntry.get() )
+        if self._windowWidthEntry:
+            self.data.configuration.windowWidth = int( self._windowWidthEntry.get() )
+        
+        self.__setState( self.data.STATES.MENU_MAIN )
+    
     def bindShuffleCheck( self, checkBox ):
         ''' Bind check box for shuffling. '''
         self._shuffleCheckVar = tk.IntVar()
@@ -89,7 +110,7 @@ class TkInput():
         if diff:
             # Use int() cause ListBox returns integer or string as return value.
             self.data.levelDetails = self._levelList.get( int(diff.pop()) )
-            self.data.state = self.data.STATES.MENU_NEW_DETAILS
+            self.__setState( self.data.STATES.MENU_NEW_DETAILS )
         self._lastLevelSelection = newSelection
         
         if self._startBtn and not newSelection:
@@ -117,7 +138,7 @@ class TkInput():
     def __restart( self, event = None ):
         ''' Restarts game. '''
         if self.data.state is not self.data.STATES.VICTORY:
-            self.data.state = self.data.STATES.LOADING
+            self.__setState( self.data.STATES.LOADING )
 
     def __setNumberOfLevels( self ):
         ''' Sets number of levels in input field. '''
@@ -156,7 +177,7 @@ class TkInput():
             except Exception as e:
                 print( e )
             
-        self.data.state = self.data.STATES.LOADING
+        self.__setState( self.data.STATES.LOADING )
         
     def __storeMousePos( self, event ):
         ''' Stores the mouse position of an event in data. '''
