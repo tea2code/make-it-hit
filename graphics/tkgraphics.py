@@ -10,6 +10,8 @@ class TkGraphics( tickable.Tickable ):
     Member:
     backFromNewBtn -- The button which leads back to the main menu (Button).
     canvas -- The canvas object (Canvas).
+    configBtn -- The button which opens the configuration menu (Button).
+    helpBtn -- The button which opens the help menu (Button).
     levelList -- The list box containing all levels (ListBox).
     menuBtn -- The button which leads back to the main menu (Button).
     newGameBtn -- The new game button (Button).
@@ -34,54 +36,15 @@ class TkGraphics( tickable.Tickable ):
         # Create views.
         self._gameView = tkgameview.TkGameView( data, self.window )
         self._menuView = tkmenuview.TkMenuView( data, self.window )
-        
-    @property
-    def backFromNewBtn( self ):
-        return self._menuView.backBtn
-        
-    @property
-    def canvas( self ):
-        return self._gameView.canvas
     
-    @property
-    def configBtn( self ):
-        return self._menuView.configBtn
-    
-    @property
-    def helpBtn( self ):
-        return self._menuView.helpBtn
-    
-    @property
-    def levelList( self ):
-        return self._menuView.levelList
-    
-    @property 
-    def menuBtn( self ):
-        return self._gameView.menuBtn
-    
-    @property 
-    def newGameBtn( self ):
-        return self._menuView.newGameBtn
-    
-    @property
-    def numLevelsInput( self ):
-        return self._menuView.numLevelsInput
-    
-    @property 
-    def quitBtn( self ):
-        return self._menuView.quitBtn
-    
-    @property
-    def restartBtn( self ):
-        return self._gameView.restartBtn
-        
-    @property
-    def shuffleCheck( self ):
-        return self._menuView.shuffleCheck
-    
-    @property
-    def startBtn( self ):
-        return self._menuView.startBtn
+    def __getattr__( self, name ):
+        ''' Implemented to give access to view properties. '''
+        if hasattr( self._gameView, name ):
+            return getattr( self._gameView, name )
+        elif hasattr( self._menuView, name ):
+            return getattr( self._menuView, name )
+        else:
+            raise AttributeError( 'Attribute "{}" not found.'.format(name) )
         
     def after( self, time, function ):
         ''' Calls function after time in milliseconds. '''

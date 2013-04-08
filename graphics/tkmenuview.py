@@ -6,7 +6,7 @@ class TkMenuView( viewhandler.ViewHandler ):
     ''' The in menu view.
     
     Member:
-    backBtn -- The button which leads back to the main menu (Button).
+    backFromNewBtn -- The button which leads back to the main menu (Button).
     configBtn -- The button which opens the configuration menu (Button).
     helpBtn -- The button which opens the help menu (Button).
     levelList -- The list box containing all levels (ListBox).
@@ -199,9 +199,9 @@ class TkMenuView( viewhandler.ViewHandler ):
         # Bottom Row
         self.spacers.append( tk.Label(self._newMenuFrame, background = 'white').pack() )
         
-        self.backBtn = tk.Button( self._newMenuFrame, text = 'Back' )
-        self.backBtn.config( background = 'white', width = 10 )
-        self.backBtn.pack( side = tk.LEFT )
+        self.backFromNewBtn = tk.Button( self._newMenuFrame, text = 'Back' )
+        self.backFromNewBtn.config( background = 'white', width = 10 )
+        self.backFromNewBtn.pack( side = tk.LEFT )
         
         self.startBtn = tk.Button( self._newMenuFrame, text = 'Start' )
         self.startBtn.config( background = 'white', width = 10 )
