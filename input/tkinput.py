@@ -34,7 +34,7 @@ class TkInput():
     
     def bindConfigBtn( self, button ):
         ''' Bind the configuration button. '''
-        button.config( command = lambda: self.__setState(self.data.STATES.MENU_CONFIG) )
+        button.config( command = self.__configBtnPressed )
     
     def bindConfigInputs( self, startDelayEntry, windowHeightEntry, windowWidthEntry ):
         ''' Bind input fields of configuration view. '''
@@ -76,14 +76,7 @@ class TkInput():
     
     def bindSaveConfigBtn( self, button ):
         ''' Bind the save configuration button. '''
-        if self._startDelayEntry:
-            self.data.configuration.startTime = int( self._startDelayEntry.get() )
-        if self._windowHeightEntry:
-            self.data.configuration.windowHeight = int( self._windowHeightEntry.get() )
-        if self._windowWidthEntry:
-            self.data.configuration.windowWidth = int( self._windowWidthEntry.get() )
-        
-        self.__setState( self.data.STATES.MENU_MAIN )
+        button.config( command = self.__saveConfigBtnPressed )
     
     def bindShuffleCheck( self, checkBox ):
         ''' Bind check box for shuffling. '''
@@ -102,6 +95,22 @@ class TkInput():
         window.bind( '<ButtonPress-1>', self.__mousePressed )
         window.bind( '<ButtonRelease-1>', self.__mouseReleased )
         window.bind_all( 'r', self.__restart )
+    
+    def __configBtnPressed( self ):
+        ''' Handles pressing the configuration button. '''
+        if self._startDelayEntry:
+            self._startDelayEntry.delete( 0, tk.END )
+            self._startDelayEntry.insert( 0, self.data.configuration.startTime / 1000 )
+
+        if self._windowHeightEntry:
+            self._windowHeightEntry.delete( 0, tk.END )
+            self._windowHeightEntry.insert( 0, self.data.configuration.windowHeight )
+        
+        if self._windowWidthEntry:
+            self._windowWidthEntry.delete( 0, tk.END )
+            self._windowWidthEntry.insert( 0, self.data.configuration.windowWidth )
+    
+        self.__setState(self.data.STATES.MENU_CONFIG)
     
     def __levelListChanged( self, event ):
         ''' Handles changes in level list. '''
@@ -139,6 +148,21 @@ class TkInput():
         ''' Restarts game. '''
         if self.data.state is not self.data.STATES.VICTORY:
             self.__setState( self.data.STATES.LOADING )
+
+    def __saveConfigBtnPressed( self ):
+        ''' Handles pressing the save configuration button. '''
+        if self._startDelayEntry:
+            # Replace , with . to allow other floating point formats.
+            text = self._startDelayEntry.get().replace( ',', '.' )
+            self.data.configuration.startTime = int( float( text ) * 1000 )
+        
+        if self._windowHeightEntry:
+            self.data.configuration.windowHeight = int( self._windowHeightEntry.get() )
+        
+        if self._windowWidthEntry:
+            self.data.configuration.windowWidth = int( self._windowWidthEntry.get() )
+        
+        self.__setState( self.data.STATES.MENU_MAIN )
 
     def __setNumberOfLevels( self ):
         ''' Sets number of levels in input field. '''

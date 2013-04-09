@@ -6,7 +6,7 @@
 framesPerSecond: 60
 forceScale: 100
 homepage: https://github.com/tea2code/make-it-hit
-levelDir: levels
+levelDir: levels/
 levelExtension: .yaml
 menuBarWidth: 120
 startTime: 1500

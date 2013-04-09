@@ -8,6 +8,7 @@ class TkGraphics( tickable.Tickable ):
     ''' This class handles the visualization of the current state. 
     
     Member:
+    backFromConfigBtn -- The button which leads back from config menu to the main menu (Button).
     backFromNewBtn -- The button which leads back to the main menu (Button).
     canvas -- The canvas object (Canvas).
     configBtn -- The button which opens the configuration menu (Button).
@@ -18,9 +19,13 @@ class TkGraphics( tickable.Tickable ):
     numLevelsInput -- Input field for number of levels to use (Entry).
     quitBtn -- The button to quit the game (Button).
     restartBtn -- The restart button (Button).
+    saveConfigBtn -- The button to save the config (Button).
     shuffleCheck -- A random check box to indicate if the level list should be shuffled (Checkbutton).
     startBtn -- The button to start the game (Button).
+    startDelayInput -- Input field for start delay (Entry).
     window -- The window object (Tk).
+    windowHeightInput -- Input field for window height (Entry).
+    windowWidthInput -- Input field for window width (Entry).
     _gameView -- The game view (GameView).
     _menuView -- The menu view (MenuView).
     '''

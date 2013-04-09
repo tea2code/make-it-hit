@@ -6,15 +6,20 @@ class TkMenuView( viewhandler.ViewHandler ):
     ''' The in menu view.
     
     Member:
-    backFromNewBtn -- The button which leads back to the main menu (Button).
+    backFromConfigBtn -- The button which leads back from config menu to the main menu (Button).
+    backFromNewBtn -- The button which leads back from new menu to the main menu (Button).
     configBtn -- The button which opens the configuration menu (Button).
     helpBtn -- The button which opens the help menu (Button).
     levelList -- The list box containing all levels (ListBox).
     newGameBtn -- The new game button (Button).
     numLevelsInput -- Input field for number of levels to use (Entry).
     quitBtn -- The button to quit the game (Button).
+    saveConfigBtn -- The button to save the config (Button).
     shuffleCheck -- A random check box to indicate if the level list should be shuffled (Checkbutton).
     startBtn -- The button to start the game (Button).
+    startDelayInput -- Input field for start delay (Entry).
+    windowHeightInput -- Input field for window height (Entry).
+    windowWidthInput -- Input field for window width (Entry).
     _authorLabel -- The label containing the author (Label).
     _configMenuFrame -- The frame of the config menu (Frame).
     _dateLabel -- The label containing the date (Label).
@@ -81,9 +86,78 @@ class TkMenuView( viewhandler.ViewHandler ):
             self._mainMenuFrame.pack_forget()
     
     def __initConfigMenu( self, data ):
-        ''' Initialize config menu. '''
+        ''' Initialize configuration menu. '''
         self._configMenuFrame = tk.Frame( self._frame )
         self._configMenuFrame.config( background = 'white' )
+        
+        label = tk.Label( self._configMenuFrame, text = 'Some changes may require an application restart.' )
+        label.config( background = 'white', anchor = tk.W )
+        label.pack( anchor = tk.W  )
+        self._labels.append( label )
+        
+        self.spacers.append( tk.Label(self._configMenuFrame, background = 'white').pack() )
+        
+        # Start Delay
+        frame = tk.Frame( self._configMenuFrame )
+        frame.config( background = 'white' )
+        frame.pack( anchor = tk.W )
+        self._frames.append( frame )
+        
+        label = tk.Label( frame, text = 'Delay before starting a level in seconds:' )
+        label.config( background = 'white', width = 35, anchor = tk.W )
+        label.pack( side = tk.LEFT )
+        self._labels.append( label )
+        
+        self.startDelayInput = tk.Entry( frame )
+        self.startDelayInput.config( background = 'white', width = 20, justify = tk.RIGHT )
+        self.startDelayInput.pack( side = tk.LEFT )
+        
+        self.spacers.append( tk.Label(self._configMenuFrame, background = 'white').pack() )
+        
+        # Window Width
+        frame = tk.Frame( self._configMenuFrame )
+        frame.config( background = 'white' )
+        frame.pack( anchor = tk.W )
+        self._frames.append( frame )
+        
+        label = tk.Label( frame, text = 'Window width in pixel:' )
+        label.config( background = 'white', width = 35, anchor = tk.W )
+        label.pack( side = tk.LEFT )
+        self._labels.append( label )
+        
+        self.windowWidthInput = tk.Entry( frame )
+        self.windowWidthInput.config( background = 'white', width = 20, justify = tk.RIGHT )
+        self.windowWidthInput.pack( side = tk.LEFT )
+        
+        self.spacers.append( tk.Label(self._configMenuFrame, background = 'white').pack() )
+        
+        # Window Height
+        frame = tk.Frame( self._configMenuFrame )
+        frame.config( background = 'white' )
+        frame.pack( anchor = tk.W )
+        self._frames.append( frame )
+        
+        label = tk.Label( frame, text = 'Window height in pixel:' )
+        label.config( background = 'white', width = 35, anchor = tk.W )
+        label.pack( side = tk.LEFT )
+        self._labels.append( label )
+        
+        self.windowHeightInput = tk.Entry( frame )
+        self.windowHeightInput.config( background = 'white', width = 20, justify = tk.RIGHT )
+        self.windowHeightInput.pack( side = tk.LEFT )
+        
+        self.spacers.append( tk.Label(self._configMenuFrame, background = 'white').pack() )
+        
+        # Bottom Row
+        self.saveConfigBtn = tk.Button( self._configMenuFrame, text = 'Save' )
+        self.saveConfigBtn.config( background = 'white', width = 10 )
+        self.saveConfigBtn.pack( anchor = tk.S, side = tk.RIGHT )
+        
+        self.spacers.append( tk.Label(self._configMenuFrame, background = 'white').pack(side = tk.RIGHT) )
+        
+        self.backFromConfigBtn = tk.Button( self._configMenuFrame, text = 'Cancel' )
+        self.backFromConfigBtn.config( background = 'white', width = 10 )
+        self.backFromConfigBtn.pack( anchor = tk.S, side = tk.RIGHT )
                 
     def __initMainMenu( self, data ):
         ''' Initialize main menu. '''
@@ -172,6 +246,7 @@ class TkMenuView( viewhandler.ViewHandler ):
         self._timeLabel.config( background = 'white' )
         self._timeLabel.pack( anchor = tk.W )
         
+        # Options
         optionsFrame = tk.Frame( levelFrame )
         optionsFrame.config( background = 'white' )
         optionsFrame.pack( anchor = tk.SW, fill = tk.X, expand = 1 )
@@ -199,10 +274,12 @@ class TkMenuView( viewhandler.ViewHandler ):
         # Bottom Row
         self.spacers.append( tk.Label(self._newMenuFrame, background = 'white').pack() )
         
-        self.backFromNewBtn = tk.Button( self._newMenuFrame, text = 'Back' )
-        self.backFromNewBtn.config( background = 'white', width = 10 )
-        self.backFromNewBtn.pack( side = tk.LEFT )
-        
         self.startBtn = tk.Button( self._newMenuFrame, text = 'Start' )
         self.startBtn.config( background = 'white', width = 10 )
         self.startBtn.pack( side = tk.RIGHT )
+        
+        self.spacers.append( tk.Label(self._newMenuFrame, background = 'white').pack(side = tk.RIGHT) )
+        
+        self.backFromNewBtn = tk.Button( self._newMenuFrame, text = 'Back' )
+        self.backFromNewBtn.config( background = 'white', width = 10 )
+        self.backFromNewBtn.pack( side = tk.RIGHT )

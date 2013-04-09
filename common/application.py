@@ -14,8 +14,9 @@ class Application:
     ''' Application/Main class.
 
     Member:
-    configPath -- Path to user specifig configuration file (string).
+    configPath -- Path to user specific configuration file (string).
     defaultConfigPath -- Path to default configuration file (string).
+    _configStorage -- The configuration storage system (ConfigStorage).
     _data -- The "global" data object (data.data).
     _destroyed -- Flag indicating if the application is already quitting (boolean).
     _fps -- The module responsible to count frames per second (fps).
@@ -65,8 +66,8 @@ class Application:
         ''' Start the application. '''
 
         # Read configuration.
-        configStorage = configstorage.ConfigStorage( self.defaultConfigPath, self.configPath )
-        config = configStorage.load()
+        self._configStorage = configstorage.ConfigStorage( self.defaultConfigPath, self.configPath )
+        config = self._configStorage.load()
 
         # Initialize data.
         self._data = data.Data()
@@ -85,6 +86,7 @@ class Application:
         
         # Initialize graphics.
         self._graphics = tkgraphics.TkGraphics( self._data )
+        self._graphics.window.protocol( 'WM_DELETE_WINDOW', self.__quit )
         
         # Initialize physics.
         self._physics = physics.Physics()
@@ -99,14 +101,19 @@ class Application:
         # Initialize and activate input module.
         self._input = tkinput.TkInput( self._data )
         self._input.bindConfigBtn( self._graphics.configBtn )
+        self._input.bindConfigInputs( self._graphics.startDelayInput, 
+                                      self._graphics.windowHeightInput, 
+                                      self._graphics.windowWidthInput )
         self._input.bindHelpBtn( self._graphics.helpBtn )
         self._input.bindLevelList( self._graphics.levelList )
+        self._input.bindMenuBtn( self._graphics.backFromConfigBtn )
         self._input.bindMenuBtn( self._graphics.backFromNewBtn )
         self._input.bindMenuBtn( self._graphics.menuBtn )
         self._input.bindNewGameBtn( self._graphics.newGameBtn )
         self._input.bindNumLevelsInput( self._graphics.numLevelsInput )
         self._input.bindQuitBtn( self._graphics.quitBtn )
         self._input.bindRestartBtn( self._graphics.restartBtn )
+        self._input.bindSaveConfigBtn( self._graphics.saveConfigBtn )
         self._input.bindShuffleCheck( self._graphics.shuffleCheck )
         self._input.bindStartBtn( self._graphics.startBtn )
         self._input.bindWindow( self._graphics.canvas )
@@ -119,9 +126,8 @@ class Application:
     def calculateNextState( self, t, dt ):
         ''' Callback function for the frame ticker. Executes all modules on the data. '''
         
-        if self._data.state is self._data.STATES.QUIT and not self._destroyed:
-            self._destroyed = True
-            self._graphics.window.destroy()
+        if self._data.state is self._data.STATES.QUIT:
+            self.__quit()
             return
         
         self._physics.tick( self._data )
@@ -141,6 +147,15 @@ class Application:
         ''' Callback function for the main loop. '''
         self._timestepper.tick()    
         self.__callNextState()
+
+    def __quit( self ):
+        ''' Quit application and save configuration. '''
+        if self._destroyed:
+            return
+        
+        self._destroyed = True
+        self._configStorage.save( self._data.configuration )
+        self._graphics.window.destroy()
 
 if __name__ == '__main__':
     print( 'Executing doctest.' )
