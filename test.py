@@ -33,6 +33,7 @@ import physics.circlerectcollider
 import physics.circlecirclereflector
 import physics.colliderfactory
 import physics.collision
+import physics.gravitation
 import physics.movestate
 import physics.reflectorfactory
 import postframe.postframe
@@ -74,6 +75,7 @@ if __name__ == '__main__':
     doctest.testmod( physics.circlerectreflector )
     doctest.testmod( physics.colliderfactory )
     doctest.testmod( physics.collision )
+    doctest.testmod( physics.gravitation )
     doctest.testmod( physics.movestate )
     doctest.testmod( physics.reflectorfactory )
     doctest.testmod( postframe.postframe )
