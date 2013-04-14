@@ -10,7 +10,8 @@ class GameStarter:
         
         data.events = []
         data.level = levelLoader.load( levelFile )
-        data.level.map.player.mass = 1
+        if data.level.map.player.mass is 0:
+            data.level.map.player.mass = 1
         data.points = 0
         data.screenXCoefficient = data.configuration.windowWidth / data.level.map.width
         data.screenYCoefficient = data.configuration.windowHeight / data.level.map.height

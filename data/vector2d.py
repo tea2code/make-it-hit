@@ -44,6 +44,12 @@ class Vector2d:
         134.737
         >>> print( '{0:.3f}'.format(Vector2d( 5, 3 ).length()) )
         5.831
+        >>> print( '{0:.3f}'.format(Vector2d( -1, 1 ).length()) )
+        1.414
+        >>> print( '{0:.3f}'.format(Vector2d( 45, -127 ).length()) )
+        134.737
+        >>> print( '{0:.3f}'.format(Vector2d( -5, -3 ).length()) )
+        5.831
         '''
         return pythagorean.solveC( self.x, self.y )
     

@@ -37,11 +37,12 @@ If not mentioned otherwise all values are strings. Integer, floating-point or bo
 
 As this game is developed the map parser will evolve. Changes (added and removed features) will be marked. You should always stay compatible with the current version.
 
-Current Version: __2__
- 
-### Level
+Current Version: **3**
 
-#### Elements:
+### Map Elements
+ 
+#### Level
+
 - author -- The author. Default empty.
 - date -- Date of last update. Default empty.
 - description -- A brief description. Default empty.
@@ -51,9 +52,8 @@ Current Version: __2__
 - timelimit -- The time limit to solve the level in milliseconds. Integer. Required.
 - version -- The version. Default empty.
  
-### Map
+#### Map
 
-#### Elements:
 - border -- The width of the border. Integer. Required.
 - height -- The height of the map. Integer. Required.
 - objects -- List of objects. See below. Required.
@@ -61,29 +61,33 @@ Current Version: __2__
 - targets -- List of targets. See below. Required.
 - width -- The width of the map. Integer. Required.
  
-### Player
+#### Player
 
-#### Elements:
+The player must always have a mass unequal zero. If it is set to zero it will be overriden with one. The player mass affects how all/most of the forces act.
+
 - *object* -- The player object. See below. Currently only circles are supported. Required.
  
-### Target
+#### Target
 
-### Elements:
 - *object* -- The target object. See below. Required.
 - points -- Number of points received if hitting this target. Integer. Required.
  
-### Object: Circle
+#### Object: Circle
 
-#### Elements:
+- mass -- The mass of the circle. Read chapter "Force". Default 0. Integer.
 - radius -- The radius of the circle. Integer. Required.
 - x -- The x-component of the center. Integer. Required.
 - y -- The y-component of the center. Integer. Required.
  
-### Object: Rect(angle)
+#### Object: Rect(angle)
 
-#### Elements:
 - angle -- The angle of the rectangle. Float. Required.
 - height -- The height of the rectangle. Integer. Required.
+- mass -- The mass of the rectangle. Read chapter "Force". Default 0. Integer.
 - width -- The width of the rectangle. Integer. Required.
 - x -- The x-component of the center. Integer. Required.
 - y -- The y-component of the center. Integer. Required.
+
+### Force
+
+The following description applies only if the player object has a positive mass. If it has a negativ mass all directions are inverted. If it has zero mass nothing happens. If an object has a mass it attracts the player object with a positive force. If the mass is negative it repulses the player with a negativ force. 

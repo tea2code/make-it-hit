@@ -21,6 +21,7 @@ class YamlParser(levelparser.LevelParser):
     TAG_HEIGHT -- Height element.
     TAG_LEVEL -- Root/level element.
     TAG_MAP -- Map element.
+    TAG_MASS -- Mass element.
     TAG_NAME -- Name element.
     TAG_OBJECTS -- Objects element.
     TAG_PARSER -- Parser version of this level.
@@ -52,6 +53,7 @@ class YamlParser(levelparser.LevelParser):
     TAG_HEIGHT = 'height'
     TAG_LEVEL = 'level'
     TAG_MAP = 'map'
+    TAG_MASS = 'mass'
     TAG_NAME = 'name'
     TAG_OBJECTS = 'objects'
     TAG_PARSER = 'parser'
@@ -73,7 +75,7 @@ class YamlParser(levelparser.LevelParser):
         >>> l.level
         '''
         self.level = None
-        self.supportedParser = [2]
+        self.supportedParser = [2, 3]
         self._errorInteger = 'Element "{0}" must be an integer.'
         self._errorMissing = 'Missing element "{0}".'
         
@@ -99,6 +101,7 @@ class YamlParser(levelparser.LevelParser):
     def __parseCircle( self, circleRoot ):
         ''' Parses circle and returns it. '''
         c = circle.Circle()
+        c.mass = self.__readInteger( circleRoot, self.TAG_MASS, c.mass )
         c.position = self.__parseVector2d( circleRoot )
         c.radius = self.__readReqInteger( circleRoot, self.TAG_RADIUS )
         return c
@@ -188,6 +191,7 @@ class YamlParser(levelparser.LevelParser):
         r = rect.Rect()
         r.angle = self.__readReqInteger( rectRoot, self.TAG_ANGLE )
         r.height = self.__readReqInteger( rectRoot, self.TAG_HEIGHT )
+        r.mass = self.__readInteger( rectRoot, self.TAG_MASS, r.mass )
         r.width = self.__readReqInteger( rectRoot, self.TAG_WIDTH )
         r.position = self.__parseVector2d( rectRoot )
         return r
@@ -197,6 +201,11 @@ class YamlParser(levelparser.LevelParser):
         x = self.__readReqInteger( vectorRoot, self.TAG_X )
         y = self.__readReqInteger( vectorRoot, self.TAG_Y )
         return vector2d.Vector2d( x, y )
+    
+    def __readInteger( self, root, tag, default ):
+        ''' Tries to read a not required integer tag. Returns the value or the default value if not 
+        found. '''
+        return self.__readString( root, tag, default )
     
     def __readReqInteger( self, root, tag ):
         ''' Tries to read a required integer tag. Returns integer or raises error. '''

@@ -4,6 +4,7 @@ from data import rect
 from data import targetevent
 from data import vector2d
 from physics import colliderfactory
+from physics import gravitation
 from physics import moveheun
 from physics import movestate
 from physics import reflectorfactory
@@ -29,6 +30,14 @@ class Physics( tickable.Tickable ):
             return;
     
         player = data.level.map.player
+    
+        # Add gravitation forces to player.
+        grav = gravitation.Gravitation()
+        for o in data.level.map.objects:
+            direction = player.position - o.position;
+            force = grav.calcForce( player.mass, o.mass, direction.length() )
+            forceVector = direction * force
+            player.addForce( forceVector )
     
         # Move player.
         state = movestate.MoveState()
