@@ -2,7 +2,9 @@
 from data import rect
 from physics import circlecirclecollider
 from physics import circlerectcollider
-from physics import nocollidererror
+
+class NoColliderError( Exception ):
+    ''' Exception thrown if no collider for the given objects was found. '''
 
 class ColliderFactory:
     ''' Factory of collider objects. '''
@@ -33,7 +35,7 @@ class ColliderFactory:
          
         # Unknown objects. Can not be collided.
         else:
-            raise nocollidererror.NoColliderError( 'No collider object for "{0}" and "{1}" found.'.format(object1, object2) )
+            raise NoColliderError( 'No collider object for "{0}" and "{1}" found.'.format(object1, object2) )
             
 if __name__ == '__main__':
     print( 'Executing doctest.' )

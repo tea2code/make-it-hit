@@ -1,8 +1,10 @@
 ﻿from data import circle
 from data import rect
-from graphics import notdrawableerror
 from graphics import tkcircledrawer
 from graphics import tkrectdrawer
+
+class NotDrawableError( Exception ):
+    ''' Exception thrown if a not drawable object should be drawn. '''
 
 class TkDrawerFactory:
     ''' Factory for tk drawer classes. '''
@@ -22,4 +24,4 @@ class TkDrawerFactory:
         
         # Unknown object. Can not be drawn.
         else:
-            raise notdrawableerror.NotDrawableError( 'Not drawable object "{0}".'.format(object) )
+            raise NotDrawableError( 'Not drawable object "{0}".'.format(object) )

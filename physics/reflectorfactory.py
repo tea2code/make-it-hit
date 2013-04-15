@@ -2,7 +2,9 @@
 from data import rect
 from physics import circlecirclereflector
 from physics import circlerectreflector
-from physics import noreflectorerror
+
+class NoReflectorError( Exception ):
+    ''' Exception thrown if no reflector for the given objects was found. '''
 
 class ReflectorFactory:
     ''' Factory of reflector objects. '''
@@ -29,7 +31,7 @@ class ReflectorFactory:
          
         # Unknown objects. Can not be collided.
         else:
-            raise noreflectorerror.NoReflectorError( 'No reflector object for "{0}" and "{1}" found.'.format(object1, object2) )
+            raise NoReflectorError( 'No reflector object for "{0}" and "{1}" found.'.format(object1, object2) )
             
 if __name__ == '__main__':
     print( 'Executing doctest.' )
