@@ -63,7 +63,7 @@ Current Version: **3**
  
 #### Player
 
-The player must always have a mass unequal zero. If it is set to zero it will be overriden with one. The player mass affects how all/most of the forces act.
+The player must always have a mass unequal zero. If it is set to zero it will be overriden with one. The player mass affects how all/most of the forces act. A negative mass will inverts most of the forces.
 
 - *object* -- The player object. See below. Currently only circles are supported. Required.
  

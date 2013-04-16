@@ -1,0 +1,79 @@
+level:
+    parser: 3
+    
+    author: tea2code
+    date: 2013-04-16
+    description: No, don't go that way...
+    name: Wrong Way
+    timelimit: 2000
+    version: 1
+    
+    map:
+        border: 10
+        height: 500
+        width: 300
+        
+        objects:
+            - rect:
+                angle: -30
+                height: 10
+                width: 130
+                x: 70
+                y: 120
+                
+            - rect:
+                angle: 30
+                height: 10
+                width: 130
+                x: 230
+                y: 120
+                
+            - circle: 
+                radius: 20
+                x: 160
+                y: 20
+                
+            - circle: 
+                radius: 5
+                x: 100
+                y: 50 
+                
+            - circle: 
+                radius: 5
+                x: 200
+                y: 43    
+                
+            - circle: 
+                radius: 5
+                x: 57
+                y: 21 
+                
+            - circle: 
+                radius: 5
+                x: 243
+                y: 86  
+
+            - circle: 
+                radius: 5
+                x: 38
+                y: 95 
+                
+            - circle: 
+                radius: 5
+                x: 272
+                y: 67  
+
+        player: 
+            circle: 
+                mass: -1
+                radius: 10
+                x: 150
+                y: 110
+                
+        targets:
+            - target:
+                circle:
+                    radius: 20
+                    x: 150
+                    y: 450
+                points: 100
