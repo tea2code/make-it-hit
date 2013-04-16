@@ -8,13 +8,15 @@ import tkinter as tk
 class TkGameView( viewhandler.ViewHandler ):
     ''' The in game view. 
     
-    Member:s
+    Member:
     canvas -- The canvas object (Canvas).
     menuBtn -- The button which leads back to the main menu (Button).
     restartBtn -- The restart button (Button).
     _barFrame -- The frame of the menu bar (Frame).
     _canvasFrame -- The frame of the canvas object (Frame).
+    _descriptionLabel -- The description label (Label).
     _frame -- The main frame (Frame).
+    _nameLabel -- The level name label (Label).
     _pointsLabel -- Label for points (Label).
     _spacers -- List of empty spacer labels (Label).
     _stateLabel -- Label to show the current state (Label).
@@ -56,9 +58,22 @@ class TkGameView( viewhandler.ViewHandler ):
         self._pointsLabel.pack()
         
         self._stateLabel = tk.Label( self._barFrame, text = 'Loading' )
-        self._stateLabel.config( background = 'white' )
+        self._stateLabel.config( background = 'white',
+                                 wraplength = data.configuration.menuBarWidth - 20 )
         self._stateLabel.pack()
         
+        self.spacers.append( tk.Label(self._barFrame, background = 'white').pack() )
+        
+        self._nameLabel = tk.Label( self._barFrame, text = '' )
+        self._nameLabel.config( background = 'white', font = {'weight': 'bold'} )
+        self._nameLabel.pack()
+        
+        self._descriptionLabel = tk.Label( self._barFrame, text = '' )
+        self._descriptionLabel.config( background = 'white', justify = tk.LEFT,
+                                       wraplength = data.configuration.menuBarWidth - 20 )
+        self._descriptionLabel.pack()
+        
+        self.spacers.append( tk.Label(self._barFrame, background = 'white').pack() )
         self.spacers.append( tk.Label(self._barFrame, background = 'white').pack() )
 
         self.restartBtn = tk.Button( self._barFrame, text = 'Restart' )
@@ -176,10 +191,14 @@ class TkGameView( viewhandler.ViewHandler ):
             self._stateLabel.config( text = 'Playing...' )
             
         elif data.state is data.STATES.VICTORY:
-            self._stateLabel.config( text = 'Congratulations,\n you have won!' )
+            self._stateLabel.config( text = 'Congratulations, you have won!' )
             
         elif data.state is data.STATES.GAMEOVER:
-            self._stateLabel.config( text = 'Game Over,\n you lost!' )
+            self._stateLabel.config( text = 'Game Over, you lost!' )
+            
+        # Update level info.
+        self._nameLabel.config( text = data.level.name )
+        self._descriptionLabel.config( text = data.level.description )
             
         # Deactivate restart button if victory.
         if data.state is data.STATES.VICTORY:
