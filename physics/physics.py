@@ -34,7 +34,7 @@ class Physics( tickable.Tickable ):
         # Add gravitation forces to player.
         grav = gravitation.Gravitation()
         for o in data.level.map.objects:
-            direction = player.position - o.position;
+            direction = o.position - player.position;
             force = grav.calcForce( player.mass, o.mass, direction.length() )
             forceVector = direction * force
             player.addForce( forceVector )

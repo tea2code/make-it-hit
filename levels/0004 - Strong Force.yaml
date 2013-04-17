@@ -1,0 +1,65 @@
+level:
+    parser: 3
+    
+    author: tea2code
+    date: 2013-04-17
+    description: Quite some strong balls you have.
+    name: Strong Force
+    timelimit: 3000
+    version: 1
+    
+    map:
+        border: 10
+        height: 500
+        width: 300
+        
+        objects:
+            - circle: 
+                mass: 43
+                radius: 39
+                x: 50
+                y: 300 
+                
+            - circle: 
+                mass: 24
+                radius: 21
+                x: 250
+                y: 100  
+                
+            - circle: 
+                mass: 84
+                radius: 29
+                x: 194
+                y: 370 
+                
+            - circle: 
+                mass: 24
+                radius: 24
+                x: 94
+                y: 137  
+                
+            - circle: 
+                mass: 62
+                radius: 34
+                x: 149
+                y: 222    
+
+            - circle: 
+                mass: -200
+                radius: 15
+                x: 220
+                y: 300     
+
+        player: 
+            circle: 
+                radius: 10
+                x: 150
+                y: 50
+                
+        targets:
+            - target:
+                circle:
+                    radius: 20
+                    x: 150
+                    y: 450
+                points: 100
