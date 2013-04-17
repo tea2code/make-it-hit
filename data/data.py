@@ -23,7 +23,6 @@ class Data:
     screenYCoefficient -- Coefficient for world to screen conversion in y direction (float).
     state -- The current game state (enum).
     time -- The accumulated time of all steps in seconds (float).
-    _borders -- List of rectangles representing the borders (data.rect). 
     '''
     
     STATES = enum.createSeq( 'MENU_MAIN', 'MENU_NEW', 'MENU_NEW_DETAILS', 'MENU_CONFIG',
@@ -58,8 +57,6 @@ class Data:
         >>> d.state
         >>> d.time
         0
-        >>> len(d._borders)
-        0
         '''
         self.configuration = None
         self.deltaTime = 0
@@ -75,7 +72,6 @@ class Data:
         self.screenYCoefficient = 1
         self.state = None
         self.time = 0
-        self._borders = []
     
 if __name__ == '__main__':
     print( 'Executing doctest.' )

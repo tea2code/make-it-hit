@@ -69,40 +69,41 @@ class Physics( tickable.Tickable ):
 
     def __borders( self, data ):
         ''' Calculates a list of rectangles representing the borders. '''
-        if not data._borders:
-            border = data.level.map.border
-            height = data.level.map.height
-            width = data.level.map.width
-            
-            # Left.
-            left = rect.Rect()
-            left.position = vector2d.Vector2d( border / 2, height / 2 )
-            left.height = height
-            left.width = border
-            data._borders.append( left )
-            
-            # Top.
-            top = rect.Rect()
-            top.position = vector2d.Vector2d( width / 2, border / 2 )
-            top.height = border
-            top.width = width
-            data._borders.append( top )
-            
-            # Right.
-            right = rect.Rect()
-            right.position = vector2d.Vector2d( width - border / 2, height / 2 )
-            right.height = height
-            right.width = border
-            data._borders.append( right )
-            
-            # Bottom.
-            bottom = rect.Rect()
-            bottom.position = vector2d.Vector2d( width / 2, height - border / 2 )
-            bottom.height = border
-            bottom.width = width
-            data._borders.append( bottom )   
+        border = data.level.map.border
+        height = data.level.map.height
+        width = data.level.map.width
         
-        return data._borders
+        borders = []
+        
+        # Left.
+        left = rect.Rect()
+        left.position = vector2d.Vector2d( border / 2, height / 2 )
+        left.height = height
+        left.width = border
+        borders.append( left )
+        
+        # Top.
+        top = rect.Rect()
+        top.position = vector2d.Vector2d( width / 2, border / 2 )
+        top.height = border
+        top.width = width
+        borders.append( top )
+        
+        # Right.
+        right = rect.Rect()
+        right.position = vector2d.Vector2d( width - border / 2, height / 2 )
+        right.height = height
+        right.width = border
+        borders.append( right )
+        
+        # Bottom.
+        bottom = rect.Rect()
+        bottom.position = vector2d.Vector2d( width / 2, height - border / 2 )
+        bottom.height = border
+        bottom.width = width
+        borders.append( bottom )   
+        
+        return borders
         
     def __interact( self, player, objects ):
         ''' Calculates interaction of player with objects. Returns list of events.'''
