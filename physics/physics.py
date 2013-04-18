@@ -12,10 +12,15 @@ from physics import reflectorfactory
 class Physics( tickable.Tickable ):
     ''' This class calculates the physical reactions of all objects. 
     
+    Constants:
+    GRAVITATIONAL_CONSTANT -- The gravitational constant (float). TODO: Move into configuration.
+    
     Member:
     _colliderFactory -- Factory for colliders (physics.colliderfactory).
     _reflectorFactory -- Factory for reflectors (physics.reflectorfactory).
     '''
+    
+    GRAVITATIONAL_CONSTANT = 6.67384 * 10**2
 
     def __init__( self ):
         self._colliderFactory = colliderfactory.ColliderFactory()
@@ -32,7 +37,7 @@ class Physics( tickable.Tickable ):
         player = data.level.map.player
     
         # Add gravitation forces to player.
-        grav = gravitation.Gravitation()
+        grav = gravitation.Gravitation( self.GRAVITATIONAL_CONSTANT )
         for o in data.level.map.objects:
             direction = o.position - player.position;
             force = grav.calcForce( player.mass, o.mass, direction.length() )

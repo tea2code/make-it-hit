@@ -15,9 +15,9 @@ class Application:
 
     Member:
     configPath -- Path to user specific configuration file (string).
+    data -- The "global" data object (data.data).
     defaultConfigPath -- Path to default configuration file (string).
     _configStorage -- The configuration storage system (ConfigStorage).
-    _data -- The "global" data object (data.data).
     _destroyed -- Flag indicating if the application is already quitting (boolean).
     _fps -- The module responsible to count frames per second (fps).
     _gamerules -- The module responsible for implementing game rules (gamerules.gamerules).
@@ -36,7 +36,8 @@ class Application:
         ''
         >>> a.defaultConfigPath
         ''
-        >>> a._data
+        >>> a.data # doctest: +ELLIPSIS
+        <...Data object at 0x...>
         >>> a._destroyed
         False
         >>> a._fps
@@ -51,7 +52,7 @@ class Application:
         '''
         self.configPath = ''
         self.defaultConfigPath = ''
-        self._data = None
+        self.data = data.Data()
         self._destroyed = False
         self._fps = None
         self._gamerules = None
@@ -70,22 +71,21 @@ class Application:
         config = self._configStorage.load()
 
         # Initialize data.
-        self._data = data.Data()
-        self._data.configuration = config
-        self._data.state = self._data.STATES.MENU_MAIN
+        self.data.configuration = config
+        self.data.state = self.data.STATES.MENU_MAIN
         
-        frameTime = 1 / self._data.configuration.framesPerSecond
+        frameTime = 1 / self.data.configuration.framesPerSecond
         self._loopTime = math.floor( frameTime * 1000 )
         
         # Initialize fps counter.
-        self._fps = fps.Fps( self._data.configuration.framesPerSecond, 
-                             2 * self._data.configuration.framesPerSecond )
+        self._fps = fps.Fps( self.data.configuration.framesPerSecond, 
+                             2 * self.data.configuration.framesPerSecond )
         
         # Initialize game rules.
-        self._gamerules = gamerules.GameRules( self._data )
+        self._gamerules = gamerules.GameRules( self.data )
         
         # Initialize graphics.
-        self._graphics = tkgraphics.TkGraphics( self._data )
+        self._graphics = tkgraphics.TkGraphics( self.data )
         self._graphics.window.protocol( 'WM_DELETE_WINDOW', self.__quit )
         
         # Initialize physics.
@@ -99,7 +99,7 @@ class Application:
         self._timestepper.time = frameTime
         
         # Initialize and activate input module.
-        self._input = tkinput.TkInput( self._data )
+        self._input = tkinput.TkInput( self.data )
         self._input.bindConfigBtn( self._graphics.configBtn )
         self._input.bindConfigInputs( self._graphics.startDelayInput, 
                                       self._graphics.windowHeightInput, 
@@ -126,18 +126,18 @@ class Application:
     def calculateNextState( self, t, dt ):
         ''' Callback function for the frame ticker. Executes all modules on the data. '''
         
-        if self._data.state is self._data.STATES.QUIT:
+        if self.data.state is self.data.STATES.QUIT:
             self.__quit()
             return
         
-        self._physics.tick( self._data )
-        self._fps.tick( self._data ) 
-        self._gamerules.tick( self._data )
-        self._graphics.tick( self._data )
-        self._postFrame.tick( self._data )
+        self._physics.tick( self.data )
+        self._fps.tick( self.data ) 
+        self._gamerules.tick( self.data )
+        self._graphics.tick( self.data )
+        self._postFrame.tick( self.data )
         
-        self._data.deltaTime = dt
-        self._data.time += dt
+        self.data.deltaTime = dt
+        self.data.time += dt
     
     def __callNextState( self ):
         ''' Return to main loop. '''
@@ -154,7 +154,7 @@ class Application:
             return
         
         self._destroyed = True
-        self._configStorage.save( self._data.configuration )
+        self._configStorage.save( self.data.configuration )
         self._graphics.window.destroy()
 
 if __name__ == '__main__':
