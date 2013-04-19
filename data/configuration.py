@@ -48,6 +48,14 @@ class Configuration:
         self.windowHeight = 768
         self.windowTitle = 'Make It Hit - {0} (FPS: {1})'
         self.windowWidth = 1024
+     
+    def __str__( self ):
+        template = 'Configuration(forceScale {}, framesPerSecond {}, homepage {}, levelDir {}, ' \
+                   'levelExtension {}, menuBarWidth {}, startTime {}, windowHeight {}, ' \
+                   'windowTitle {}, windowWidth {})'
+        return template.format( self.forceScale, self.framesPerSecond, self.homepage, self.levelDir,
+                                self.levelExtension, self.menuBarWidth, self.startTime, 
+                                self.windowHeight, self.windowTitle, self.windowWidth )
         
 if __name__ == '__main__':
     print( 'Executing doctest.' )

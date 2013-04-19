@@ -117,7 +117,7 @@ class Application:
         self._input.bindShuffleCheck( self._graphics.shuffleCheck )
         self._input.bindStartBtn( self._graphics.startBtn )
         self._input.bindWindow( self._graphics.canvas )
-        
+
         # Start.
         self._timestepper.start()
         self.__callNextState()

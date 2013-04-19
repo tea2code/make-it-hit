@@ -20,7 +20,7 @@ class Physics( tickable.Tickable ):
     _reflectorFactory -- Factory for reflectors (physics.reflectorfactory).
     '''
     
-    GRAVITATIONAL_CONSTANT = 6.67384 * 10**2
+    GRAVITATIONAL_CONSTANT = 6.67384 * 10**2 # Not the correct value but for scaling purpose we use it.
 
     def __init__( self ):
         self._colliderFactory = colliderfactory.ColliderFactory()

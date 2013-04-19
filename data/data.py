@@ -73,6 +73,15 @@ class Data:
         self.state = None
         self.time = 0
     
+    def __str__( self ):
+        template = 'Data(configuration {}, deltaTime {}, events {}, fps {}, level {}, ' \
+                   'levelDetails {}, levelList {}, mousePosition {}, mousePressed {}, points {}, ' \
+                   'screenXCoefficient {}, screenYCoefficient {}, state {}, time {})'
+        return template.format( self.configuration, self.deltaTime, self.events, self.fps, self.level,
+                                self.levelDetails, self.levelList, self.mousePosition, self.mousePressed,
+                                self.points, self.screenXCoefficient, self.screenYCoefficient, self.state,
+                                self.time )
+    
 if __name__ == '__main__':
     print( 'Executing doctest.' )
     import doctest
