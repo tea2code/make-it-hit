@@ -57,7 +57,7 @@ Current Version: **3**
 
 - border -- The width of the border. Integer. Required.
 - height -- The height of the map. Integer. Required.
-- objects -- List of objects. See below. Required.
+- objects -- List of objects. See below. Required but can be empty.
 - player -- The player. See below. Required.
 - targets -- List of targets. See below. Required.
 - width -- The width of the map. Integer. Required.
