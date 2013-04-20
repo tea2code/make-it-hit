@@ -27,6 +27,8 @@ class TkGameView( viewhandler.ViewHandler ):
         ''' Inject canvas frame and menu frame in given window. Using data and menu bar width 
         for initial settings. '''
 
+        menuBarWrapLength = data.configuration.menuBarWidth - 20
+
         self._frame = tk.Frame( window )
         self._frame.config( background = 'white' )
 
@@ -58,19 +60,19 @@ class TkGameView( viewhandler.ViewHandler ):
         self._pointsLabel.pack()
         
         self._stateLabel = tk.Label( self._barFrame, text = 'Loading' )
-        self._stateLabel.config( background = 'white',
-                                 wraplength = data.configuration.menuBarWidth - 20 )
+        self._stateLabel.config( background = 'white', wraplength = menuBarWrapLength )
         self._stateLabel.pack()
         
         self.spacers.append( tk.Label(self._barFrame, background = 'white').pack() )
         
         self._nameLabel = tk.Label( self._barFrame, text = '' )
-        self._nameLabel.config( background = 'white', font = {'weight': 'bold'} )
+        self._nameLabel.config( background = 'white', font = {'weight': 'bold'},
+                                wraplength = menuBarWrapLength )
         self._nameLabel.pack()
         
         self._descriptionLabel = tk.Label( self._barFrame, text = '' )
         self._descriptionLabel.config( background = 'white', justify = tk.LEFT,
-                                       wraplength = data.configuration.menuBarWidth - 20 )
+                                       wraplength = menuBarWrapLength )
         self._descriptionLabel.pack()
         
         self.spacers.append( tk.Label(self._barFrame, background = 'white').pack() )

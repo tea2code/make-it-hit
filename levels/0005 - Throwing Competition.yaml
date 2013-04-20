@@ -1,0 +1,119 @@
+level:
+    parser: 3
+    
+    author: tea2code
+    date: 2013-04-17
+    description: Throw it as far as you can.
+    name: Throwing Competition
+    timelimit: 3000
+    version: 1
+    
+    map:
+        border: 10
+        height: 200
+        width: 500
+        
+        objects:
+            - circle: 
+                mass: 60
+                radius: 10
+                x: 50
+                y: 500
+                
+            - circle: 
+                mass: 60
+                radius: 10
+                x: 100
+                y: 500
+                
+            - circle: 
+                mass: 60
+                radius: 10
+                x: 150
+                y: 500
+                
+            - circle: 
+                mass: 60
+                radius: 10
+                x: 200
+                y: 500
+                
+            - circle: 
+                mass: 60
+                radius: 10
+                x: 250
+                y: 500
+                
+            - circle: 
+                mass: 60
+                radius: 10
+                x: 300
+                y: 500
+                
+            - circle: 
+                mass: 60
+                radius: 10
+                x: 350
+                y: 500
+                
+            - circle: 
+                mass: 60
+                radius: 10
+                x: 400
+                y: 500
+                
+            - circle: 
+                mass: 60
+                radius: 10
+                x: 450
+                y: 500
+                
+            - rect:
+                angle: 0
+                height: 50
+                width: 10
+                x: 150
+                y: 165
+              
+            - rect:
+                angle: 0
+                height: 50
+                width: 10
+                x: 250
+                y: 165
+                
+            - rect:
+                angle: 0
+                height: 50
+                width: 10
+                x: 350
+                y: 165
+              
+            - rect:
+                angle: -20
+                height: 10
+                width: 60
+                x: 40
+                y: 110
+                
+            - rect:
+                mass: 10
+                angle: -20
+                height: 25
+                width: 18
+                x: 22
+                y: 98
+                
+        player: 
+            circle: 
+                radius: 10
+                x: 41
+                y: 93
+                
+        targets:
+            - target:
+                circle:
+                    radius: 20
+                    x: 450
+                    y: 100
+                points: 100
