@@ -149,7 +149,8 @@ class YamlParser(levelparser.LevelParser):
         # Objects.
         objects = []
         if self.TAG_OBJECTS in mapRoot:
-            objects.extend( mapRoot[self.TAG_OBJECTS] )
+            if mapRoot[self.TAG_OBJECTS]:
+                objects.extend( mapRoot[self.TAG_OBJECTS] )
         else:
             raise levelparser.LevelParserError( self._errorMissing.format(self.TAG_OBJECTS) )
         if objects:
@@ -167,7 +168,8 @@ class YamlParser(levelparser.LevelParser):
         # Targets.
         targets = []
         if self.TAG_TARGETS in mapRoot:
-            targets.extend( mapRoot[self.TAG_TARGETS] )
+            if mapRoot[self.TAG_TARGETS]:
+                targets.extend( mapRoot[self.TAG_TARGETS] )
         else:
             raise levelparser.LevelParserError( self._errorMissing.format(self.TAG_TARGETS) )
         if targets:

@@ -1,0 +1,123 @@
+level:
+    parser: 2
+    
+    author: tea2code
+    date: 2013-04-20
+    description: Which one should i take?
+    name: So Much Choice
+    timelimit: 500
+    version: 1
+    
+    map:
+        border: 10
+        height: 500
+        width: 500
+        
+        objects:
+
+        player: 
+            circle: 
+                radius: 10
+                x: 250
+                y: 250
+                
+        targets:
+            - target:
+                circle:
+                    radius: 20
+                    x: 57
+                    y: 65
+                points: 576
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 461
+                    y: 100
+                points: 467
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 340
+                    y: 40
+                points: 234
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 96
+                    y: 374
+                points: 975
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 310
+                    y: 400
+                points: 761
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 216
+                    y: 108
+                points: 485
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 460
+                    y: 287
+                points: 149
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 320
+                    y: 190
+                points: 843
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 140
+                    y: 260
+                points: 510
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 220
+                    y: 454
+                points: 378
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 104
+                    y: 180
+                points: 666
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 195
+                    y: 364
+                points: 751
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 341
+                    y: 128
+                points: 711
+                
+            - target:
+                circle:
+                    radius: 20
+                    x: 440
+                    y: 412
+                points: 388
+                
+            
