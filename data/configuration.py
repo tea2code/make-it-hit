@@ -4,6 +4,7 @@ class Configuration:
     Member:
     forceScale -- Scaling factor for forces (float).
     framesPerSecond -- The rate of frames per second which should be (int).
+    gravitationalConstant -- The gravitational constant (float).
     homepage -- Url of the homepage (string).
     levelDir -- Directory where levels can be found (string).
     levelExtension -- Extension of level files (string).
@@ -21,6 +22,8 @@ class Configuration:
         100
         >>> c.framesPerSecond
         60
+        >>> c.gravitationalConstant
+        667.384
         >>> c.homepage
         ''
         >>> c.levelDir
@@ -40,6 +43,7 @@ class Configuration:
         '''
         self.forceScale = 100
         self.framesPerSecond = 60
+        self.gravitationalConstant = 667.384
         self.homepage = ''
         self.levelDir = 'levels'
         self.levelExtension = '.yaml'
@@ -50,12 +54,29 @@ class Configuration:
         self.windowWidth = 1024
      
     def __str__( self ):
-        template = 'Configuration(forceScale {}, framesPerSecond {}, homepage {}, levelDir {}, ' \
-                   'levelExtension {}, menuBarWidth {}, startTime {}, windowHeight {}, ' \
-                   'windowTitle {}, windowWidth {})'
-        return template.format( self.forceScale, self.framesPerSecond, self.homepage, self.levelDir,
-                                self.levelExtension, self.menuBarWidth, self.startTime, 
-                                self.windowHeight, self.windowTitle, self.windowWidth )
+        template = 'Configuration(' \
+                   'forceScale {}, ' \
+                   'framesPerSecond {}, ' \
+                   'gravitationalConstant {}, ' \
+                   'homepage {}, ' \
+                   'levelDir {}, ' \
+                   'levelExtension {}, ' \
+                   'menuBarWidth {}, ' \
+                   'startTime {}, ' \
+                   'windowHeight {}, ' \
+                   'windowTitle {}, ' \
+                   'windowWidth {})'
+        return template.format( self.forceScale, 
+                                self.framesPerSecond, 
+                                self.gravitationalConstant, 
+                                self.homepage, 
+                                self.levelDir,
+                                self.levelExtension, 
+                                self.menuBarWidth, 
+                                self.startTime, 
+                                self.windowHeight, 
+                                self.windowTitle, 
+                                self.windowWidth )
         
 if __name__ == '__main__':
     print( 'Executing doctest.' )

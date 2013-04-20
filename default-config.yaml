@@ -5,6 +5,8 @@
 # ==================================================================================================
 framesPerSecond: 60
 forceScale: 100
+# Not the correct value but for scaling purpose we use it:
+gravitationalConstant: 667.384
 homepage: https://github.com/tea2code/make-it-hit
 levelDir: levels/
 levelExtension: .yaml
