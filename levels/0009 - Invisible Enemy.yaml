@@ -1,0 +1,49 @@
+level:
+    parser: 2
+    
+    author: tea2code
+    date: 2013-04-21
+    description: An invisible enemy is lurking in the darkness.
+    name: Invisible Enemy
+    timelimit: 3000
+    version: 1
+    
+    map:
+        border: 10
+        height: 500
+        width: 200
+        
+        objects:
+            - circle: 
+                mass: 50
+                radius: 1
+                x: -300
+                y: 250
+                
+        player: 
+            circle: 
+                radius: 10
+                x: 100
+                y: 50
+                
+        targets:
+            - target:
+                circle:
+                    radius: 10
+                    x: 100
+                    y: 450
+                points: 100
+                
+            - target:
+                circle:
+                    radius: 35
+                    x: 50
+                    y: 350
+                points: -100
+                
+            - target:
+                circle:
+                    radius: 35
+                    x: 150
+                    y: 350
+                points: -100
