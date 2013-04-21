@@ -6,13 +6,13 @@ A little game where you must shoot objects to targets.
 
 - [2012-02-23] Version 1: Basically a improved version of the prototype. Better map/level format with improved parser.
 - [2012-04-03] Version 2: Fixed window size with scaling of level. In game menu and main menu with level selection.
+- [2012-04-21] Version 3: Replacement of xml with yaml as level format. Configuration module. Gravitational force (positive and negative).
 
 ## Roadmap
 
-- [2012-05] Version 3: Replacement of xml with yaml as level format. Configuration module. New level features (maybe objects with attractive force).
-- [2012-06] Version 4: Highscores. New level features (maybe triangle as an object, reflection and collision as an attribute of objects). 
-- [2012-07] Version 7: Sound. Possible first public version.
-- [2012-08] Version 6: Graphic themes. Maybe PyQt as rendering base. New level features.
+- [2012-05] Version 4: Sound. New level features (reflection and collision as an attribute of objects).
+- [2012-06] Version 5: Highscores. New level features (maybe triangle as an object). Possible first public version.
+- [2012-07] Version 6: Graphic themes. PyQt as rendering base. New level features.
 
 ## Known Bugs:
 
