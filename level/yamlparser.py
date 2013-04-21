@@ -207,7 +207,12 @@ class YamlParser(levelparser.LevelParser):
     def __readInteger( self, root, tag, default ):
         ''' Tries to read a not required integer tag. Returns the value or the default value if not 
         found. '''
-        return self.__readString( root, tag, default )
+        if tag in root and isinstance( root[tag], int ):
+            return root[tag]
+        elif tag in root and not isinstance( root[tag], int ):
+            raise levelparser.LevelParserError( self._errorInteger.format(tag) )
+        else:
+            return default
     
     def __readReqInteger( self, root, tag ):
         ''' Tries to read a required integer tag. Returns integer or raises error. '''

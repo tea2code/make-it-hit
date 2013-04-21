@@ -1,0 +1,41 @@
+level:
+    parser: 2
+    
+    author: tea2code
+    date: 2013-04-21
+    description: Simple minigolf course.
+    name: Minigolf II
+    timelimit: 3000
+    version: 1
+    
+    map:
+        border: 10
+        height: 700
+        width: 200
+        
+        objects:
+            - circle: 
+                mass: 20
+                radius: 90
+                x: 10
+                y: 200
+                
+            - circle: 
+                mass: 12
+                radius: 90
+                x: 190
+                y: 500   
+                
+        player: 
+            circle: 
+                radius: 10
+                x: 100
+                y: 50
+                
+        targets:
+            - target:
+                circle:
+                    radius: 10
+                    x: 90
+                    y: 650
+                points: 100

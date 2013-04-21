@@ -5,7 +5,7 @@ level:
     date: 2013-04-06
     description: Try to reflect the ball to hit the target.
     name: Let's Reflect
-    timelimit: 5000
+    timelimit: 2000
     version: 1
     
     map:
