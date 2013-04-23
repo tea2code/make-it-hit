@@ -11,7 +11,7 @@ if sys.platform == "win32":
 
 setup(
     name = 'Make-It-Hit',
-    version = '3',
+    version = '4',
     description = 'A little game where you must shoot objects to targets.',
     author = 'tea2code',
     url = 'https://github.com/tea2code/make-it-hit',
