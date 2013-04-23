@@ -16,6 +16,7 @@ class YamlParser(levelparser.LevelParser):
     TAG_AUTHOR -- Author element.
     TAG_BORDER -- Border element.
     TAG_CIRCLE -- Circle element.
+    TAG_COLLIDING -- Colliding element.
     TAG_DATE -- Date element.
     TAG_DESCRIPTION -- Description element.
     TAG_HEIGHT -- Height element.
@@ -40,6 +41,7 @@ class YamlParser(levelparser.LevelParser):
     Member:
     level -- The resulting level object.
     supportedParser -- List of supported parser versions
+    _errorBoolean -- Text template for not an boolean error.
     _errorInteger -- Text template for not an integer error.
     _errorMissing -- Text template for missing element error.
     '''
@@ -49,6 +51,7 @@ class YamlParser(levelparser.LevelParser):
     TAG_BORDER = 'border'
     TAG_DATE = 'date'
     TAG_CIRCLE = 'circle'
+    TAG_COLLIDING = 'colliding'
     TAG_DESCRIPTION = 'description'
     TAG_HEIGHT = 'height'
     TAG_LEVEL = 'level'
@@ -76,6 +79,7 @@ class YamlParser(levelparser.LevelParser):
         '''
         self.level = None
         self.supportedParser = [2, 3]
+        self._errorBoolean = 'Element "{0}" must be a boolean.'
         self._errorInteger = 'Element "{0}" must be an integer.'
         self._errorMissing = 'Missing element "{0}".'
         
@@ -100,7 +104,7 @@ class YamlParser(levelparser.LevelParser):
     
     def __parseCircle( self, circleRoot ):
         ''' Parses circle and returns it. '''
-        c = circle.Circle()
+        c = self.__parseObject( circleRoot, circle.Circle() )
         c.mass = self.__readInteger( circleRoot, self.TAG_MASS, c.mass )
         c.position = self.__parseVector2d( circleRoot )
         c.radius = self.__readReqInteger( circleRoot, self.TAG_RADIUS )
@@ -178,6 +182,21 @@ class YamlParser(levelparser.LevelParser):
         else:
             raise levelparser.LevelParserError( self._errorMissing.format(self.TAG_TARGET) )
     
+    def __parseObject( self, root, obj ):
+        ''' Reads common attributes of an found object. Returns the object. '''
+        obj.colliding = self.__readBoolean( root, self.TAG_COLLIDING, obj.colliding )
+        obj.mass = self.__readInteger( root, self.TAG_MASS, obj.mass )
+        obj.position = self.__parseVector2d( root )
+        return obj
+        
+    def __parseRect( self, rectRoot ):
+        ''' Parses a rectangle and returns it. '''
+        r = self.__parseObject( rectRoot, rect.Rect() )
+        r.angle = self.__readReqInteger( rectRoot, self.TAG_ANGLE )
+        r.height = self.__readReqInteger( rectRoot, self.TAG_HEIGHT )
+        r.width = self.__readReqInteger( rectRoot, self.TAG_WIDTH )
+        return r
+    
     def __parseTarget( self, targetRoot ):
         ''' Parses a target and returns it. '''
         t = target.Target()
@@ -187,22 +206,22 @@ class YamlParser(levelparser.LevelParser):
         if self.TAG_RECT in targetRoot:
             t.object = self.__parseRect( targetRoot[self.TAG_RECT] )
         return t
-        
-    def __parseRect( self, rectRoot ):
-        ''' Parses a rectangle and returns it. '''
-        r = rect.Rect()
-        r.angle = self.__readReqInteger( rectRoot, self.TAG_ANGLE )
-        r.height = self.__readReqInteger( rectRoot, self.TAG_HEIGHT )
-        r.mass = self.__readInteger( rectRoot, self.TAG_MASS, r.mass )
-        r.width = self.__readReqInteger( rectRoot, self.TAG_WIDTH )
-        r.position = self.__parseVector2d( rectRoot )
-        return r
     
     def __parseVector2d( self, vectorRoot ):
         ''' Parses a vector and returns it. '''
         x = self.__readReqInteger( vectorRoot, self.TAG_X )
         y = self.__readReqInteger( vectorRoot, self.TAG_Y )
         return vector2d.Vector2d( x, y )
+    
+    def __readBoolean( self, root, tag, default ):
+        ''' Tries to read a not required boolean tag. Returns the value or the default value if not 
+        found. '''
+        if tag in root and isinstance( root[tag], bool ):
+            return root[tag]
+        elif tag in root and not isinstance( root[tag], bool ):
+            raise levelparser.LevelParserError( self._errorBoolean.format(tag) )
+        else:
+            return default
     
     def __readInteger( self, root, tag, default ):
         ''' Tries to read a not required integer tag. Returns the value or the default value if not 

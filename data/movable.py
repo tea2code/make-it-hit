@@ -5,15 +5,18 @@ class Movable(metaclass = ABCMeta):
     ''' This abstract class represents a movable object. 
     
     Members:
+    colliding -- If set to true the object can collide with other objects (Boolean).
     mass -- The mass of the object (float).
-    momentum -- The momentum of the object (common.vector2d).
-    position -- The position of the object (common.vector2d).
-    _forces -- List of force vectors (common.vector2d).
+    momentum -- The momentum of the object (Vector2d).
+    position -- The position of the object (Vector2d).
+    _forces -- List of force vectors (Vector2d).
     '''
     
     def __init__( self ):
         ''' Test:
         >>> m = Movable()
+        >>> m.colliding
+        True
         >>> m.mass
         0
         >>> m.position.x == 0 and m.position.y == 0
@@ -23,6 +26,7 @@ class Movable(metaclass = ABCMeta):
         >>> m._forces
         []
         '''
+        self.colliding = True
         self.mass = 0
         self.position = vector2d.Vector2d.nullVector()
         self.momentum = vector2d.Vector2d.nullVector()

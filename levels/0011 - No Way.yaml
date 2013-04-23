@@ -1,0 +1,37 @@
+level:
+    parser: 2
+    
+    author: tea2code
+    date: 2013-04-23
+    description: Impossible level?
+    name: No Way
+    timelimit: 2000
+    version: 1
+    
+    map:
+        border: 10
+        height: 500
+        width: 200
+        
+        objects:
+            - rect:
+                angle: 0
+                colliding: false
+                height: 10
+                width: 180
+                x: 100
+                y: 250
+                
+        player: 
+            circle: 
+                radius: 10
+                x: 100
+                y: 50
+                
+        targets:
+            - target:
+                circle:
+                    radius: 10
+                    x: 100
+                    y: 450
+                points: 100

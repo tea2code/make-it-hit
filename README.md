@@ -64,7 +64,8 @@ Current Version: **3**
  
 #### Player
 
-The player must always have a mass unequal zero. If it is set to zero it will be overriden with one. The player mass affects how all/most of the forces act. A negative mass will inverts most of the forces.
+The player must always have a mass unequal zero. If it is set to zero it will be overriden with 1. The player mass affects how all/most of the forces act. A negative mass will invert most of the forces.
+The attribute "colliding" has no effect on the player object.
 
 - *object* -- The player object. See below. Currently only circles are supported. Required.
  
@@ -72,22 +73,25 @@ The player must always have a mass unequal zero. If it is set to zero it will be
 
 - *object* -- The target object. See below. Required.
 - points -- Number of points received if hitting this target. Integer. Required.
- 
-#### Object: Circle
 
+#### Object
+
+Every object has the following attributes:
+
+- colliding -- If set to true other objects can collide with this object. If set to false another object would go through. Default true. Boolean.
 - mass -- The mass of the circle. Read chapter "Force". Default 0. Integer.
-- radius -- The radius of the circle. Integer. Required.
 - x -- The x-component of the center. Integer. Required.
 - y -- The y-component of the center. Integer. Required.
  
-#### Object: Rect(angle)
+##### Circle
+
+- radius -- The radius of the circle. Integer. Required.
+
+##### Rect(angle)
 
 - angle -- The angle of the rectangle. Float. Required.
 - height -- The height of the rectangle. Integer. Required.
-- mass -- The mass of the rectangle. Read chapter "Force". Default 0. Integer.
 - width -- The width of the rectangle. Integer. Required.
-- x -- The x-component of the center. Integer. Required.
-- y -- The y-component of the center. Integer. Required.
 
 ### Force
 
