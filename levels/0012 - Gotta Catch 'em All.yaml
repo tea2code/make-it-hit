@@ -1,0 +1,49 @@
+level:
+    parser: 2
+    
+    author: tea2code
+    date: 2013-04-24
+    description: Can you catch all of them?
+    name: Gotta Catch 'em All
+    timelimit: 3000
+    version: 1
+    
+    map:
+        border: 10
+        height: 500
+        width: 300
+        
+        objects:
+                
+        player: 
+            circle: 
+                radius: 10
+                x: 50
+                y: 50
+                
+        targets:
+            - target:
+                circle:
+                    radius: 30
+                    x: 250
+                    y: 150
+                final: false
+                points: 100
+                
+            - target:
+                circle:
+                    radius: 30
+                    x: 50
+                    y: 300
+                final: false
+                points: 100
+                
+            - target:
+                circle:
+                    radius: 30
+                    x: 250
+                    y: 450
+                final: true
+                points: 100
+                
+            

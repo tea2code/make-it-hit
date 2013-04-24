@@ -32,11 +32,11 @@ A little game where you must shoot objects to targets.
 
 ## Level Format
  
-The level format uses YAML files. Please read on [wikipeda.org](http://en.wikipedia.org/wiki/Yaml) and [yaml.org](http://yaml.org/) for further information.
+The level format uses YAML files. Please read [wikipeda.org](http://en.wikipedia.org/wiki/Yaml) and [yaml.org](http://yaml.org/) for further information.
 
 If not mentioned otherwise all values are strings. Integer, floating-point or boolean values are marked. A level without all required values might not work at all.
 
-As this game is developed the map parser will evolve. Changes (added and removed features) will be marked. You should always stay compatible with the current version.
+As this game is developed the map parser will evolve. Changes (added and removed features) will be marked. You should always stay compatible with the current version. Compatibility with older versions is possible but not certain.
 
 Current Version: **3**
 
@@ -71,6 +71,7 @@ The attribute "colliding" has no effect on the player object.
  
 #### Target
 
+- final -- If set to true the level ends if this target is hit. If set to false the level continues. Default true. Boolean
 - *object* -- The target object. See below. Required.
 - points -- Number of points received if hitting this target. Integer. Required.
 

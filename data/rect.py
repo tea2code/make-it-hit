@@ -28,7 +28,7 @@ class Rect( movable.Movable ):
         ''' Test:
         >>> r = Rect()
         >>> print( r )
-        Rect(angle 0.00, height 1.00, width 1.00, Movable(forces [], mass 0.00, momentum Vector2d(0.00, 0.00), position Vector2d(0.00, 0.00)))
+        Rect(angle 0.00, height 1.00, width 1.00, Movable(colliding True, forces [], mass 0.00, momentum Vector2d(0.00, 0.00), position Vector2d(0.00, 0.00)))
         '''
         template = 'Rect(angle {0:.2f}, height {1:.2f}, width {2:.2f}, {3})'
         return template.format(self.angle, self.height, self.width, super().__str__() )

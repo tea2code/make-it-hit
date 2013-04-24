@@ -19,6 +19,7 @@ class YamlParser(levelparser.LevelParser):
     TAG_COLLIDING -- Colliding element.
     TAG_DATE -- Date element.
     TAG_DESCRIPTION -- Description element.
+    TAG_FINAL -- Final element.
     TAG_HEIGHT -- Height element.
     TAG_LEVEL -- Root/level element.
     TAG_MAP -- Map element.
@@ -53,6 +54,7 @@ class YamlParser(levelparser.LevelParser):
     TAG_CIRCLE = 'circle'
     TAG_COLLIDING = 'colliding'
     TAG_DESCRIPTION = 'description'
+    TAG_FINAL = 'final'
     TAG_HEIGHT = 'height'
     TAG_LEVEL = 'level'
     TAG_MAP = 'map'
@@ -200,6 +202,7 @@ class YamlParser(levelparser.LevelParser):
     def __parseTarget( self, targetRoot ):
         ''' Parses a target and returns it. '''
         t = target.Target()
+        t.final = self.__readBoolean( targetRoot, self.TAG_FINAL, t.final )
         t.points = self.__readReqInteger( targetRoot, self.TAG_POINTS )
         if self.TAG_CIRCLE in targetRoot:
             t.object = self.__parseCircle( targetRoot[self.TAG_CIRCLE] )

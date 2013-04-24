@@ -39,11 +39,13 @@ level:
                     radius: 35
                     x: 50
                     y: 350
-                points: -100
+                final: false
+                points: -200
                 
             - target:
                 circle:
                     radius: 35
                     x: 150
                     y: 350
-                points: -100
+                final: false
+                points: -200

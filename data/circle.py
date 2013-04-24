@@ -20,7 +20,7 @@ class Circle( movable.Movable ):
         ''' Test:
         >>> c = Circle()
         >>> print(c)
-        Circle(radius 1.00, Movable(forces [], mass 0.00, momentum Vector2d(0.00, 0.00), position Vector2d(0.00, 0.00)))
+        Circle(radius 1.00, Movable(colliding True, forces [], mass 0.00, momentum Vector2d(0.00, 0.00), position Vector2d(0.00, 0.00)))
         '''
         return 'Circle(radius {0:.2f}, {1})'.format( self.radius, super().__str__() )
         

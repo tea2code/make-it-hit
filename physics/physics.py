@@ -61,9 +61,14 @@ class Physics( tickable.Tickable ):
         
         # Check if player hits target.
         for target in data.level.map.targets:
+            if target.hit:
+                continue
+            
             collider = self._colliderFactory.createFrom( player, target.object )
             collision = collider.collide()
+            
             if collision.isCollided:
+                target.hit = True
                 event = targetevent.TargetEvent( target, collision.x, collision.y )
                 data.events.append( event )
 
