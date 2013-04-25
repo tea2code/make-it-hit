@@ -4,7 +4,7 @@ level:
     author: tea2code
     date: 2013-04-24
     description: Can you catch all of them?
-    name: Gotta Catch 'em All I
+    name: Gotta Catch 'em All II
     timelimit: 3000
     version: 1
     
@@ -24,6 +24,7 @@ level:
         targets:
             - target:
                 circle:
+                    colliding: true
                     radius: 30
                     x: 250
                     y: 150
@@ -31,19 +32,22 @@ level:
                 points: 100
                 
             - target:
-                circle:
-                    radius: 30
-                    x: 50
-                    y: 300
-                final: false
+                rect:
+                    angle: 0
+                    height: 300
+                    width: 20
+                    x: 30
+                    y: 250
+                final: true
                 points: 100
                 
             - target:
                 circle:
+                    colliding: true
                     radius: 30
-                    x: 250
+                    x: 170
                     y: 450
-                final: true
+                final: false
                 points: 100
                 
             
