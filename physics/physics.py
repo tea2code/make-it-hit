@@ -64,13 +64,15 @@ class Physics( tickable.Tickable ):
             if target.hit:
                 continue
             
-            collider = self._colliderFactory.createFrom( player, target.object )
-            collision = collider.collide()
+            collision = self.__collide( player, target.object )
             
             if collision.isCollided:
                 target.hit = True
                 event = targetevent.TargetEvent( target, collision.x, collision.y )
                 data.events.append( event )
+                
+                if target.object.colliding:
+                    self.__reflect( player, target.object, collision )
 
     def __borders( self, data ):
         ''' Calculates a list of rectangles representing the borders. '''
@@ -110,6 +112,11 @@ class Physics( tickable.Tickable ):
         
         return borders
         
+    def __collide( self, object1, object2 ):
+        ''' Calculates collision of two objects. Returns the result object. '''
+        collider = self._colliderFactory.createFrom( object1, object2 )
+        return collider.collide()
+        
     def __interact( self, player, objects ):
         ''' Calculates interaction of player with objects. Returns list of events.'''
         events = []
@@ -118,13 +125,17 @@ class Physics( tickable.Tickable ):
             if not mapObject.colliding:
                 continue
             
-            collider = self._colliderFactory.createFrom( player, mapObject )
-            collision = collider.collide()
+            collision = self.__collide( player, mapObject )
             
             if collision.isCollided:
-                reflector = self._reflectorFactory.createFrom( player, mapObject )
-                player.momentum = reflector.reflect( collision.x, collision.y )
+                self.__reflect( player, mapObject, collision )
                 event = collisionevent.CollisionEvent( mapObject, collision.x, collision.y )
                 events.append( event )
                 
         return events
+                
+    def __reflect( self, object1, object2, collision ):
+        ''' Calculates reflection of two objects at a collision point. Sets new momentum of 
+        object1. '''
+        reflector = self._reflectorFactory.createFrom( object1, object2 )
+        object1.momentum = reflector.reflect( collision.x, collision.y )

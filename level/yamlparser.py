@@ -204,10 +204,15 @@ class YamlParser(levelparser.LevelParser):
         t = target.Target()
         t.final = self.__readBoolean( targetRoot, self.TAG_FINAL, t.final )
         t.points = self.__readReqInteger( targetRoot, self.TAG_POINTS )
+        
         if self.TAG_CIRCLE in targetRoot:
             t.object = self.__parseCircle( targetRoot[self.TAG_CIRCLE] )
+            t.object.colliding = self.__readBoolean( targetRoot[self.TAG_CIRCLE], self.TAG_COLLIDING, False )
+            
         if self.TAG_RECT in targetRoot:
             t.object = self.__parseRect( targetRoot[self.TAG_RECT] )
+            t.object.colliding = self.__readBoolean( targetRoot[self.TAG_RECT], self.TAG_COLLIDING, False )
+            
         return t
     
     def __parseVector2d( self, vectorRoot ):

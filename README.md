@@ -71,6 +71,8 @@ The attribute "colliding" has no effect on the player object.
  
 #### Target
 
+The attribute "colliding" is by default set to false for targets. If you set it to true other objects can collide with it. Useful in combination with "final" set to false.
+
 - final -- If set to true the level ends if this target is hit. If set to false the level continues. Default true. Boolean
 - *object* -- The target object. See below. Required.
 - points -- Number of points received if hitting this target. Integer. Required.
