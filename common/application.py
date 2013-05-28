@@ -7,6 +7,7 @@ from graphics import tkgraphics
 from input import tkinput
 from physics import physics
 from postframe import postframe
+from sound import sound
 
 import math
 
@@ -26,6 +27,7 @@ class Application:
     _loopTime -- The overall refreshing time of the main loop int milliseconds (int). 
     _physics -- The module responsible for physics calculation (physics.physics).
     _postFrame -- The module responsible for after frame tasks (postframe.postframe).
+    _sound -- The module responsible to play sound (sound.sound).
     _timestepper -- The frame ticker (common.timestepper).
     '''
     
@@ -48,6 +50,7 @@ class Application:
         100
         >>> a._physics
         >>> a._postFrame
+        >>> a._sound
         >>> a._timestepper
         '''
         self.configPath = ''
@@ -61,6 +64,7 @@ class Application:
         self._loopTime = 100
         self._physics = None
         self._postFrame = None
+        self._sound = None
         self._timestepper = None
         
     def begin( self ):
@@ -93,6 +97,8 @@ class Application:
         
         # Initialize post frame.
         self._postFrame = postframe.PostFrame()
+        
+        self._sound = sound.Sound()
         
         # Initialize time stepper.
         self._timestepper = timestepper.Timestepper( frameTime, self.calculateNextState )
@@ -134,6 +140,7 @@ class Application:
         self._fps.tick( self.data ) 
         self._gamerules.tick( self.data )
         self._graphics.tick( self.data )
+        self._sound.tick( self.data )
         self._postFrame.tick( self.data )
         
         self.data.deltaTime = dt
