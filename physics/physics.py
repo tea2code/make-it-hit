@@ -53,11 +53,11 @@ class Physics( tickable.Tickable ):
         
         # Interaction of player with borders.
         events = self.__interact( player, self.__borders(data) )
-        data.events.extend( events )
+        data.collisionEvents.extend( events )
         
         # Interaction of player with objects.
         events = self.__interact( player, data.level.map.objects )
-        data.events.extend( events )
+        data.collisionEvents.extend( events )
         
         # Check if player hits target.
         for target in data.level.map.targets:
@@ -69,7 +69,7 @@ class Physics( tickable.Tickable ):
             if collision.isCollided:
                 target.hit = True
                 event = targetevent.TargetEvent( target, collision.x, collision.y )
-                data.events.append( event )
+                data.targetEvents.append( event )
                 
                 if target.object.colliding:
                     self.__reflect( player, target.object, collision )

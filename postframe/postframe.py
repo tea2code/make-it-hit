@@ -9,17 +9,23 @@ class PostFrame( tickable.Tickable ):
         Test:
         >>> import data.data
         >>> d = data.data.Data()
-        >>> d.events.append( 1 )
+        >>> d.collisionEvents.append( 1 )
+        >>> d.targetEvents.append( 1 )
         >>> len(d.events)
+        1
+        >>> len(d.targetEvents)
         1
         >>> p = PostFrame()
         >>> p.tick( d )
-        >>> len(d.events)
+        >>> len(d.collisionEvents)
+        0
+        >>> len(d.targetEvents)
         0
         '''
     
         # Clear events.
-        del data.events[:]
+        del data.collisionEvents[:]
+        del data.targetEvents[:]
         
 if __name__ == '__main__':
     print( 'Executing doctest.' )

@@ -40,23 +40,21 @@ class GameRules( tickable.Tickable ):
         
         timeMs = data.time * 1000
         
-        # Event handling:
-        for event in data.events:
-            # Collision events.
-            if isinstance( event, collisionevent.CollisionEvent ):
-                data.points += 2
+        # Collision events.
+        for event in data.collisionEvents:
+            data.points += 2
             
-            # Target events.
-            elif isinstance( event, targetevent.TargetEvent ):
-                data.points += event.target.points
-                data.points += round( (data.level.timeLimit - timeMs) * 0.05 )
-                
-                if event.target.final:
-                    data.state = data.STATES.VICTORY   
-                  
-                    data.levelList.pop( 0 )
-                    if data.levelList:
-                        data.state = data.STATES.LOADING  
+        # Target events.
+        for event in data.targetEvents:
+            data.points += event.target.points
+            data.points += round( (data.level.timeLimit - timeMs) * 0.05 )
+            
+            if event.target.final:
+                data.state = data.STATES.VICTORY   
+              
+                data.levelList.pop( 0 )
+                if data.levelList:
+                    data.state = data.STATES.LOADING  
                 
         # Check rest time.
         if timeMs >= data.level.timeLimit:

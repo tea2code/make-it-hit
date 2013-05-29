@@ -82,7 +82,7 @@ The attribute "colliding" is by default set to false for targets. If you set it 
 Every object has the following attributes:
 
 - colliding -- If set to true other objects can collide with this object. If set to false another object would go through. Default true. Boolean.
-- mass -- The mass of the circle. Read chapter "Force". Default 0. Integer.
+- mass -- The mass of the object. Read chapter "Force". Default 0. Integer.
 - x -- The x-component of the center. Integer. Required.
 - y -- The y-component of the center. Integer. Required.
  

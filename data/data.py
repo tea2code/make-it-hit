@@ -9,9 +9,9 @@ class Data:
     STATES -- Possible game states (enum).
     
     Member:
+    collisionEvents -- List of collision events of the current frame (data.collisionevent).
     configuration -- The configuration (Configuration).
     deltaTime -- The time difference since the last step (float).
-    events -- List of events in this frame (data.event).
     fps -- The current frame rate (int).
     level -- The level to play (data.level).
     levelDetails -- Name of the level to show details of (string).
@@ -22,6 +22,7 @@ class Data:
     screenXCoefficient -- Coefficient for world to screen conversion in x direction (float).
     screenYCoefficient -- Coefficient for world to screen conversion in y direction (float).
     state -- The current game state (enum).
+    targetEvents -- List of target events of the current frame (data.targetevent).
     time -- The accumulated time of all steps in seconds (float).
     '''
     
@@ -32,10 +33,10 @@ class Data:
     def __init__( self ):
         ''' Test: 
         >>> d = Data()
+        >>> len(d.collisionEvents)
+        0
         >>> d.configuration
         >>> d.deltaTime
-        0
-        >>> len(d.events)
         0
         >>> d.fps
         0
@@ -55,12 +56,14 @@ class Data:
         >>> d.screenYCoefficient
         1
         >>> d.state
+        >>> len(d.targetEvents)
+        0
         >>> d.time
         0
         '''
+        self.collisionEvents = []
         self.configuration = None
         self.deltaTime = 0
-        self.events = []
         self.fps = 0
         self.level = None
         self.levelDetails = ''
@@ -71,16 +74,17 @@ class Data:
         self.screenXCoefficient = 1
         self.screenYCoefficient = 1
         self.state = None
+        self.targetEvents = []
         self.time = 0
     
     def __str__( self ):
-        template = 'Data(configuration {}, deltaTime {}, events {}, fps {}, level {}, ' \
+        template = 'Data(collisionEvents {}, configuration {}, deltaTime {}, fps {}, level {}, ' \
                    'levelDetails {}, levelList {}, mousePosition {}, mousePressed {}, points {}, ' \
-                   'screenXCoefficient {}, screenYCoefficient {}, state {}, time {})'
-        return template.format( self.configuration, self.deltaTime, self.events, self.fps, self.level,
+                   'screenXCoefficient {}, screenYCoefficient {}, state {}, targetEvents {}, time {})'
+        return template.format( self.collisionEvents, self.configuration, self.deltaTime, self.fps, self.level,
                                 self.levelDetails, self.levelList, self.mousePosition, self.mousePressed,
                                 self.points, self.screenXCoefficient, self.screenYCoefficient, self.state,
-                                self.time )
+                                self.targetEvents, self.time )
     
 if __name__ == '__main__':
     print( 'Executing doctest.' )
