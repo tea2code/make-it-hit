@@ -32,7 +32,7 @@ def floatEqual( a, b, epsilon ):
         return diff / (absA + absB) < epsilon
 
 def stringIsFloat( string ):
-    ''' Checks if a string is a integer.
+    ''' Checks if a string is a float.
 
     Test: 
     >>> stringIsFloat( '1' )
